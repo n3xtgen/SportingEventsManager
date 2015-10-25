@@ -1,4 +1,4 @@
-package cz.muni.fi;
+package cz.muni.fi.PA165;
 
 /**
  * Hello world!
