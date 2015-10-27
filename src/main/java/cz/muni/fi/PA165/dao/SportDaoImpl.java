@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.entity.Sport;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Vladimir on 25.10.2015.
  */
+@Repository
 public class SportDaoImpl implements SportDao {
 
     @PersistenceContext
@@ -28,12 +30,12 @@ public class SportDaoImpl implements SportDao {
     }
 
     public List<Sport> findAll() {
-        return em.createQuery("SELECT s FROM Sport S", Sport.class).getResultList();
+        return em.createQuery("SELECT s FROM Sport s", Sport.class).getResultList();
     }
 
     public Sport findByName(String name) {
         try {
-            return em.createQuery("SELECT s FROM Sport S WHERE name = :name",Sport.class).setParameter(":name", name)
+            return em.createQuery("SELECT s FROM Sport s WHERE s.name = :name",Sport.class).setParameter("name", name)
                     .getSingleResult();
         } catch (NoResultException nrf) {
             return null;

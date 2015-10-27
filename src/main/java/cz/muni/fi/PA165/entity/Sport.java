@@ -1,6 +1,6 @@
 package cz.muni.fi.PA165.entity;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -19,9 +19,6 @@ public class Sport {
     @NotNull
     @Column(nullable = false, unique = true)
     private String name;
-
-    @ManyToMany(mappedBy = "sports", fetch=FetchType.EAGER)
-    private Set<Sportsman> sportsman = new HashSet<Sportsman>();
 
     public Sport(Long id){
         this.id = id;
