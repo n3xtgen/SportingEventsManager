@@ -40,18 +40,8 @@ public class ApplicationContext {
 	public LocalContainerEntityManagerFactoryBean  entityManagerFactory(){
 		LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean ();
 		jpaFactoryBean.setDataSource(db());
-		jpaFactoryBean.setLoadTimeWeaver(instrumentationLoadTimeWeaver());
 		jpaFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		return jpaFactoryBean;
-	}
-
-	@Bean
-	public LocalValidatorFactoryBean localValidatorFactoryBean(){
-		return new LocalValidatorFactoryBean();
-	}
-	@Bean
-	public LoadTimeWeaver instrumentationLoadTimeWeaver() {
-		return new InstrumentationLoadTimeWeaver();
 	}
 
 	@Bean
