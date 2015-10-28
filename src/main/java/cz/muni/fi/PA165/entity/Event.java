@@ -78,4 +78,24 @@ public class Event{
         this.start = start;
     }
 
+    @Override
+    public boolean equals(Object toCompare) {
+        if(toCompare == null || !(toCompare instanceof Event))
+            return false;
+
+        if(this == toCompare)
+            return true;
+
+        if(!name.equals(((Event) toCompare).getName()))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode(){
+        // NOTE: 79, 29 are random prime numbers
+        return (79 * 29 + name == null ? 0 : name.hashCode());
+    }
+
 }
