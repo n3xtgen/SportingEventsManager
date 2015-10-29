@@ -1,11 +1,7 @@
 package cz.muni.fi.PA165.entity;
 
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -27,7 +23,8 @@ public class Sportsman {
 	@Column(nullable=false,unique=true)
 	private String personID;
 
-
+	@ManyToOne
+	private Event event;
 
 	public Long getId() {
 		return id;
@@ -61,6 +58,13 @@ public class Sportsman {
 		this.name = name;
 	}
 
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
 
 	@Override
 	public int hashCode() {

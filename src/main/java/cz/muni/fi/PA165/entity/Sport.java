@@ -20,6 +20,9 @@ public class Sport {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @OneToMany
+    private Set<Event> eventsContainingSport = new HashSet<Event>();
+
     public Sport(Long id){
         this.id = id;
     }
@@ -40,6 +43,22 @@ public class Sport {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Event> getEventsContainingSport() {
+        return eventsContainingSport;
+    }
+
+    public void setEventsContainingSport(Set<Event> eventsContainingSport) {
+        this.eventsContainingSport = eventsContainingSport;
+    }
+
+    public void addEventsContainingSport(Event event){
+        this.eventsContainingSport.add(event);
+    }
+
+    public void removeEventContainingSport(Event event){
+        this.eventsContainingSport.remove(event);
     }
 
     @Override

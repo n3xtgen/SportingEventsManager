@@ -2,7 +2,6 @@ package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.entity.Event;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public interface EventDao {
     public Event findById(Long id);
 
     /**
-     *
+     * find all events
      * @return all events
      */
     public List<Event> findAll();

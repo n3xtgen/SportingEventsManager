@@ -3,6 +3,8 @@ package cz.muni.fi.PA165.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Jamik on 28.10.2015.
@@ -24,20 +26,40 @@ public class Event{
 
     // time&date of events start
     @NotNull
-    private Date start;
+    private Date startTime;
 
     // time&date of the events end
     @NotNull
-    private Date end;
+    private Date endTime;
 
+    /**
+     * TODO: rewrite relations to sportsmans & sports to M:N after needed entities will be implemented
+     */
 
+    // sportsmans registered to this event
+    @OneToMany(mappedBy = "event")
+    private Set<Sportsman> registeredSportsmans = new HashSet<Sportsman>();
+
+    @ManyToOne
+    private Sport sportType;
+
+    /**
+     * non-args constructor
+     */
     public Event(){
     }
 
+    /**
+     * constructor
+     * @param id
+     */
     public Event(Long id){
         this.id = id;
     }
 
+    /******************************
+     * BUNCH OF GETTERS&SETTERS ***
+     ******************************/
     public Long getId() {
         return id;
     }
@@ -62,20 +84,56 @@ public class Event{
         this.description = description;
     }
 
-    public Date getEnd() {
-        return end;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setStartTime(Date start) {
+        this.startTime = start;
     }
 
-    public Date getStart() {
-        return start;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public void setEndTime(Date end) {
+        this.endTime = end;
+    }
+
+    public Set<Sportsman> getRegisteredSportsmans() {
+        return registeredSportsmans;
+    }
+
+    public void setRegisteredSportsmans(Set<Sportsman> registeredSportsmans) {
+        this.registeredSportsmans = registeredSportsmans;
+    }
+
+    public Sport getSportType() {
+        return sportType;
+    }
+
+    public void setSportType(Sport sportType) {
+        this.sportType = sportType;
+    }
+
+    /******************************
+     *END OF GETTERS&SETTERS ******
+     ******************************/
+
+    /**
+     * add sportsman to the event
+     * @param sportsman
+     */
+    public void addSportsman(Sportsman sportsman){
+        registeredSportsmans.add(sportsman);
+    }
+
+    /**
+     * remove sportsman from the event
+     * @param sportsman
+     */
+    public void removeSportsman(Sportsman sportsman){
+        registeredSportsmans.remove(sportsman);
     }
 
     @Override
@@ -85,7 +143,7 @@ public class Event{
 
         if(this == toCompare)
             return true;
-
+        // check Events name
         if(!name.equals(((Event) toCompare).getName()))
             return false;
 
@@ -95,7 +153,7 @@ public class Event{
     @Override
     public int hashCode(){
         // NOTE: 79, 29 are random prime numbers
-        return (79 * 29 + name == null ? 0 : name.hashCode());
+        return (79 * 29 + (name == null ? 0 : name.hashCode()));
     }
 
 }

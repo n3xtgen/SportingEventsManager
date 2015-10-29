@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 /**
@@ -19,19 +20,11 @@ public class EventDaoImpl implements EventDao {
     private EntityManager entityManager;
 
     public void create(Event evt) {
-        try{
-            entityManager.persist(evt);
-        }catch(Throwable tr){
-            throw new DataAccessException("Problem with creating of event: " + evt, tr);
-        }
+        entityManager.persist(evt);
     }
 
     public void delete(Event evt) {
-        try{
-            entityManager.remove(evt);
-        }catch(Throwable tr){
-            throw new DataAccessException("Problem with deleting of event: " + evt, tr);
-        }
+        entityManager.remove(evt);
     }
 
     // TODO: implement or not? or maybe implement using basic queries...
@@ -40,22 +33,10 @@ public class EventDaoImpl implements EventDao {
     }
 
     public Event findById(Long id) {
-        try{
-            return entityManager.createQuery("SELECT e FROM Event e WHERE e.id = :id", Event.class).setParameter("id", id).getSingleResult();
-        }catch(NoResultException nre){
-            return null;
-        }catch(Throwable tr){
-            throw new DataAccessException("Can´t find event by its ID: " + id, tr);
-        }
+        return entityManager.createQuery("SELECT e FROM Event e WHERE e.id = :id", Event.class).setParameter("id", id).getSingleResult();
     }
 
     public List<Event> findAll() {
-        try{
-            return entityManager.createQuery("SELECT e FROM Event e", Event.class).getResultList();
-        }catch (NoResultException nre){
-            return null;
-        }catch(Throwable tr){
-            throw new DataAccessException("Can´t find any records", tr);
-        }
+        return entityManager.createQuery("SELECT e FROM Event e", Event.class).getResultList();
     }
 }
