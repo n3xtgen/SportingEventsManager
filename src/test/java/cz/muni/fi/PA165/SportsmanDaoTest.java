@@ -1,7 +1,6 @@
 package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.dao.SportsmanDao;
-import cz.muni.fi.PA165.entity.Sport;
 import cz.muni.fi.PA165.entity.Sportsman;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,7 +18,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 /**
- * Created by Vladimir on 27.10.2015.
+ * @author Vladimir
  */
 @ContextConfiguration(classes = ApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)

@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * Created by Vladimir on 25.10.2015.
+ * @author Vladimir
  */
 @Repository
 public class SportDaoImpl implements SportDao {

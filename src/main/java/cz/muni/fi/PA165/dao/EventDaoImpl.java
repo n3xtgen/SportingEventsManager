@@ -1,17 +1,14 @@
 package cz.muni.fi.PA165.dao;
 
-import cz.muni.fi.PA165.dao.exception.DataAccessException;
 import cz.muni.fi.PA165.entity.Event;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import java.util.List;
 
 /**
- * Created by Jamik on 28.10.2015.
+ * @author Jamik (Lukas Gryc)
  */
 @Repository
 public class EventDaoImpl implements EventDao {

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Jamik on 28.10.2015.
+ * @author Jamik (Lukas Gryc)
  */
 @Entity
 public class Event{

@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Jamik on 29.10.2015.
+ * @author Jamik
  */
 @ContextConfiguration(classes = ApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
@@ -132,5 +132,26 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         // save to DB
         eventDao.create(evt1);
         eventDao.create(evt2);
+    }
+
+    @Test
+    public void tryToUpdateEvent(){
+        // create event
+        Event evt1 = new Event();
+        evt1.setName("football");
+        evt1.setDescription("blah");
+        evt1.setStartTime(new Date());
+        evt1.setEndTime(new Date());
+        // save to DB
+        eventDao.create(evt1);
+        // udpate some data
+        evt1.setDescription("naaah");
+        Long evt1Id = evt1.getId();
+        // update in DB
+        eventDao.update(evt1);
+
+        evt1 = eventDao.findById(evt1Id);
+        // check stuff
+        Assert.assertEquals(evt1.getDescription(), "naaah");
     }
 }

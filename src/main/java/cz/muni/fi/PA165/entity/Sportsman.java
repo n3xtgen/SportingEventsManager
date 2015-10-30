@@ -5,7 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by jbouska on 22.10.15.
+ * @author jbouska
  */
 @Entity
 public class Sportsman {

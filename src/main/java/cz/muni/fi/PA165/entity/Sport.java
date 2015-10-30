@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Vladimir on 25.10.2015.
+ * @author Vladimir
  */
 @Entity
 public class Sport {
@@ -20,7 +20,7 @@ public class Sport {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "sportType")
     private Set<Event> eventsContainingSport = new HashSet<Event>();
 
     public Sport(Long id){

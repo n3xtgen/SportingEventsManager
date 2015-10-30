@@ -10,7 +10,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
@@ -21,7 +20,7 @@ import cz.muni.fi.PA165.dao.SportDao;
 import cz.muni.fi.PA165.entity.Sport;
 
 /**
- * Created by jbouska on 26.10.15.
+ * @author jbouska
  */
 
 @ContextConfiguration(classes = ApplicationContext.class)

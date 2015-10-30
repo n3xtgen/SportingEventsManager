@@ -5,7 +5,7 @@ import cz.muni.fi.PA165.entity.Sport;
 import java.util.List;
 
 /**
- * Created by Vladimir on 25.10.2015.
+ * @author Vladimir
  */
 
 public interface SportDao {

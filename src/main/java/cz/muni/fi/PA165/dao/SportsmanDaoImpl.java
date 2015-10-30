@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 
 import java.util.List;
 
-import cz.muni.fi.PA165.entity.Event;
 import cz.muni.fi.PA165.entity.Sportsman;
 
 /**

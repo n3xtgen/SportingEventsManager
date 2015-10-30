@@ -5,7 +5,7 @@ import cz.muni.fi.PA165.entity.Event;
 import java.util.List;
 
 /**
- * Created by Jamik on 28.10.2015.
+ * @author Jamik (Lukas Gryc)
  */
 public interface EventDao {
 
