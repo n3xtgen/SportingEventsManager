@@ -15,7 +15,7 @@ public class Event{
     // event id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idEvent;
 
     // Name of the event
     @Column(nullable=false, unique=true)
@@ -32,16 +32,21 @@ public class Event{
     @NotNull
     private Date endTime;
 
-    /**
-     * TODO: rewrite relations to sportsmans & sports to M:N after needed entities will be implemented
-     */
-
     // sportsmans registered to this event
-    @OneToMany(mappedBy = "event")
+    @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinTable(name="event_sportsman", joinColumns = {
+            @JoinColumn(name="idEvent", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="idSportsman",
+            nullable = false, updatable = false)})
     private Set<Sportsman> registeredSportsmans = new HashSet<Sportsman>();
 
-    @ManyToOne
-    private Sport sportType;
+    // sports that are available in the event
+    @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinTable(name="event_sport", joinColumns = {
+            @JoinColumn(name="idEvent", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="idSport",
+                    nullable = false, updatable = false)})
+    private Set<Sport> sportTypes = new HashSet<Sport>();
 
     /**
      * non-args constructor
@@ -54,18 +59,18 @@ public class Event{
      * @param id
      */
     public Event(Long id){
-        this.id = id;
+        this.idEvent = id;
     }
 
     /******************************
      * BUNCH OF GETTERS&SETTERS ***
      ******************************/
-    public Long getId() {
-        return id;
+    public Long getIdEvent() {
+        return idEvent;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEvent(Long id) {
+        this.idEvent = id;
     }
 
     public String getName() {
@@ -108,12 +113,12 @@ public class Event{
         this.registeredSportsmans = registeredSportsmans;
     }
 
-    public Sport getSportType() {
-        return sportType;
+    public Set<Sport> getSportTypes() {
+        return sportTypes;
     }
 
-    public void setSportType(Sport sportType) {
-        this.sportType = sportType;
+    public void setSportTypes(Set<Sport> sportTypes) {
+        this.sportTypes = sportTypes;
     }
 
     /******************************

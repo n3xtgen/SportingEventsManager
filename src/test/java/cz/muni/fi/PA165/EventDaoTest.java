@@ -1,7 +1,9 @@
 package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.dao.EventDao;
+import cz.muni.fi.PA165.dao.SportDao;
 import cz.muni.fi.PA165.entity.Event;
+import cz.muni.fi.PA165.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -16,7 +18,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Jamik
@@ -28,6 +32,9 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private EventDao eventDao;
+
+    @Autowired
+    private SportDao sportDao;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -74,7 +81,7 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         // save to DB
         eventDao.create(evt1);
         // check stuff
-        Assert.assertEquals(eventDao.findById(evt1.getId()), evt1);
+        Assert.assertEquals(eventDao.findById(evt1.getIdEvent()), evt1);
     }
 
     /**
@@ -146,12 +153,49 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         eventDao.create(evt1);
         // udpate some data
         evt1.setDescription("naaah");
-        Long evt1Id = evt1.getId();
+        Long evt1Id = evt1.getIdEvent();
         // update in DB
         eventDao.update(evt1);
 
         evt1 = eventDao.findById(evt1Id);
         // check stuff
         Assert.assertEquals(evt1.getDescription(), "naaah");
+    }
+
+    @Test
+    public void tryReferenceToSport(){
+        Event evt = new Event();
+        evt.setName("football");
+        evt.setDescription("blah");
+        evt.setStartTime(new Date());
+        evt.setEndTime(new Date());
+
+        Set<Sport> someSports = new HashSet<Sport>();
+        Sport spt1 = new Sport();
+        Sport spt2 = new Sport();
+
+        spt1.setName("hockey");
+        spt2.setName("football");
+
+        someSports.add(spt1);
+        someSports.add(spt2);
+
+        evt.setSportTypes(someSports);
+        Assert.assertEquals(evt.getSportTypes().size(), 2);
+        // save sports to DB
+        sportDao.create(spt1);
+        sportDao.create(spt2);
+        // save the event to DB
+        eventDao.create(evt);
+
+        Event retEvt = eventDao.findById(evt.getIdEvent());
+
+        // check event
+        Assert.assertEquals(retEvt.getName(), evt.getName());
+        Assert.assertNotNull(retEvt.getSportTypes());
+        // check number of references
+        Assert.assertEquals(retEvt.getSportTypes().size(), 2);
+        // check reference to Sports
+        Assert.assertTrue(retEvt.getSportTypes().containsAll(someSports));
     }
 }

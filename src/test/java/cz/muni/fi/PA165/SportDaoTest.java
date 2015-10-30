@@ -59,7 +59,7 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 
 		sportDao.create(sp);
 
-		Assert.assertEquals(sportDao.findById(sp.getId()), sp);
+		Assert.assertEquals(sportDao.findById(sp.getIdSport()), sp);
 	}
 
 	@Test(expectedExceptions = ConstraintViolationException.class)

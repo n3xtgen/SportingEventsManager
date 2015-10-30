@@ -14,27 +14,34 @@ public class Sport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idSport;
 
     @NotNull
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "sportType")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "sportTypes")
     private Set<Event> eventsContainingSport = new HashSet<Event>();
 
+    @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinTable(name="sport_sportsman", joinColumns = {
+            @JoinColumn(name="idSport", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="idSportsman",
+                    nullable = false, updatable = false)})
+    private Set<Sportsman> competitors = new HashSet<Sportsman>();
+
     public Sport(Long id){
-        this.id = id;
+        this.idSport = id;
     }
 
     public Sport(){}
 
-    public Long getId() {
-        return id;
+    public Long getIdSport() {
+        return idSport;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdSport(Long id) {
+        this.idSport = id;
     }
 
     public String getName() {
@@ -51,6 +58,14 @@ public class Sport {
 
     public void setEventsContainingSport(Set<Event> eventsContainingSport) {
         this.eventsContainingSport = eventsContainingSport;
+    }
+
+    public Set<Sportsman> getCompetitors() {
+        return competitors;
+    }
+
+    public void setCompetitors(Set<Sportsman> competitors) {
+        this.competitors = competitors;
     }
 
     public void addEventsContainingSport(Event event){

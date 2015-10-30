@@ -1,6 +1,8 @@
 package cz.muni.fi.PA165.entity;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +14,7 @@ public class Sportsman {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	private Long idSportsman;
 
 	private String name;
 
@@ -23,15 +25,18 @@ public class Sportsman {
 	@Column(nullable=false,unique=true)
 	private String personID;
 
-	@ManyToOne
-	private Event event;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "registeredSportsmans")
+	private Set<Event> events = new HashSet<Event>();
 
-	public Long getId() {
-		return id;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "competitors")
+	private Set<Sport> competesInSports = new HashSet<Sport>();
+
+	public Long getIdSportsman() {
+		return idSportsman;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdSportsman(Long id) {
+		this.idSportsman = id;
 	}
 
 	public String getSurnamename() {
@@ -58,12 +63,12 @@ public class Sportsman {
 		this.name = name;
 	}
 
-	public Event getEvent() {
-		return event;
+	public Set<Event> getEvents() {
+		return events;
 	}
 
-	public void setEvent(Event event) {
-		this.event = event;
+	public void setEvents(Set<Event> events) {
+		this.events = events;
 	}
 
 	@Override
