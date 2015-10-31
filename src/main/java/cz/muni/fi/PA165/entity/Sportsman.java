@@ -16,14 +16,15 @@ public class Sportsman {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idSportsman;
 
+	@NotNull
 	private String name;
 
 	@NotNull
-	private String Surname;
+	private String surname;
 
 	@NotNull
 	@Column(nullable=false,unique=true)
-	private String personID;
+	private String citizenIdNumber;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "registeredSportsmans")
 	private Set<Event> events = new HashSet<Event>();
@@ -39,28 +40,28 @@ public class Sportsman {
 		this.idSportsman = id;
 	}
 
-	public String getSurnamename() {
-		return Surname;
-	}
-
-	public void setSurnamename(String Surname) {
-		this.Surname = Surname;
-	}
-
-	public String getPersonID() {
-		return personID;
-	}
-
-	public void setPersonID(String personID) {
-		this.personID = personID;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getCitizenIdNumber() {
+		return citizenIdNumber;
+	}
+
+	public void setCitizenIdNumber(String citizenIdNumber) {
+		this.citizenIdNumber = citizenIdNumber;
 	}
 
 	public Set<Event> getEvents() {
@@ -74,7 +75,7 @@ public class Sportsman {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 67 * hash + Objects.hashCode(getPersonID());
+		hash = 67 * hash + Objects.hashCode(getCitizenIdNumber());
 		return hash;
 	}
 
@@ -87,13 +88,10 @@ public class Sportsman {
 			return false;
 		}
 		final Sportsman other = (Sportsman) obj;
-		if (!Objects.equals(getPersonID(), other.getPersonID())) {
+		if (!Objects.equals(getCitizenIdNumber(), other.getCitizenIdNumber())) {
 			return false;
 		}
 		return true;
 	}
-
-
-
 
 }

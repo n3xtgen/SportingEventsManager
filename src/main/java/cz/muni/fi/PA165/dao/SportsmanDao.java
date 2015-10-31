@@ -45,10 +45,10 @@ public interface SportsmanDao {
 
 	/**
 	 *
-	 * @param id
+	 * @param citizenIdNumber
 	 * @return sportsman with selected ID
 	 *
 	 */
-	public Sportsman findByPersonalID(String id);
+	public Sportsman findByCitizenIdNumber(String citizenIdNumber);
 
 }
