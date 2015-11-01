@@ -48,23 +48,20 @@ public class Event{
                     nullable = false, updatable = false)})
     private Set<Sport> sportTypes = new HashSet<Sport>();
 
-    /**
-     * non-args constructor
-     */
+    @ManyToOne
+    private Promoter promoter;
+
+    /********************
+     *** CONSTRUCTORS ***
+     ********************/
+
     public Event(){
     }
 
-    /**
-     * constructor
-     * @param id
-     */
-    public Event(Long id){
-        this.idEvent = id;
-    }
+    /*************************
+     *** GETTERS & SETTERS ***
+     *************************/
 
-    /******************************
-     * BUNCH OF GETTERS&SETTERS ***
-     ******************************/
     public Long getIdEvent() {
         return idEvent;
     }
@@ -121,9 +118,17 @@ public class Event{
         this.sportTypes = sportTypes;
     }
 
-    /******************************
-     *END OF GETTERS&SETTERS ******
-     ******************************/
+    public Promoter getPromoter() {
+        return promoter;
+    }
+
+    public void setPromoter(Promoter promoter) {
+        this.promoter = promoter;
+    }
+
+    /***************************
+     *** METHODS & FUNCTIONS ***
+     ***************************/
 
     /**
      * add sportsman to the event

@@ -25,6 +25,13 @@ public interface SportsmanDao {
 
 	/**
 	 *
+	 * @param s Sportsman
+	 * @return Sportsman
+	 */
+	public Sportsman update(Sportsman s);
+
+	/**
+	 *
 	 * @param s sportsman to delete
 	 * @throws cz.muni.fi.PA165.dao.exception.DataAccessException if there is a problem on persistent layer
 	 */

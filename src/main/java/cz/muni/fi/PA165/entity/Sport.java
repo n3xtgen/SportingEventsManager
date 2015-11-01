@@ -30,11 +30,16 @@ public class Sport {
                     nullable = false, updatable = false)})
     private Set<Sportsman> competitors = new HashSet<Sportsman>();
 
-    public Sport(Long id){
-        this.idSport = id;
+    /********************
+     *** CONSTRUCTORS ***
+     ********************/
+
+    public Sport(){
     }
 
-    public Sport(){}
+    /*************************
+     *** GETTERS & SETTERS ***
+     *************************/
 
     public Long getIdSport() {
         return idSport;
@@ -68,13 +73,9 @@ public class Sport {
         this.competitors = competitors;
     }
 
-    public void addEventsContainingSport(Event event){
-        this.eventsContainingSport.add(event);
-    }
-
-    public void removeEventContainingSport(Event event){
-        this.eventsContainingSport.remove(event);
-    }
+    /***************************
+     *** METHODS & FUNCTIONS ***
+     ***************************/
 
     @Override
     public int hashCode() {

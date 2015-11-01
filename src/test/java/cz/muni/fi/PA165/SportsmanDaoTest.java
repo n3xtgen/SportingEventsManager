@@ -2,7 +2,6 @@ package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.dao.SportsmanDao;
 import cz.muni.fi.PA165.entity.Sportsman;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -68,13 +67,23 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void importWithoutPersonId() {
         Sportsman first = new Sportsman();
+        first.setName("Jan");
         first.setSurname("Zeleny");
+        sportsmanDao.create(first);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void importWithoutName() {
+        Sportsman first = new Sportsman();
+        first.setSurname("Novák");
+        first.setCitizenIdNumber("900522/7652");
         sportsmanDao.create(first);
     }
 
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void importWithoutSurname() {
         Sportsman first = new Sportsman();
+        first.setName("Jan");
         first.setCitizenIdNumber("900522/7652");
         sportsmanDao.create(first);
     }
@@ -84,10 +93,12 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         Sportsman first = new Sportsman();
         Sportsman second = new Sportsman();
 
+        first.setName("Dana");
         first.setSurname("Obycajna");
-        first.setCitizenIdNumber("900522/7654");
+        first.setCitizenIdNumber("900522/7659");
+        second.setName("Klara");
         second.setSurname("Novakova");
-        second.setCitizenIdNumber("900522/7654");
+        second.setCitizenIdNumber("900522/7659");
 
         sportsmanDao.create(first);
         sportsmanDao.create(second);

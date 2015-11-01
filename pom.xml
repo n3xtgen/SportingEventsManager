@@ -52,6 +52,7 @@
     <dependency>
       <groupId>org.hibernate.javax.persistence</groupId>
       <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <version>1.0.0.Final</version>
     </dependency>
 
     <dependency>
@@ -110,6 +111,7 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.12</version>
     </dependency>
+
 
     <!-- For embedded usage -->
     <dependency>

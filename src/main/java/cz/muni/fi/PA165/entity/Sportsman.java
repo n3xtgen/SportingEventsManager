@@ -32,6 +32,17 @@ public class Sportsman {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "competitors")
 	private Set<Sport> competesInSports = new HashSet<Sport>();
 
+	/********************
+	 *** CONSTRUCTORS ***
+	 ********************/
+
+	public Sportsman() {
+	}
+
+	/*************************
+	 *** GETTERS & SETTERS ***
+	 *************************/
+
 	public Long getIdSportsman() {
 		return idSportsman;
 	}
@@ -68,8 +79,34 @@ public class Sportsman {
 		return events;
 	}
 
-	public void setEvents(Set<Event> events) {
-		this.events = events;
+	public void setEvents(Set<Event> events) { this.events = events; }
+
+	public Set<Sport> getCompetesInSports() {
+		return competesInSports;
+	}
+
+	public void setCompetesInSports(Set<Sport> competesInSports) {
+		this.competesInSports = competesInSports;
+	}
+
+	/***************************
+	 *** METHODS & FUNCTIONS ***
+	 ***************************/
+
+	/**
+	 * Prida sport, ktery tento sportovec umi.
+	 * @param sport
+	 */
+	public void addSport(Sport sport) {
+		competesInSports.add(sport);
+	}
+
+	/**
+	 * Odebere sport, ktery tento sportovec umi.
+	 * @param sport
+	 */
+	public void removeSport(Sport sport) {
+		competesInSports.remove(sport);
 	}
 
 	@Override

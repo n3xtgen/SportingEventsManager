@@ -23,6 +23,13 @@ public interface SportDao {
     public void create(Sport s);
 
     /**
+     * Updates sport.
+     * @param s Sport
+     * @return Promoter
+     */
+    public Sport update(Sport s);
+
+    /**
      * Delete existing sport
      * @param s represent specific sport
      */
