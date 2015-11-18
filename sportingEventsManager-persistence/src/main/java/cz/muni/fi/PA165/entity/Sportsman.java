@@ -16,6 +16,8 @@ public class Sportsman {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idSportsman;
 
+	String passwordHash;
+
 	@NotNull
 	private String name;
 
@@ -49,6 +51,14 @@ public class Sportsman {
 
 	public void setIdSportsman(Long id) {
 		this.idSportsman = id;
+	}
+
+	public String getPasswordHash() {
+		return passwordHash;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
 	public String getName() {
