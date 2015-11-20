@@ -4,6 +4,11 @@ import java.util.List;
 
 import cz.muni.fi.PA165.entity.Sportsman;
 
+
+/**
+ * 
+ * @author jbouska
+ */
 public interface SportsmanService {
 
 	void registerSportsman(Sportsman u, String unencryptedPassword);
@@ -17,5 +22,7 @@ public interface SportsmanService {
 	List<Sportsman> findSportsmanBySurname(String surname);
 
 	Sportsman findSportsmanByCitizenID(String citizenID);
+        
+        Sportsman findSportsmanByEmail(String email);
 
 }

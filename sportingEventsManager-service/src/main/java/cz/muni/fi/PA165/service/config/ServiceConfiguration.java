@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Import;
 
 
 import cz.muni.fi.PA165.ApplicationContext;
+import cz.muni.fi.PA165.service.SportsmanServiceImpl;
+import cz.muni.fi.PA165.service.facade.SportsmanFacadeImpl;
 
 @Configuration
 @Import(ApplicationContext.class)
-
+@ComponentScan(basePackageClasses = {SportsmanServiceImpl.class, SportsmanFacadeImpl.class})
 public class ServiceConfiguration {
 
 	@Bean

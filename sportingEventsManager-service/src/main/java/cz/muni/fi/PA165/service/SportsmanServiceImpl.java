@@ -14,8 +14,8 @@ import cz.muni.fi.PA165.dao.SportsmanDao;
 import cz.muni.fi.PA165.entity.Sportsman;
 
 /**
- * Implementation of the {@link SportsmanService}. This class is part of the service module of the application that provides the implementation of the
- * business logic (main logic of the application).
+ * 
+ * @author jbouska
  */
 @Service
 public class SportsmanServiceImpl implements SportsmanService {
@@ -52,6 +52,11 @@ public class SportsmanServiceImpl implements SportsmanService {
     @Override
     public Sportsman findSportsmanByCitizenID(String citizenID) {
         return sportsmanDao.findByCitizenIdNumber(citizenID);
+    }
+    
+    @Override
+    public Sportsman findSportsmanByEmail(String email) {
+        return sportsmanDao.findByEmail(email);
     }
 
     //see  https://crackstation.net/hashing-security.htm#javasourcecode

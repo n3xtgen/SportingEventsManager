@@ -1,17 +1,34 @@
 package cz.muni.fi.PA165.dto;
 
 import java.util.Date;
-
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 /**
  * 
  * @author jbouska
  */
-public class SportsmanDTO {
+public class CreateSportsmanDTO {
 
     private Long id;
+    
+    
+    @NotNull
+    @Size(min = 3, max = 50)
     private String name;
+    
+    @NotNull
+    @Size(min = 3, max = 50)
     private String surname;
+    
+    @NotNull
+    @Size(min = 3, max = 50)
     private String citizenIdNumber;
+    
+    @NotNull
+    @Size(min = 5, max = 8)
+    private String password;
+    
+    @NotNull
     private String email;
 
     public String getEmail() {
@@ -20,6 +37,16 @@ public class SportsmanDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCitizenIdNumber() {
@@ -73,7 +100,7 @@ public class SportsmanDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        SportsmanDTO other = (SportsmanDTO) obj;
+        CreateSportsmanDTO other = (CreateSportsmanDTO) obj;
         if (getCitizenIdNumber() == null) {
             if (other.getCitizenIdNumber() != null) {
                 return false;

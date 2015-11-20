@@ -23,10 +23,16 @@ public class Sportsman {
 
 	@NotNull
 	private String surname;
+        
+        @NotNull
+        @Column(nullable=false,unique=true)
+	private String email;
 
 	@NotNull
 	@Column(nullable=false,unique=true)
 	private String citizenIdNumber;
+        
+        
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "registeredSportsmans")
 	private Set<Event> events = new HashSet<Event>();
@@ -41,10 +47,20 @@ public class Sportsman {
 	public Sportsman() {
 	}
 
+   
+
 	/*************************
 	 *** GETTERS & SETTERS ***
 	 *************************/
 
+         public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+        
 	public Long getIdSportsman() {
 		return idSportsman;
 	}
@@ -123,6 +139,7 @@ public class Sportsman {
 	public int hashCode() {
 		int hash = 7;
 		hash = 67 * hash + Objects.hashCode(getCitizenIdNumber());
+                hash = 7 * hash + Objects.hashCode(getEmail());
 		return hash;
 	}
 
@@ -136,6 +153,10 @@ public class Sportsman {
 		}
 		final Sportsman other = (Sportsman) obj;
 		if (!Objects.equals(getCitizenIdNumber(), other.getCitizenIdNumber())) {
+			return false;
+		}
+                
+                if (!Objects.equals(getEmail(), other.getEmail())) {
 			return false;
 		}
 		return true;

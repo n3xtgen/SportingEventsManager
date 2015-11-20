@@ -14,4 +14,12 @@
     <packaging>jar</packaging>
 
     <name>sporting-events-manager-api</name>
+    
+    <dependencies>
+		<!-- validation annotations for bean properties -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+	</dependencies>
 </project>

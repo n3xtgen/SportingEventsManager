@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.service.facade;
 
+import cz.muni.fi.PA165.dto.CreateSportsmanDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,11 @@ import cz.muni.fi.PA165.entity.Sportsman;
 import cz.muni.fi.PA165.service.SportsmanService;
 import cz.muni.fi.PA165.service.BeanMappingService;
 
+
+/**
+ * 
+ * @author jbouska
+ */
 @Service
 @Transactional
 public class SportsmanFacadeImpl implements SportsmanFacade {
@@ -35,14 +41,26 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
         Sportsman user = sportsmanService.findSportsmanByCitizenID(id);
         return (user == null) ? null : beanMappingService.mapTo(user, SportsmanDTO.class);
     }
+    
+    @Override
+    public SportsmanDTO findSportsmanByEmail(String email) {
+        Sportsman user = sportsmanService.findSportsmanByEmail(email);
+        return (user == null) ? null : beanMappingService.mapTo(user, SportsmanDTO.class);
+    }
 
 
 
     @Override
-    public void registerSportsman(SportsmanDTO sportsmanDTO, String unencryptedPassword) {
-        Sportsman sportsmanEntity = beanMappingService.mapTo(sportsmanDTO, Sportsman.class);
-        sportsmanService.registerSportsman(sportsmanEntity, unencryptedPassword);
-        sportsmanDTO.setId(sportsmanEntity.getIdSportsman());
+    public long registerSportsman(CreateSportsmanDTO s) {
+        
+       Sportsman sp = new Sportsman();
+       sp.setCitizenIdNumber(s.getCitizenIdNumber());
+       sp.setName(s.getName());
+       sp.setSurname(s.getSurname());
+       sp.setEmail(s.getEmail());
+        sportsmanService.registerSportsman(sp, s.getPassword());
+        s.setId(sp.getIdSportsman());
+        return sp.getIdSportsman();
     }
 
     @Override
@@ -53,7 +71,7 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
     @Override
     public boolean authenticate(SportsmanAuthenticateDTO s) {
         return sportsmanService.authenticate(
-                sportsmanService.findSportsmanById(s.getUserId()), s.getPassword());
+                sportsmanService.findSportsmanByEmail(s.getEmail()), s.getPassword());
     }
 
 }

@@ -50,6 +50,13 @@ public class SportsmanDaoImpl implements SportsmanDao{
                 .setParameter("name", surname).getResultList();
 
     }
+    
+     @Override
+    public Sportsman findByEmail(String email) {
+
+       return em.createQuery("select s from Sportsman s where s.email = :email", Sportsman.class)
+                .setParameter("email", email).getSingleResult();
+    }
 
     @Override
     public Sportsman findByCitizenIdNumber(String id) {

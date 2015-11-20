@@ -50,6 +50,13 @@ public interface SportsmanDao {
 	 */
 	public List<Sportsman> findBySurname(String surname);
 
+        /**
+	 *
+	 * @param email
+	 * @return sportsmans with selected email
+         */
+        public Sportsman findByEmail(String email);
+        
 	/**
 	 *
 	 * @param citizenIdNumber

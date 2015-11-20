@@ -39,9 +39,11 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         first.setName("Usain");
         first.setSurname("Bolt");
         first.setCitizenIdNumber("900522/7654");
+        first.setEmail("email@email.cz");
         second.setName("Miroslav");
         second.setSurname("Satan");
         second.setCitizenIdNumber("800322/7654");
+        second.setEmail("email2@email.cz");
 
         sportsmanDao.create(first);
         sportsmanDao.create(second);
@@ -58,7 +60,7 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         first.setName("Usain");
         first.setSurname("Bolt");
         first.setCitizenIdNumber("900522/7654");
-
+        first.setEmail("email@email.cz");
         sportsmanDao.create(first);
 
         Assert.assertEquals(sportsmanDao.findById(first.getIdSportsman()), first);
@@ -69,6 +71,7 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         Sportsman first = new Sportsman();
         first.setName("Jan");
         first.setSurname("Zeleny");
+        first.setEmail("email@email.cz");
         sportsmanDao.create(first);
     }
 
@@ -77,6 +80,7 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         Sportsman first = new Sportsman();
         first.setSurname("Novák");
         first.setCitizenIdNumber("900522/7652");
+        first.setEmail("email@email.cz");
         sportsmanDao.create(first);
     }
 
@@ -85,6 +89,7 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         Sportsman first = new Sportsman();
         first.setName("Jan");
         first.setCitizenIdNumber("900522/7652");
+        first.setEmail("email@email.cz");
         sportsmanDao.create(first);
     }
 
@@ -96,9 +101,12 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         first.setName("Dana");
         first.setSurname("Obycajna");
         first.setCitizenIdNumber("900522/7659");
+        first.setEmail("email@email.cz");
         second.setName("Klara");
         second.setSurname("Novakova");
         second.setCitizenIdNumber("900522/7659");
+        second.setEmail("email2@email.cz");
+        
 
         sportsmanDao.create(first);
         sportsmanDao.create(second);
@@ -110,7 +118,7 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         first.setName("Anka");
         first.setSurname("Obycajna");
         first.setCitizenIdNumber("900522/7654");
-
+        first.setEmail("email@email.cz");
         sportsmanDao.create(first);
 
         Assert.assertEquals(sportsmanDao.findByCitizenIdNumber(first.getCitizenIdNumber()), first);
@@ -124,10 +132,11 @@ public class SportsmanDaoTest extends AbstractTestNGSpringContextTests {
         first.setName("Anka");
         first.setCitizenIdNumber("900522/7654");
         first.setSurname("Obycajna");
+        first.setEmail("email@email.cz");
         second.setName("Patka");
         second.setCitizenIdNumber("900522/7622");
         second.setSurname("Novakova");
-
+         second.setEmail("email2@email.cz");
 
 
         sportsmanDao.create(first);
