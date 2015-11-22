@@ -1,6 +1,8 @@
 package cz.muni.fi.PA165.dto;
 
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * 
@@ -9,9 +11,17 @@ import java.util.Date;
 public class SportsmanDTO {
 
     private Long idSportsman;
+    
+    @NotNull
+    @Size(min = 3, max = 50)
     private String name;
+    
+    @NotNull
+    @Size(min = 3, max = 50)
     private String surname;
-    private String citizenIdNumber;
+    
+    
+    
     private String email;
 
     public String getEmail() {
@@ -22,13 +32,7 @@ public class SportsmanDTO {
         this.email = email;
     }
 
-    public String getCitizenIdNumber() {
-        return citizenIdNumber;
-    }
-
-    public void setCitizenIdNumber(String citizenIdNumber) {
-        this.citizenIdNumber = citizenIdNumber;
-    }
+ 
 
     public Long getIdSportsman() {
         return idSportsman;
@@ -60,7 +64,7 @@ public class SportsmanDTO {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getCitizenIdNumber() == null) ? 0 : getCitizenIdNumber().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         return result;
     }
 
@@ -76,11 +80,11 @@ public class SportsmanDTO {
             return false;
         }
         SportsmanDTO other = (SportsmanDTO) obj;
-        if (getCitizenIdNumber() == null) {
-            if (other.getCitizenIdNumber() != null) {
+        if (getEmail() == null) {
+            if (other.getEmail() != null) {
                 return false;
             }
-        } else if (!getCitizenIdNumber().equals(other.getCitizenIdNumber())) {
+        } else if (!getEmail().equals(other.getEmail())) {
             return false;
         }
         return true;
@@ -90,7 +94,7 @@ public class SportsmanDTO {
     public String toString() {
         return "UserDTO{"
                 + "id=" + idSportsman
-                + ", email='" + citizenIdNumber + '\''
+                + ", email='" + getEmail() + '\''
                 + ", givenName='" + name + '\''
                 + ", surname='" + surname + '\''
                 + '}';

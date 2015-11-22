@@ -15,10 +15,10 @@ import cz.muni.fi.PA165.dto.SportsmanDTO;
 public interface SportsmanFacade {
 	
 	SportsmanDTO findSportsmanById(Long userId);
-
-	SportsmanDTO findSportsmanByCitizenId(String id);
         
         SportsmanDTO findSportsmanByEmail(String email);
+        
+        void updateSportsman(SportsmanDTO s);
 
 	/**
 	 * Register the given user with the given unencrypted password.

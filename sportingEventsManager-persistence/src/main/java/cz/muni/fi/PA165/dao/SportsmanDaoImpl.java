@@ -62,15 +62,8 @@ public class SportsmanDaoImpl implements SportsmanDao{
 		}
     }
 
-    @Override
-    public Sportsman findByCitizenIdNumber(String id) {
-        try{
-        return em.createQuery("select s from Sportsman s where s.citizenIdNumber = :id", Sportsman.class)
-                .setParameter("id", id).getSingleResult();
-        } catch (NoResultException nrf) {
-			return null;
-		}
-    }
+   
+  
 
 
 }

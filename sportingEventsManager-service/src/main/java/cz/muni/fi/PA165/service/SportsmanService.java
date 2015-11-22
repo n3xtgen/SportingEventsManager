@@ -20,9 +20,9 @@ public interface SportsmanService {
 	Sportsman findSportsmanById(Long sportsmanId);
 
 	List<Sportsman> findSportsmanBySurname(String surname);
-
-	Sportsman findSportsmanByCitizenID(String citizenID);
         
         Sportsman findSportsmanByEmail(String email);
+        
+        void updateSportsman(Sportsman s);
 
 }
