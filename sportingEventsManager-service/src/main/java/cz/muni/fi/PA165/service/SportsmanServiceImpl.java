@@ -35,6 +35,7 @@ public class SportsmanServiceImpl implements SportsmanService {
 
     @Override
     public boolean authenticate(Sportsman u, String password) {
+        if(u == null) return false;
         return validatePassword(password, u.getPasswordHash());
     }
 

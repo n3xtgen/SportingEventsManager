@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class SportsmanDTO {
 
-    private Long id;
+    private Long idSportsman;
     private String name;
     private String surname;
     private String citizenIdNumber;
@@ -30,13 +30,15 @@ public class SportsmanDTO {
         this.citizenIdNumber = citizenIdNumber;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdSportsman() {
+        return idSportsman;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdSportsman(Long idSportsman) {
+        this.idSportsman = idSportsman;
     }
+
+    
 
     public String getName() {
         return name;
@@ -87,7 +89,7 @@ public class SportsmanDTO {
     @Override
     public String toString() {
         return "UserDTO{"
-                + "id=" + id
+                + "id=" + idSportsman
                 + ", email='" + citizenIdNumber + '\''
                 + ", givenName='" + name + '\''
                 + ", surname='" + surname + '\''

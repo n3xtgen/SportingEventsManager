@@ -59,7 +59,7 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
        sp.setSurname(s.getSurname());
        sp.setEmail(s.getEmail());
         sportsmanService.registerSportsman(sp, s.getPassword());
-        s.setId(sp.getIdSportsman());
+       s.setId(sp.getIdSportsman());
         return sp.getIdSportsman();
     }
 

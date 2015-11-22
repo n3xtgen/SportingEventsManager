@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import cz.muni.fi.PA165.entity.Sportsman;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -53,16 +54,22 @@ public class SportsmanDaoImpl implements SportsmanDao{
     
      @Override
     public Sportsman findByEmail(String email) {
-
+        try{
        return em.createQuery("select s from Sportsman s where s.email = :email", Sportsman.class)
                 .setParameter("email", email).getSingleResult();
+       } catch (NoResultException nrf) {
+			return null;
+		}
     }
 
     @Override
     public Sportsman findByCitizenIdNumber(String id) {
-
+        try{
         return em.createQuery("select s from Sportsman s where s.citizenIdNumber = :id", Sportsman.class)
                 .setParameter("id", id).getSingleResult();
+        } catch (NoResultException nrf) {
+			return null;
+		}
     }
 
 
