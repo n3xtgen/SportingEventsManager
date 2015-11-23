@@ -28,16 +28,14 @@
                 <td><strong>surname:</strong></td>
                 <td><c:out value="${sportsmanDetail.surname}"/></td>
             </tr>
-            <tr>
-                <td><strong>citizen identification number:</strong></td>
-                <td><c:out value="${sportsmanDetail.citizenIdNumber}"/></td>
-
-
-            </tr>
-            
+                       
             
 
         </table>
+                <c:if test="${sportsmanDetail.idSportsman ==  authenticatedUser.idSportsman}">
+                <a href="${pageContext.request.contextPath}/user/update/${sportsmanDetail.idSportsman}" ><button type="button" class="btn btn-primary btn-md">Edit</button></a>
+                </c:if>
+                
 
     </jsp:attribute>
 </my:pagetemplate>

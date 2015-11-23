@@ -36,25 +36,26 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
         return (user == null) ? null : beanMappingService.mapTo(user, SportsmanDTO.class);
     }
 
-    @Override
-    public SportsmanDTO findSportsmanByCitizenId(String id) {
-        Sportsman user = sportsmanService.findSportsmanByCitizenID(id);
-        return (user == null) ? null : beanMappingService.mapTo(user, SportsmanDTO.class);
-    }
+   
     
     @Override
     public SportsmanDTO findSportsmanByEmail(String email) {
         Sportsman user = sportsmanService.findSportsmanByEmail(email);
         return (user == null) ? null : beanMappingService.mapTo(user, SportsmanDTO.class);
     }
-
+    @Override
+    public void updateSportsman(SportsmanDTO s){
+         Sportsman sp = sportsmanService.findSportsmanById(s.getIdSportsman());
+         sp.setName(s.getName());
+         sp.setSurname(s.getSurname());
+         sportsmanService.updateSportsman(sp);
+     }
 
 
     @Override
     public long registerSportsman(CreateSportsmanDTO s) {
         
        Sportsman sp = new Sportsman();
-       sp.setCitizenIdNumber(s.getCitizenIdNumber());
        sp.setName(s.getName());
        sp.setSurname(s.getSurname());
        sp.setEmail(s.getEmail());

@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.mvc.config;
 
 
+import cz.muni.fi.PA165.sampledata.SportingEventsManagerSampleDataConfiguration;
 import cz.muni.fi.PA165.service.config.ServiceConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,8 @@ import javax.validation.Validator;
 
 @EnableWebMvc
 @Configuration
-@Import(ServiceConfiguration.class)
-@ComponentScan(basePackages = "cz.muni.fi.PA165.mvc.controllers")
+@ComponentScan(basePackages ="cz.muni.fi.PA165.mvc.controllers")
+@Import({SportingEventsManagerSampleDataConfiguration.class})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
     final static Logger log = LoggerFactory.getLogger(MySpringMvcConfig.class);

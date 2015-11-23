@@ -57,12 +57,6 @@ public interface SportsmanDao {
          */
         public Sportsman findByEmail(String email);
         
-	/**
-	 *
-	 * @param citizenIdNumber
-	 * @return sportsman with selected ID
-	 *
-	 */
-	public Sportsman findByCitizenIdNumber(String citizenIdNumber);
+	
 
 }

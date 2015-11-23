@@ -32,13 +32,7 @@
                      <form:errors path="surname" cssClass="help-block"/>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="citizenIdNumberInput" >Citizen Identification Number:</label>
-                <div class="col-sm-10">
-                    <form:input type="text" class="form-control"  path="citizenIdNumber" id="citizenIdNumberInput" placeholder="Citizen ID" />
-                     <form:errors path="citizenIdNumber" cssClass="help-block"/>
-                </div>
-            </div>
+           
             <div class="form-group">
                 <label class="control-label col-sm-2" for="pwd">Password:</label>
                 <div class="col-sm-10">

@@ -28,10 +28,7 @@ public class Sportsman {
         @Column(nullable=false,unique=true)
 	private String email;
 
-	@NotNull
-	@Column(nullable=false,unique=true)
-	private String citizenIdNumber;
-        
+	
         
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "registeredSportsmans")
@@ -93,13 +90,7 @@ public class Sportsman {
 		this.surname = surname;
 	}
 
-	public String getCitizenIdNumber() {
-		return citizenIdNumber;
-	}
-
-	public void setCitizenIdNumber(String citizenIdNumber) {
-		this.citizenIdNumber = citizenIdNumber;
-	}
+	
 
 	public Set<Event> getEvents() {
 		return events;
@@ -138,7 +129,6 @@ public class Sportsman {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 67 * hash + Objects.hashCode(getCitizenIdNumber());
                 hash = 7 * hash + Objects.hashCode(getEmail());
 		return hash;
 	}
@@ -152,10 +142,7 @@ public class Sportsman {
 			return false;
 		}
 		final Sportsman other = (Sportsman) obj;
-		if (!Objects.equals(getCitizenIdNumber(), other.getCitizenIdNumber())) {
-			return false;
-		}
-                
+		
                 if (!Objects.equals(getEmail(), other.getEmail())) {
 			return false;
 		}

@@ -20,12 +20,9 @@ public class CreateSportsmanDTO {
     @Size(min = 3, max = 50)
     private String surname;
     
+       
     @NotNull
-    @Size(min = 3, max = 50)
-    private String citizenIdNumber;
-    
-    @NotNull
-    @Size(min = 5, max = 8)
+    @Size(min = 5, max = 20)
     private String password;
     
     @NotNull
@@ -49,14 +46,7 @@ public class CreateSportsmanDTO {
         this.password = password;
     }
 
-    public String getCitizenIdNumber() {
-        return citizenIdNumber;
-    }
-
-    public void setCitizenIdNumber(String citizenIdNumber) {
-        this.citizenIdNumber = citizenIdNumber;
-    }
-
+   
     public Long getId() {
         return id;
     }
@@ -85,7 +75,7 @@ public class CreateSportsmanDTO {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getCitizenIdNumber() == null) ? 0 : getCitizenIdNumber().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         return result;
     }
 
@@ -101,11 +91,11 @@ public class CreateSportsmanDTO {
             return false;
         }
         CreateSportsmanDTO other = (CreateSportsmanDTO) obj;
-        if (getCitizenIdNumber() == null) {
-            if (other.getCitizenIdNumber() != null) {
+        if (getEmail() == null) {
+            if (other.getEmail() != null) {
                 return false;
             }
-        } else if (!getCitizenIdNumber().equals(other.getCitizenIdNumber())) {
+        } else if (!getEmail().equals(other.getEmail())) {
             return false;
         }
         return true;
@@ -115,7 +105,7 @@ public class CreateSportsmanDTO {
     public String toString() {
         return "UserDTO{"
                 + "id=" + id
-                + ", email='" + citizenIdNumber + '\''
+                + ", email='" + getEmail() + '\''
                 + ", givenName='" + name + '\''
                 + ", surname='" + surname + '\''
                 + '}';

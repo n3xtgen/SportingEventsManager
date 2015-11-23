@@ -38,10 +38,7 @@ public class ProtectFilter implements Filter {
     }
 
 
-    private String[] parseAuthHeader(String auth) {
-        return new String(DatatypeConverter.parseBase64Binary(auth.split(" ")[1])).split(":", 2);
-    }
-
+   
     private void response401(HttpServletResponse response, HttpServletRequest request) throws IOException {
         response.sendRedirect(request.getContextPath()+"/user/login_page");
     }

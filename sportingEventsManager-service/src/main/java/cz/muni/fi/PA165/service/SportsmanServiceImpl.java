@@ -12,6 +12,7 @@ import java.util.List;
 
 import cz.muni.fi.PA165.dao.SportsmanDao;
 import cz.muni.fi.PA165.entity.Sportsman;
+import javax.validation.ConstraintViolationException;
 
 /**
  * 
@@ -25,7 +26,10 @@ public class SportsmanServiceImpl implements SportsmanService {
     @Override
     public void registerSportsman(Sportsman u, String unencryptedPassword) {
         u.setPasswordHash(createHash(unencryptedPassword));
+     
         sportsmanDao.create(u);
+       
+      
     }
 
     @Override
@@ -50,14 +54,17 @@ public class SportsmanServiceImpl implements SportsmanService {
         return sportsmanDao.findBySurname(surname);
     }
 
-    @Override
-    public Sportsman findSportsmanByCitizenID(String citizenID) {
-        return sportsmanDao.findByCitizenIdNumber(citizenID);
-    }
-    
+   
     @Override
     public Sportsman findSportsmanByEmail(String email) {
         return sportsmanDao.findByEmail(email);
+    }
+    
+    @Override
+    public void updateSportsman(Sportsman s)
+    {  
+        sportsmanDao.update(s);
+        
     }
 
     //see  https://crackstation.net/hashing-security.htm#javasourcecode

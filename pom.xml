@@ -67,10 +67,11 @@
     </dependencyManagement>
 
     <modules>
-        <module>sportingEventsManager-api</module>
         <module>sportingEventsManager-persistence</module>
         <module>sportingEventsManager-service</module>
-    <module>sporting-events-manager-mvc</module>
-  </modules>
+        <module>sportingEventsManager-api</module>
+        <module>sportingEventsManager-mvc</module>
+        <module>sportingEventsManager-sampleData</module>
+    </modules>
 
 </project>
