@@ -22,7 +22,7 @@ public class CreateSportsmanDTO {
     
        
     @NotNull
-    @Size(min = 5)
+    @Size(min = 5, max = 20)
     private String password;
     
     @NotNull

@@ -13,7 +13,7 @@ public class SportsmanAuthenticateDTO
     private String email;
     
     @NotNull
-    @Size(min = 5)
+    @Size(min = 5, max = 20)
     private String password;
 
     public String getEmail() {
