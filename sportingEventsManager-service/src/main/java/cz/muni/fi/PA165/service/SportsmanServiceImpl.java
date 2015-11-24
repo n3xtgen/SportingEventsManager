@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.service;
 
+import cz.muni.fi.PA165.Exceptions.DataAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,59 +13,95 @@ import java.util.List;
 
 import cz.muni.fi.PA165.dao.SportsmanDao;
 import cz.muni.fi.PA165.entity.Sportsman;
-import javax.validation.ConstraintViolationException;
 
 /**
- * 
+ *
  * @author jbouska
  */
 @Service
 public class SportsmanServiceImpl implements SportsmanService {
+
     @Autowired
     private SportsmanDao sportsmanDao;
 
     @Override
     public void registerSportsman(Sportsman u, String unencryptedPassword) {
         u.setPasswordHash(createHash(unencryptedPassword));
-     
-        sportsmanDao.create(u);
-       
-      
+        try {
+            sportsmanDao.create(u);
+        } catch (Exception e) {
+            throw new DataAccessException(e);
+        }
+
     }
 
     @Override
     public List<Sportsman> getAllSportsmans() {
-        return sportsmanDao.findAll();
+        try {
+            return sportsmanDao.findAll();
+        } catch (Exception e) {
+            throw new DataAccessException(e);
+        }
     }
 
     @Override
     public boolean authenticate(Sportsman u, String password) {
-        if(u == null) return false;
-        return validatePassword(password, u.getPasswordHash());
+        if (u == null) {
+            return false;
+        }
+        try {
+            return validatePassword(password, u.getPasswordHash());
+        } catch (Exception e) {
+            throw new DataAccessException(e);
+        }
     }
-
 
     @Override
     public Sportsman findSportsmanById(Long sportsmanId) {
-        return sportsmanDao.findById(sportsmanId);
+        try {
+            return sportsmanDao.findById(sportsmanId);
+        } catch (Exception e) {
+            throw new DataAccessException(e);
+        }
     }
 
     @Override
     public List<Sportsman> findSportsmanBySurname(String surname) {
-        return sportsmanDao.findBySurname(surname);
+        try {
+            return sportsmanDao.findBySurname(surname);
+        } catch (Exception e) {
+            throw new DataAccessException(e);
+        }
     }
 
-   
     @Override
     public Sportsman findSportsmanByEmail(String email) {
-        return sportsmanDao.findByEmail(email);
+        try {
+            return sportsmanDao.findByEmail(email);
+        } catch (Exception e) {
+            throw new DataAccessException(e);
+        }
+    }
+
+    @Override
+    public void updateSportsman(Sportsman s) {
+        try {
+            sportsmanDao.update(s);
+        } catch (Exception e) {
+            throw new DataAccessException(e);
+
+        }
+
     }
     
     @Override
-    public void updateSportsman(Sportsman s)
-    {  
-        sportsmanDao.update(s);
-        
+    public void deleteSportsman(Sportsman s) {
+        try {
+            sportsmanDao.delete(s);
+        } catch (Exception e) {
+            throw new DataAccessException(e);
+
+        }
     }
 
     //see  https://crackstation.net/hashing-security.htm#javasourcecode
@@ -92,8 +129,12 @@ public class SportsmanServiceImpl implements SportsmanService {
     }
 
     public static boolean validatePassword(String password, String correctHash) {
-        if(password==null) return false;
-        if(correctHash==null) throw new IllegalArgumentException("password hash is null");
+        if (password == null) {
+            return false;
+        }
+        if (correctHash == null) {
+            throw new IllegalArgumentException("password hash is null");
+        }
         String[] params = correctHash.split(":");
         int iterations = Integer.parseInt(params[0]);
         byte[] salt = fromHex(params[1]);
@@ -113,8 +154,9 @@ public class SportsmanServiceImpl implements SportsmanService {
      */
     private static boolean slowEquals(byte[] a, byte[] b) {
         int diff = a.length ^ b.length;
-        for (int i = 0; i < a.length && i < b.length; i++)
+        for (int i = 0; i < a.length && i < b.length; i++) {
             diff |= a[i] ^ b[i];
+        }
         return diff == 0;
     }
 

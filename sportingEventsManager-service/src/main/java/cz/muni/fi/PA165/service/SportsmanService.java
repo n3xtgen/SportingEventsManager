@@ -4,25 +4,70 @@ import java.util.List;
 
 import cz.muni.fi.PA165.entity.Sportsman;
 
-
 /**
- * 
+ *
  * @author jbouska
  */
 public interface SportsmanService {
 
-	void registerSportsman(Sportsman u, String unencryptedPassword);
+    /**
+     * Register new Sportsman.
+     *
+     * @param u sportsman to register
+     * @param unencryptedPassword
+     */
+    void registerSportsman(Sportsman u, String unencryptedPassword);
 
-	List<Sportsman> getAllSportsmans();
+    /**
+     * Get all sportsmans.
+     *
+     * @return list of sportsmans
+     */
+    List<Sportsman> getAllSportsmans();
 
-	boolean authenticate(Sportsman u, String password);
+    /**
+     * Authenticate sportsman.
+     *
+     * @param u
+     * @param password
+     * @return true if is authenticate
+     */
+    boolean authenticate(Sportsman u, String password);
 
-	Sportsman findSportsmanById(Long sportsmanId);
+    /**
+     * Find sportsman by ID.
+     *
+     * @param sportsmanId
+     * @return
+     */
+    Sportsman findSportsmanById(Long sportsmanId);
 
-	List<Sportsman> findSportsmanBySurname(String surname);
-        
-        Sportsman findSportsmanByEmail(String email);
-        
-        void updateSportsman(Sportsman s);
+    /**
+     * Find sportsman by surname. 
+     * 
+     * @param surname
+     * @return
+     */
+    List<Sportsman> findSportsmanBySurname(String surname);
+
+    /**
+     * Find sportsman by email
+     * 
+     * @param email
+     * @return 
+     */
+    Sportsman findSportsmanByEmail(String email);
+
+    /**
+     * Update sportsman.
+     * @param s 
+     */
+    void updateSportsman(Sportsman s);
+    
+    /**
+     * Delete sportsman
+     * @param s 
+     */ 
+    void deleteSportsman(Sportsman s);
 
 }

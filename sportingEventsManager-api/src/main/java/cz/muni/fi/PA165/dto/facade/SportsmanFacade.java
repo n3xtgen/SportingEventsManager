@@ -14,14 +14,28 @@ import cz.muni.fi.PA165.dto.SportsmanDTO;
 
 public interface SportsmanFacade {
 	
+    /**
+     * Find sportsman by ID
+     * @param userId 
+     * @return 
+     */
 	SportsmanDTO findSportsmanById(Long userId);
         
+        /**
+         * Find Sportsman by email
+         * @param email
+         * @return 
+         */
         SportsmanDTO findSportsmanByEmail(String email);
         
+        /**
+         * Update sportsman
+         * @param s 
+         */
         void updateSportsman(SportsmanDTO s);
 
 	/**
-	 * Register the given user with the given unencrypted password.
+	 * Register the sportsman with the unencrypted password.
 	 */
 	long registerSportsman(CreateSportsmanDTO sp);
 
