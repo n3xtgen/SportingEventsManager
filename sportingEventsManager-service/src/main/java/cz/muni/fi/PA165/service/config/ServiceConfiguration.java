@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165.service.config;
 
+import cz.muni.fi.PA165.service.SportServiceImpl;
+import cz.muni.fi.PA165.service.facade.SportFacadeImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
@@ -15,7 +17,7 @@ import cz.muni.fi.PA165.service.facade.SportsmanFacadeImpl;
 
 @Configuration
 @Import(ApplicationContext.class)
-@ComponentScan(basePackageClasses = {SportsmanServiceImpl.class, SportsmanFacadeImpl.class})
+@ComponentScan(basePackageClasses = {SportsmanServiceImpl.class, SportsmanFacadeImpl.class, SportServiceImpl.class, SportFacadeImpl.class})
 public class ServiceConfiguration {
 
 	@Bean
