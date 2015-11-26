@@ -38,6 +38,11 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
+    public Event findByName(String name){
+        return entityManager.createQuery("SELECT e FROM Event e WHERE e.name = :name", Event.class).setParameter("name", name).getSingleResult();
+    }
+
+    @Override
     public List<Event> findAll() {
         return entityManager.createQuery("SELECT e FROM Event e", Event.class).getResultList();
     }

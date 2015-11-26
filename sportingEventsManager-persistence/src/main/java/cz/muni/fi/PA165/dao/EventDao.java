@@ -36,6 +36,13 @@ public interface EventDao {
     public Event findById(Long id);
 
     /**
+     * find event by its name
+     * @param name
+     * @return event with specified name
+     */
+    public Event findByName(String name);
+
+    /**
      * find all events
      * @return all events
      */
