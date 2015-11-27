@@ -3,6 +3,7 @@ package cz.muni.fi.PA165.dao;
 import cz.muni.fi.PA165.entity.Event;
 
 import java.util.List;
+import java.util.Date;
 
 /**
  * @author Jamik (Lukas Gryc)
@@ -47,4 +48,12 @@ public interface EventDao {
      * @return all events
      */
     public List<Event> findAll();
+
+    /**
+     * find events that start at startDate & end at endDate
+     * @param startDate
+     * @param endDate
+     * @return list of events in a date range
+     */
+    public List<Event> findEventsInDateRange(Date startDate, Date endDate);
 }

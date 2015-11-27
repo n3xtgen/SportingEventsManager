@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.dto.CreateEventDTO;
 import cz.muni.fi.PA165.dto.EventDTO;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Jamik on 25.11.2015.
@@ -29,6 +30,14 @@ public interface EventFacade {
      * @return collection of all events
      */
     Collection<EventDTO> getAllEvents();
+
+    /**
+     * Find events that take place between startDate & endDate
+     * @param startDate
+     * @param endDate
+     * @return collection of events that take place between startDate & endDate
+     */
+    Collection<EventDTO> findEventsInDateRange(Date startDate, Date endDate);
 
     /**
      * Add new event

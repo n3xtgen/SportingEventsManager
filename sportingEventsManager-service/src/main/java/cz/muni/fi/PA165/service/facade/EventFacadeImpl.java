@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.CollationElementIterator;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Jamik on 25.11.2015.
@@ -32,6 +33,11 @@ public class EventFacadeImpl implements EventFacade {
     public EventDTO findEventByName(String name){
         Event e = eventService.findEventByName(name);
         return (e == null ? null : beanMappingService.mapTo(e, EventDTO.class));
+    }
+
+    @Override
+    public Collection<EventDTO> findEventsInDateRange(Date startDate, Date endDate) {
+        return beanMappingService.mapTo(eventService.findEventsInDateRange(startDate, endDate), EventDTO.class);
     }
 
     @Override

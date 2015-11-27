@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.dto;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,10 +21,16 @@ public class CreateEventDTO {
     // most likely we will need to extend validation class
     @NotNull
     @Future
+    @AssertTrue public boolean isStartDateValid(){
+        return endTime == null ? true : (startTime.getTime() < endTime.getTime() ? true : false);
+    }
     private Date startTime;
 
     @NotNull
     @Future
+    @AssertTrue public boolean isEndDateValid(){
+        return startTime == null ? true : (startTime.getTime() < endTime.getTime() ? true : false);
+    }
     private Date    endTime;
 
 

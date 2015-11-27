@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Date;
 
 /**
  * @author Jamik (Lukas Gryc)
@@ -45,5 +47,14 @@ public class EventDaoImpl implements EventDao {
     @Override
     public List<Event> findAll() {
         return entityManager.createQuery("SELECT e FROM Event e", Event.class).getResultList();
+    }
+
+    // TODO: how about events that start or end outside of the interval
+    @Override
+    public List<Event> findEventsInDateRange(Date startDate, Date endDate){
+        TypedQuery<Event> query = entityManager.createQuery("SELECT e FROM Event e WHERE e.startTime >= :sDate AND e.endTime <= :eDate", Event.class);
+        query.setParameter("sDate", startDate);
+        query.setParameter("eDate", endDate);
+        return query.getResultList();
     }
 }

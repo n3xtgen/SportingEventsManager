@@ -85,6 +85,22 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     /**
+     * create event, save to DB, get from DB using its name
+     */
+    @Test
+    public void tryToFindByName(){
+        Event evt1 = new Event();
+        evt1.setName("football");
+        evt1.setDescription("blah");
+        evt1.setStartTime(new Date());
+        evt1.setEndTime(new Date());
+        // save to DB
+        eventDao.create(evt1);
+        // check stuff
+        Assert.assertEquals(eventDao.findByName(evt1.getName()), evt1);
+    }
+
+    /**
      * create 2 events, save to DB, delete 1 of them, get all from DB
      */
     @Test
@@ -197,5 +213,32 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(retEvt.getSportTypes().size(), 2);
         // check reference to Sports
         Assert.assertTrue(retEvt.getSportTypes().containsAll(someSports));
+    }
+
+    @Test
+    public void tryToGetEventsBetweenDates(){
+        Event evt1 = new Event();
+        evt1.setName("football");
+        evt1.setDescription("blah");
+        Date startDateTry = new Date();
+        Date endDateTry = new Date();
+        // set start date
+        Date dStart = new Date();
+        dStart.setTime(dStart.getTime()+2000); // now + 2000 ms
+        evt1.setStartTime(dStart);
+        // set end date
+        Date dEnd = new Date();
+        dEnd.setTime(dEnd.getTime()+5000); // now + 5000 ms
+        evt1.setEndTime(dEnd);
+
+        // save to DB
+        eventDao.create(evt1);
+
+        // there should be an event in (now + 1000 ms) to (now + 10000 ms)
+        startDateTry.setTime(startDateTry.getTime()+1000);
+        endDateTry.setTime(endDateTry.getTime()+10000);
+        List<Event> eventsInRange  = eventDao.findEventsInDateRange(startDateTry,endDateTry);
+
+        Assert.assertTrue(eventsInRange.size() > 0);
     }
 }
