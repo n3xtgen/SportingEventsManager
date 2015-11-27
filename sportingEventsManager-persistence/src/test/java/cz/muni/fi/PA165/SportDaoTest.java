@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165;
 
+import cz.muni.fi.PA165.dao.EventDao;
+import cz.muni.fi.PA165.entity.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -7,13 +9,14 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
 
+import java.util.Date;
 import java.util.List;
 
 import cz.muni.fi.PA165.dao.SportDao;
@@ -31,8 +34,23 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 	@Autowired
 	private SportDao sportDao;
 
+	@Autowired
+	private EventDao eventDao;
+
 	@PersistenceContext
 	private EntityManager em;
+
+	private Event event;
+
+	@BeforeMethod
+	public void prepareEvent() {
+		event = new Event();
+		event.setName("Event 1");
+		event.setDescription("Event description.");
+		event.setStartTime(new Date());
+		event.setEndTime(new Date());
+		eventDao.create(event);
+	}
 
 	@Test
 	public void shouldfindAll() {
@@ -41,6 +59,9 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 
 		sp1.setName("tennis");
 		sp2.setName("hockey");
+
+		sp1.setEvent(event);
+		sp2.setEvent(event);
 
 		sportDao.create(sp1);
 		sportDao.create(sp2);
@@ -56,6 +77,7 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 	public void shouldFindByID() {
 		Sport sp = new Sport();
 		sp.setName("tennis");
+		sp.setEvent(event);
 
 		sportDao.create(sp);
 
@@ -76,6 +98,9 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 		sp1.setName("tennis");
 		sp2.setName("tennis");
 
+		sp1.setEvent(event);
+		sp2.setEvent(event);
+
 		sportDao.create(sp1);
 		sportDao.create(sp2);
 	}
@@ -84,6 +109,7 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 	public void shouldFindByName() {
 		Sport sp = new Sport();
 		sp.setName("tennis");
+		sp.setEvent(event);
 
 		sportDao.create(sp);
 
@@ -97,6 +123,8 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 		Sport sp2 = new Sport();
 		sp1.setName("tennis");
 		sp2.setName("hockey");
+		sp1.setEvent(event);
+		sp2.setEvent(event);
 
 		sportDao.create(sp1);
 		sportDao.create(sp2);

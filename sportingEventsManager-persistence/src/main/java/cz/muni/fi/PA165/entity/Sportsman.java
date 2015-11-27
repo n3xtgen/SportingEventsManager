@@ -1,5 +1,6 @@
 package cz.muni.fi.PA165.entity;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -24,18 +25,15 @@ public class Sportsman {
 	@NotNull
 	private String surname;
         
-        @NotNull
-        @Column(nullable=false,unique=true)
+	@NotNull
+	@Column(nullable=false,unique=true)
 	private String email;
 
-	
-        
-
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "registeredSportsmans")
-	private Set<Event> events = new HashSet<Event>();
-
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "competitors")
-	private Set<Sport> competesInSports = new HashSet<Sport>();
+	/**
+	 * Seznam prihlasek sportovce k jednotlivym zavodum a jeho vysledek.
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sportsman")
+	private Set<Entry> entries = new HashSet<Entry>();
 
 	/********************
 	 *** CONSTRUCTORS ***
@@ -44,20 +42,10 @@ public class Sportsman {
 	public Sportsman() {
 	}
 
-   
-
 	/*************************
 	 *** GETTERS & SETTERS ***
 	 *************************/
 
-         public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-        
 	public Long getIdSportsman() {
 		return idSportsman;
 	}
@@ -90,41 +78,27 @@ public class Sportsman {
 		this.surname = surname;
 	}
 
-	
-
-	public Set<Event> getEvents() {
-		return events;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEvents(Set<Event> events) { this.events = events; }
-
-	public Set<Sport> getCompetesInSports() {
-		return competesInSports;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public void setCompetesInSports(Set<Sport> competesInSports) {
-		this.competesInSports = competesInSports;
+	public Set<Entry> getEntries() { return Collections.unmodifiableSet(entries); }
+
+	public void addEntry(Entry entry) {
+		entries.add(entry);
+	}
+
+	public void removeEntry(Entry entry) {
+		entries.remove(entry);
 	}
 
 	/***************************
 	 *** METHODS & FUNCTIONS ***
 	 ***************************/
-
-	/**
-	 * Prida sport, ktery tento sportovec umi.
-	 * @param sport
-	 */
-	public void addSport(Sport sport) {
-		competesInSports.add(sport);
-	}
-
-	/**
-	 * Odebere sport, ktery tento sportovec umi.
-	 * @param sport
-	 */
-	public void removeSport(Sport sport) {
-		competesInSports.remove(sport);
-	}
 
 	@Override
 	public int hashCode() {

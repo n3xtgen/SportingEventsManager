@@ -186,33 +186,36 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         evt.setStartTime(new Date());
         evt.setEndTime(new Date());
 
-        Set<Sport> someSports = new HashSet<Sport>();
         Sport spt1 = new Sport();
-        Sport spt2 = new Sport();
-
         spt1.setName("hockey");
+        Sport spt2 = new Sport();
         spt2.setName("football");
 
-        someSports.add(spt1);
-        someSports.add(spt2);
+        spt1.setEvent(evt);
+        spt2.setEvent(evt);
+        evt.addSport(spt1);
+        evt.addSport(spt2);
 
-        evt.setSportTypes(someSports);
-        Assert.assertEquals(evt.getSportTypes().size(), 2);
+        Assert.assertEquals(evt.getSports().size(), 2);
+
+        // save the event to DB
+        eventDao.create(evt);
+
         // save sports to DB
         sportDao.create(spt1);
         sportDao.create(spt2);
-        // save the event to DB
-        eventDao.create(evt);
+
 
         Event retEvt = eventDao.findById(evt.getIdEvent());
 
         // check event
         Assert.assertEquals(retEvt.getName(), evt.getName());
-        Assert.assertNotNull(retEvt.getSportTypes());
+        Assert.assertNotNull(retEvt.getSports());
         // check number of references
-        Assert.assertEquals(retEvt.getSportTypes().size(), 2);
+        Assert.assertEquals(retEvt.getSports().size(), 2);
         // check reference to Sports
-        Assert.assertTrue(retEvt.getSportTypes().containsAll(someSports));
+        Assert.assertTrue(retEvt.getSports().contains(spt1));
+        Assert.assertTrue(retEvt.getSports().contains(spt2));
     }
 
     @Test

@@ -4,6 +4,10 @@ package cz.muni.fi.PA165;
  * Created by jbouska on 26.10.15.
  */
 
+import cz.muni.fi.PA165.dao.EventDao;
+import cz.muni.fi.PA165.dao.SportsmanDao;
+import cz.muni.fi.PA165.entity.Entry;
+import cz.muni.fi.PA165.entity.Sportsman;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +30,7 @@ import cz.muni.fi.PA165.dao.SportDao;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses={SportDao.class})
+@ComponentScan(basePackageClasses={SportDao.class, EventDao.class, SportsmanDao.class})
 public class ApplicationContext {
 
 

@@ -3,10 +3,13 @@ package cz.muni.fi.PA165.entity;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Konkretni Sport (zavod), ktery se kona v ramci jednoho Eventu.
+ *
  * @author Vladimir
  */
 @Entity
@@ -20,15 +23,15 @@ public class Sport {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "sportTypes")
-    private Set<Event> eventsContainingSport = new HashSet<Event>();
+    @NotNull
+    @ManyToOne
+    private Event event;
 
-    @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinTable(name="sport_sportsman", joinColumns = {
-            @JoinColumn(name="idSport", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="idSportsman",
-                    nullable = false, updatable = false)})
-    private Set<Sportsman> competitors = new HashSet<Sportsman>();
+    /**
+     * Seznam prihlasek jednotlivych sportovcu k zavodu a jejich vysledku.
+     */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sport")
+    private Set<Entry> entries = new HashSet<Entry>();
 
     /********************
      *** CONSTRUCTORS ***
@@ -57,20 +60,22 @@ public class Sport {
         this.name = name;
     }
 
-    public Set<Event> getEventsContainingSport() {
-        return eventsContainingSport;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventsContainingSport(Set<Event> eventsContainingSport) {
-        this.eventsContainingSport = eventsContainingSport;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public Set<Sportsman> getCompetitors() {
-        return competitors;
+    public Set<Entry> getEntries() { return Collections.unmodifiableSet(entries); }
+
+    public void addEntry(Entry entry) {
+        entries.add(entry);
     }
 
-    public void setCompetitors(Set<Sportsman> competitors) {
-        this.competitors = competitors;
+    public void removeEntry(Entry entry) {
+        entries.remove(entry);
     }
 
     /***************************

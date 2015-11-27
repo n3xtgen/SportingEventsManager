@@ -2,6 +2,7 @@ package cz.muni.fi.PA165.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,24 +33,9 @@ public class Event{
     @NotNull
     private Date endTime;
 
-    // sportsmans registered to this event
-    @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinTable(name="event_sportsman", joinColumns = {
-            @JoinColumn(name="idEvent", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="idSportsman",
-            nullable = false, updatable = false)})
-    private Set<Sportsman> registeredSportsmans = new HashSet<Sportsman>();
-
     // sports that are available in the event
-    @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinTable(name="event_sport", joinColumns = {
-            @JoinColumn(name="idEvent", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="idSport",
-                    nullable = false, updatable = false)})
-    private Set<Sport> sportTypes = new HashSet<Sport>();
-
-    @ManyToOne
-    private Promoter promoter;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
+    private Set<Sport> sports = new HashSet<Sport>();
 
     /********************
      *** CONSTRUCTORS ***
@@ -102,49 +88,19 @@ public class Event{
         this.endTime = end;
     }
 
-    public Set<Sportsman> getRegisteredSportsmans() {
-        return registeredSportsmans;
+    public Set<Sport> getSports() { return Collections.unmodifiableSet(sports); }
+
+    public void addSport(Sport sport) {
+        sports.add(sport);
     }
 
-    public void setRegisteredSportsmans(Set<Sportsman> registeredSportsmans) {
-        this.registeredSportsmans = registeredSportsmans;
-    }
-
-    public Set<Sport> getSportTypes() {
-        return sportTypes;
-    }
-
-    public void setSportTypes(Set<Sport> sportTypes) {
-        this.sportTypes = sportTypes;
-    }
-
-    public Promoter getPromoter() {
-        return promoter;
-    }
-
-    public void setPromoter(Promoter promoter) {
-        this.promoter = promoter;
+    public void removeSport(Sport sport) {
+        sports.remove(sport);
     }
 
     /***************************
      *** METHODS & FUNCTIONS ***
      ***************************/
-
-    /**
-     * add sportsman to the event
-     * @param sportsman
-     */
-    public void addSportsman(Sportsman sportsman){
-        registeredSportsmans.add(sportsman);
-    }
-
-    /**
-     * remove sportsman from the event
-     * @param sportsman
-     */
-    public void removeSportsman(Sportsman sportsman){
-        registeredSportsmans.remove(sportsman);
-    }
 
     @Override
     public boolean equals(Object toCompare) {
