@@ -15,11 +15,11 @@ import java.util.Date;
 public class Entry {
 
     /**
-     * Id vysledku zavodu.
+     * Id prihlasky sportovce k zavodu.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSportResult;
+    private Long idEntry;
 
     /**
      * Sport (zavod), ke kteremu se vysledek vaze.
@@ -65,12 +65,12 @@ public class Entry {
      *** GETTERS & SETTERS ***
      *************************/
 
-    public Long getIdSportResult() {
-        return idSportResult;
+    public Long getIdEntry() {
+        return idEntry;
     }
 
-    public void setIdSportResult(Long idSportResult) {
-        this.idSportResult = idSportResult;
+    public void setIdEntry(Long idEntry) {
+        this.idEntry = idEntry;
     }
 
     public Sport getSport() {

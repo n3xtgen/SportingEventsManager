@@ -11,7 +11,7 @@ import java.util.Set;
  * @author Jamik (Lukas Gryc)
  */
 @Entity
-public class Event{
+public class Event {
 
     // event id
     @Id
