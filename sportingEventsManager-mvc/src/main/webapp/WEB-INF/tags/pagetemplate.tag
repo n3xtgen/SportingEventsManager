@@ -17,6 +17,7 @@
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
+        <link href="${pageContext.request.contextPath}/resources/events_page.css" rel="stylesheet" >
         <jsp:invoke fragment="head"/>
     </head>
     <body>
@@ -28,7 +29,7 @@
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Events..</a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/event/list">Events..</a></li>
                         <li><a href="${pageContext.request.contextPath}/user/list">All registred sportsmans</a></li>
                         <li><a href="#">Page 2</a></li>
                         <li><a href="#">Page 3</a></li>

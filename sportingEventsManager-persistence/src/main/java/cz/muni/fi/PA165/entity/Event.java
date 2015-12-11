@@ -102,6 +102,25 @@ public class Event {
      *** METHODS & FUNCTIONS ***
      ***************************/
 
+    /**
+     * Computes hash code
+     * @return hash code computed with name attribute
+     */
+    @Override
+    public int hashCode(){
+        // NOTE: 79, 29 are random prime numbers
+        int hash = 79;
+        hash = 29 * hash + (name == null ? 0 : name.hashCode());
+        hash = 29 * hash + (startTime == null ? 0 : startTime.hashCode());
+        hash = 29 * hash + (endTime == null ? 0 : endTime.hashCode());
+        return hash;
+    }
+
+    /**
+     * Compares objects
+     * @param toCompare
+     * @return
+     */
     @Override
     public boolean equals(Object toCompare) {
         if(toCompare == null || !(toCompare instanceof Event))
@@ -110,16 +129,10 @@ public class Event {
         if(this == toCompare)
             return true;
         // check Events name
-        if(!name.equals(((Event) toCompare).getName()))
-            return false;
-
-        return true;
+        Event other = (Event)toCompare;
+        // make sure null == null returns true
+        return (name == null ? other.getName() == null : name.equals(other.getName()) &&
+                startTime == null ? other.getStartTime() == null : startTime.equals(other.getStartTime()) &&
+                endTime == null ? other.getEndTime() == null : endTime.equals(other.getEndTime()));
     }
-
-    @Override
-    public int hashCode(){
-        // NOTE: 79, 29 are random prime numbers
-        return (79 * 29 + (name == null ? 0 : name.hashCode()));
-    }
-
 }

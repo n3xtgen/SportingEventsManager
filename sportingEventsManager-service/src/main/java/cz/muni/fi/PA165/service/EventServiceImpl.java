@@ -3,6 +3,7 @@ package cz.muni.fi.PA165.service;
 import cz.muni.fi.PA165.Exceptions.DataAccessException;
 import cz.muni.fi.PA165.dao.EventDao;
 import cz.muni.fi.PA165.entity.Event;
+import cz.muni.fi.PA165.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,5 +82,15 @@ public class EventServiceImpl implements EventService{
         }
     }
 
+    @Override
+    public void addSport(Event evt, Sport sport){
+        if(!evt.getSports().contains(sport))
+            evt.addSport(sport);
+        // TODO: exception
+    }
 
+    @Override
+    public void removeSport(Event evt, Sport sport) {
+        evt.removeSport(sport);
+    }
 }

@@ -2,6 +2,7 @@ package cz.muni.fi.PA165.dto.facade;
 
 import cz.muni.fi.PA165.dto.CreateEventDTO;
 import cz.muni.fi.PA165.dto.EventDTO;
+import cz.muni.fi.PA165.dto.SportDTO;
 
 import java.util.Collection;
 import java.util.Date;
@@ -50,4 +51,18 @@ public interface EventFacade {
      * @param evt
      */
     void updateEvent(EventDTO evt);
+
+    /**
+     * Add sport to the event
+     * @param eventId
+     * @param sportId
+     */
+    void addSport(Long eventId, Long sportId);
+
+    /**
+     * Remove sport from an event
+     * @param eventId
+     * @param sportId
+     */
+    void removeSport(Long eventId, Long sportId);
 }

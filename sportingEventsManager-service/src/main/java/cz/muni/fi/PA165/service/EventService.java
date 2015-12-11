@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.entity.Event;
+import cz.muni.fi.PA165.entity.Sport;
 
 import java.util.Collection;
 import java.util.Date;
@@ -55,4 +56,19 @@ public interface EventService {
      * @param evt
      */
     void createEvent(Event evt);
+
+    /**
+     * Add sport to an event
+     * @param evt
+     * @param sport
+     * @return
+     */
+    void addSport(Event evt, Sport sport);
+
+    /**
+     * Remove sport from an event
+     * @param evt
+     * @param sport
+     */
+    void removeSport(Event evt, Sport sport);
 }

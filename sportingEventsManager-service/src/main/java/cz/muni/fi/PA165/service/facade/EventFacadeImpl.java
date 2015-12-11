@@ -6,8 +6,12 @@ import cz.muni.fi.PA165.dto.facade.EventFacade;
 import cz.muni.fi.PA165.entity.Event;
 import cz.muni.fi.PA165.service.BeanMappingService;
 import cz.muni.fi.PA165.service.EventService;
+import cz.muni.fi.PA165.service.SportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.text.CollationElementIterator;
 import java.util.Collection;
 import java.util.Date;
@@ -15,10 +19,15 @@ import java.util.Date;
 /**
  * Created by Jamik on 25.11.2015.
  */
+@Service
+@Transactional
 public class EventFacadeImpl implements EventFacade {
 
-    @Autowired
+    @Inject
     private EventService eventService;
+
+    @Inject
+    private SportService sportService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -63,5 +72,16 @@ public class EventFacadeImpl implements EventFacade {
         e.setStartTime(evt.getStartTime());
         e.setEndTime(evt.getEndTime());
         eventService.updateEvent(e);
+    }
+
+    @Override
+    public void addSport(Long eventId, Long sportId) {
+        eventService.addSport(eventService.findEventById(eventId), sportService.findSportById(sportId));
+    }
+
+    @Override
+    public void removeSport(Long eventId, Long sportId) {
+        System.out.println(" removeSport(Long eventId, Long sportId) = " + eventId + " , " + sportId);
+        eventService.removeSport(eventService.findEventById(eventId), sportService.findSportById(sportId));
     }
 }

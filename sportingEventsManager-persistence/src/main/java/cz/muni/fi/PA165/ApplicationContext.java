@@ -4,6 +4,7 @@ package cz.muni.fi.PA165;
  * Created by jbouska on 26.10.15.
  */
 
+import cz.muni.fi.PA165.dao.EntryDao;
 import cz.muni.fi.PA165.dao.EventDao;
 import cz.muni.fi.PA165.dao.SportsmanDao;
 import cz.muni.fi.PA165.entity.Entry;
@@ -30,7 +31,7 @@ import cz.muni.fi.PA165.dao.SportDao;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses={SportDao.class, EventDao.class, SportsmanDao.class})
+@ComponentScan(basePackageClasses={SportDao.class, EventDao.class, SportsmanDao.class, EntryDao.class})
 public class ApplicationContext {
 
 

@@ -1,21 +1,19 @@
 package cz.muni.fi.PA165.dto;
 
-
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Jamik on 25.11.2015.
  */
 public class EventDTO {
 
-    private Long    idEvent;
-    private String  name;
-    private String  description;
-    private Date    startTime;
-    private Date    endTime;
+    private Long        idEvent;
+    private String      name;
+    private String      description;
+    private Date        startTime;
+    private Date        endTime;
+    private Set<SportDTO>  sports;
 
     /*********************
      * GETTERS & SETTERS *
@@ -30,6 +28,7 @@ public class EventDTO {
     }
 
     public String getName() {
+        System.out.println("public String getName() " + name);
         return name;
     }
 
@@ -61,6 +60,15 @@ public class EventDTO {
         this.endTime = endTime;
     }
 
+    public Set<SportDTO> getSports() {
+        System.out.println("public Set<SportDTO> getSports(): " + (sports == null ? 0 : sports.size()));
+        return sports;
+    }
+
+    public void setSports(Set<SportDTO> sports) {
+        this.sports = sports;
+    }
+
     /**********
     * METHODS *
     ***********/
@@ -72,7 +80,11 @@ public class EventDTO {
     @Override
     public int hashCode(){
         // NOTE: 79, 29 are random prime numbers
-        return (79 * 29 + (name == null ? 0 : name.hashCode()));
+        int hash = 79;
+        hash = 29 * hash + (name == null ? 0 : name.hashCode());
+        hash = 29 * hash + (startTime == null ? 0 : startTime.hashCode());
+        hash = 29 * hash + (endTime == null ? 0 : endTime.hashCode());
+        return hash;
     }
 
     /**
@@ -90,14 +102,9 @@ public class EventDTO {
         // check Events name
         EventDTO other = (EventDTO)toCompare;
         // make sure null == null returns true
-        if(getName() == null){
-            if(other.getName() != null)
-                return false;
-        }
-        else if(!getName().equals(other.getName())) // check the name
-            return false;
-
-        return true;
+        return (name == null ? other.getName() == null : name.equals(other.getName()) &&
+                startTime == null ? other.getStartTime() == null : startTime.equals(other.getStartTime()) &&
+                endTime == null ? other.getEndTime() == null : endTime.equals(other.getEndTime()));
     }
 
     /**

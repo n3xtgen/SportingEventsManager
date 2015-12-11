@@ -1,8 +1,10 @@
 package cz.muni.fi.PA165.service.config;
 
 import cz.muni.fi.PA165.dto.facade.EventFacade;
+import cz.muni.fi.PA165.service.EntryServiceImpl;
 import cz.muni.fi.PA165.service.EventServiceImpl;
 import cz.muni.fi.PA165.service.SportServiceImpl;
+import cz.muni.fi.PA165.service.facade.EntryFacadeImpl;
 import cz.muni.fi.PA165.service.facade.EventFacadeImpl;
 import cz.muni.fi.PA165.service.facade.SportFacadeImpl;
 import org.dozer.DozerBeanMapper;
@@ -21,7 +23,7 @@ import cz.muni.fi.PA165.service.facade.SportsmanFacadeImpl;
 @Configuration
 @Import(ApplicationContext.class)
 @ComponentScan(basePackageClasses = {SportsmanServiceImpl.class, SportsmanFacadeImpl.class, SportServiceImpl.class, SportFacadeImpl.class,
-		EventServiceImpl.class, EventFacadeImpl.class})
+		EventServiceImpl.class, EventFacadeImpl.class, EntryServiceImpl.class, EntryFacadeImpl.class})
 
 public class ServiceConfiguration {
 

@@ -11,11 +11,16 @@ import cz.muni.fi.PA165.service.EntryService;
 import cz.muni.fi.PA165.service.SportService;
 import cz.muni.fi.PA165.service.SportsmanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collection;
 
 /**
  * @author n3xtgen
  */
+@Service
+@Transactional
 public class EntryFacadeImpl implements EntryFacade {
 
     @Autowired
