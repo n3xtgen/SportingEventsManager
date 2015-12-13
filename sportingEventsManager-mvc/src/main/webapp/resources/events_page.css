@@ -2,3 +2,15 @@
     border-style: solid;
     border-color: black;
 }
+
+.event_form_without_errors {
+    color: black;
+}
+
+.event_form_with_errors {
+    color: crimson;
+}
+
+.event_form_input {
+
+}

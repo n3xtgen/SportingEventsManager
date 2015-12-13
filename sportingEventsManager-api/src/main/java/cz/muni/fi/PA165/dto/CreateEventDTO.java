@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Created by Jamik on 25.11.2015.
@@ -14,25 +15,15 @@ public class CreateEventDTO {
 
     @NotNull
     @Size(min = 5, max = 50)
-    private String  name;
+    private String name;
 
-    private String  description;
+    private String description;
 
-    // TODO: start time cant be >= end time, @Future is not sufficient enough
-    // most likely we will need to extend validation class
-    @NotNull
-    @Future
-    @AssertTrue public boolean isStartDateValid(){
-        return endTime == null ? true : (startTime.getTime() < endTime.getTime() ? true : false);
-    }
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
-    @NotNull
-    @Future
-    @AssertTrue public boolean isEndDateValid(){
-        return startTime == null ? true : (startTime.getTime() < endTime.getTime() ? true : false);
-    }
-    private Date    endTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endTime;
 
     private Set<SportDTO> sports;
 
@@ -72,7 +63,6 @@ public class CreateEventDTO {
     }
 
     public Set<SportDTO> getSports() {
-        System.out.println("public Set<SportDTO> getSports(): " + (sports == null ? 0 : sports.size()));
         return sports;
     }
 

@@ -34,7 +34,7 @@ public class Event {
     private Date endTime;
 
     // sports that are available in the event
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "event", orphanRemoval = true)
     private Set<Sport> sports = new HashSet<Sport>();
 
     /********************

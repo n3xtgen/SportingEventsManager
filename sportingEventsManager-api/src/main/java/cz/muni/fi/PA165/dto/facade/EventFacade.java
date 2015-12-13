@@ -47,6 +47,12 @@ public interface EventFacade {
     void addEvent(CreateEventDTO evt);
 
     /**
+     * Remove an event
+     * @param eventId
+     */
+    void deleteEvent(Long eventId);
+
+    /**
      * Update existing event
      * @param evt
      */

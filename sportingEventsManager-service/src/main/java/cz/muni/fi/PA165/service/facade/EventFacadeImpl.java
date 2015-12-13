@@ -65,6 +65,12 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
+    public void deleteEvent(Long eventId) {
+        System.out.println("public void deleteEvent(Long eventId)");
+        eventService.deleteEvent(eventService.findEventById(eventId));
+    }
+
+    @Override
     public void updateEvent(EventDTO evt) {
         Event e = eventService.findEventById(evt.getIdEvent());
         e.setName(evt.getName());
