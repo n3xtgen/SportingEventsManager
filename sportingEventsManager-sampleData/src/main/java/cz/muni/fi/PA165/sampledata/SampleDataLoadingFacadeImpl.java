@@ -1,8 +1,10 @@
 package cz.muni.fi.PA165.sampledata;
 
+import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Event;
 import cz.muni.fi.PA165.entity.Sport;
 import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.service.EntryService;
 import cz.muni.fi.PA165.service.EventService;
 import cz.muni.fi.PA165.service.SportService;
 import cz.muni.fi.PA165.service.SportsmanService;
@@ -30,14 +32,17 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Autowired
     private SportService sportService;
+
+    @Autowired
+    private EntryService entryService;
    
     @Override
     @SuppressWarnings("unused")
     public void loadData() throws IOException {
-        Sportsman sp = sportsman("password", "admin","bbb","email@mail.com");
+
 
         createSomeEvents();
-
+        createSomeEntries();
     }
 
   
@@ -53,6 +58,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     }
 
    private void createSomeEvents(){
+       Sportsman sp = sportsman("password", "admin","bbb","email@mail.com");
+       Sportsman sp2 = sportsman("heslo", "Janko", "Hrasko", "test@test.test");
+       Sportsman sp3 = sportsman("sportovec", "Arnold", "Schwarzeneger", "sportovec@mail.com");
+
        // create 2 events
        Event evt1 = new Event();
        Event evt2 = new Event();
@@ -95,6 +104,25 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
        Sport sport6 = new Sport();
        sport6.setName("Long-distance run");
 
+
+       // CREATING ENTRIES
+
+       Entry entry1 = new Entry();
+       Entry entry2 = new Entry();
+
+       entry1.setSport(sport1);
+       entry1.setSportsman(sp);
+       entry1.setPosition(14);
+       entry1.setTime(dStart2);
+     //  entry1.setEntryState(Entry.EntryState.REGISTERED);
+
+       entry2.setSport(sport1);
+       entry2.setSportsman(sp2);
+       entry2.setPosition(2);
+       entry2.setTime(dStart1);
+     ///  entry1.setEntryState(Entry.EntryState.REGISTERED);
+
+
        sport1.setEvent(evt1);
        sport2.setEvent(evt1);
        sport3.setEvent(evt2);
@@ -123,10 +151,14 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
        sportService.addNewSport(sport6);
 
 
-
-
-
-
+       entryService.createEntry(entry1);
+       entryService.createEntry(entry2);
    }
+
+    private void createSomeEntries(){
+
+
+
+    }
     
 }

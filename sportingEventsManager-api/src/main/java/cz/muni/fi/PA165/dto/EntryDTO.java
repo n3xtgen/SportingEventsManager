@@ -79,8 +79,8 @@ public class EntryDTO {
 
         final EntryDTO entry = (EntryDTO) obj;
 
-        if ( !getIdSportResult().equals(entry.getIdSportResult()) ) return false;
-        if ( !getEntryState().equals(entry.getEntryState()) ) return false;
+        //if ( !getIdSportResult().equals(entry.getIdSportResult()) ) return false;
+        //if ( !getEntryState().equals(entry.getEntryState()) ) return false;
         if ( getPosition() != entry.getPosition() ) return false;
         if ( !getTime().equals(entry.getTime()) ) return false;
 
@@ -90,11 +90,11 @@ public class EntryDTO {
     @Override
     public int hashCode(){
         int hash;
-        hash = 13 * getIdSportResult().hashCode();
-        hash = hash + 17 * getEntryState().hashCode();
-        hash = hash + 29 * getPosition();
-        hash = hash + 37 * getTime().hashCode();
-        return hash;
+//        hash = 13 * getIdSportResult().hashCode();
+//        hash = hash + 17 * getEntryState().hashCode();
+//        hash = hash + 29 * getPosition();
+//        hash = hash + 37 * getTime().hashCode();
+        return 57;
     }
 
     @Override

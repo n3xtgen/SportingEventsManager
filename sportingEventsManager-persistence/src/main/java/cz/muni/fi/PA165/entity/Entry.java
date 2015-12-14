@@ -38,7 +38,7 @@ public class Entry {
     /**
      * Stav ve kterem se sportovec v ramci zavodu nachazi.
      */
-    @NotNull
+  //  @NotNull
     @Enumerated
     private EntryState entryState;
     public enum EntryState { REGISTERED, STARTED, FINISHED, DISQUALIFIED}

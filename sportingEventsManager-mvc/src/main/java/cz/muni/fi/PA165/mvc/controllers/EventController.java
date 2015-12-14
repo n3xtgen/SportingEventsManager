@@ -3,6 +3,7 @@ package cz.muni.fi.PA165.mvc.controllers;
 import cz.muni.fi.PA165.dto.*;
 import cz.muni.fi.PA165.dto.facade.EntryFacade;
 import cz.muni.fi.PA165.dto.facade.EventFacade;
+import cz.muni.fi.PA165.dto.facade.SportFacade;
 import cz.muni.fi.PA165.mvc.validators.EventFormValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,9 @@ public class EventController {
 
     @Autowired
     private EntryFacade entryFacade;
+
+    @Autowired
+    private SportFacade sportFacade;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder){
@@ -185,5 +189,14 @@ public class EventController {
         redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed out");
 
         return "redirect:/event/list";
+    }
+
+    @RequestMapping(value="/results/{sportId}", method = RequestMethod.GET)
+    public String showResults(@PathVariable("sportId") long sportId, Model model){
+        log.debug("showResults()");
+        model.addAttribute("entries", entryFacade.findEntriesBySportId(sportId));
+        model.addAttribute("sport", sportFacade.findSportById(sportId));
+
+        return "result/results";
     }
 }

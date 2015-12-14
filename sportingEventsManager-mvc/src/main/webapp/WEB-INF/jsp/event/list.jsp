@@ -82,6 +82,11 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
+                                <td>
+                                    <form method="get" action="${pageContext.request.contextPath}/event/results/${sport.idSport}">
+                                        <button type="submit" class="btn_sport_results">Results</button>
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
