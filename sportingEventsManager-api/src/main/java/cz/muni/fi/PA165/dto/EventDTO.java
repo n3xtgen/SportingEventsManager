@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -11,10 +13,14 @@ public class EventDTO {
     private Long        idEvent;
     private String      name;
     private String      description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date        startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date        endTime;
     private Set<SportDTO>  sports;
 
+    // just as a helper
+    private boolean isNew;
     /*********************
      * GETTERS & SETTERS *
      *********************/
@@ -67,6 +73,14 @@ public class EventDTO {
 
     public void setSports(Set<SportDTO> sports) {
         this.sports = sports;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setIsNew(boolean isNew) {
+        this.isNew = isNew;
     }
 
     /**********

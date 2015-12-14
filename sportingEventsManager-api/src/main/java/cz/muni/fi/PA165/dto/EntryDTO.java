@@ -13,6 +13,9 @@ public class EntryDTO {
     private int position;
     private Date time;
 
+    private SportDTO sport;
+    private SportsmanDTO sportsman;
+
     /*************************
      *** GETTERS & SETTERS ***
      *************************/
@@ -47,6 +50,22 @@ public class EntryDTO {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public SportDTO getSport() {
+        return sport;
+    }
+
+    public void setSport(SportDTO sport) {
+        this.sport = sport;
+    }
+
+    public SportsmanDTO getSportsman() {
+        return sportsman;
+    }
+
+    public void setSportsman(SportsmanDTO sportsman) {
+        this.sportsman = sportsman;
     }
 
     /***************************

@@ -1,7 +1,7 @@
 package cz.muni.fi.PA165.mvc.controllers;
 
-import cz.muni.fi.PA165.dto.EventDTO;
-import cz.muni.fi.PA165.dto.CreateEventDTO;
+import cz.muni.fi.PA165.dto.*;
+import cz.muni.fi.PA165.dto.facade.EntryFacade;
 import cz.muni.fi.PA165.dto.facade.EventFacade;
 import cz.muni.fi.PA165.mvc.validators.EventFormValidator;
 import org.slf4j.Logger;
@@ -11,12 +11,12 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,10 +34,12 @@ public class EventController {
     @Autowired
     private EventFacade eventFacade;
 
+    @Autowired
+    private EntryFacade entryFacade;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder){
-        if(binder.getTarget() instanceof CreateEventDTO) {
+        if((binder.getTarget() instanceof CreateEventDTO) || (binder.getTarget() instanceof EventDTO)) {
             // we need to convert String to Date
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             binder.registerCustomEditor(Date.class, "startDate", new CustomDateEditor(dateFormat, false));
@@ -55,6 +57,7 @@ public class EventController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String eventsList(Model model){
         model.addAttribute("events", eventFacade.getAllEvents());
+
         log.debug("eventList()");
         return "event/list";
     }
@@ -83,8 +86,22 @@ public class EventController {
      */
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String addEvent(Model model){
-        model.addAttribute("newEvent", new CreateEventDTO());
-        return "event/new";
+        model.addAttribute("eventForm", new CreateEventDTO());
+        log.debug("addEvent()");
+        return "event/eventForm";
+    }
+
+    /**
+     * Shows up event update form
+     * @param updateId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/update/{updateId}", method = RequestMethod.GET)
+    public String updateEvent(@PathVariable("updateId") long updateId, Model model){
+        model.addAttribute("eventForm", eventFacade.findEventById(updateId));
+        log.debug("updateEvent");
+        return "event/eventForm";
     }
 
     /**
@@ -96,41 +113,76 @@ public class EventController {
      * @return
      */
     @RequestMapping(value="/create", method= RequestMethod.POST)
-    public String create(@ModelAttribute("newEvent") @Valid CreateEventDTO formBean, BindingResult bResult,
+    public String create(@ModelAttribute("eventForm") @Valid CreateEventDTO formBean, BindingResult bResult,
                          Model model, RedirectAttributes redirectAttributes){
 
-        System.out.println("public String create(@Validated @ModelAttribute()");
-        log.debug("asdasd", "public String create(@Validated @ModelAttribute(");
-        log.info("info", "public String create(@Validated @ModelAttribute(");
-        // if we have some errors, lets stay on the new event page
+        // if we have some errors, lets stay on the eventForm page
         if(bResult.hasErrors())
-            return "event/new";
+            return "event/eventForm";
 
         // save the new event
         eventFacade.addEvent(formBean);
         // show success alert
-        redirectAttributes.addFlashAttribute("alert_success", "Event " + formBean.getName() + " was created successfully");
+        redirectAttributes.addFlashAttribute("alert_success", "Event \"" + formBean.getName() + "\" was created successfully");
 
         // go back to list of events
         return "redirect:/event/list";
     }
 
-    /**
-     * Shows up event update form
-     * @param updateId
-     * @param model
-     * @return
-     */
-    @RequestMapping(value="/update/{updateId}", method = RequestMethod.GET)
-    public String updateEvent(@PathVariable("updateId") long updateId, Model model){
-        model.addAttribute("updateEvent", eventFacade.findEventById(updateId));
-        return "event/update";
+    @RequestMapping(value="/update", method= RequestMethod.POST)
+    public String update(@ModelAttribute("eventForm") @Valid EventDTO formBean, BindingResult bResult,
+                         Model model, RedirectAttributes redirectAttributes){
+
+        // if we have any errors, lets stay on the eventForm page
+        if(bResult.hasErrors())
+            return "event/eventForm";
+        // update event
+        eventFacade.updateEvent(formBean);
+        // show success alert
+        redirectAttributes.addFlashAttribute("alert_success", "Event " + formBean.getName() + " was updated successfully");
+
+        // go back to list of events
+        return "redirect:/event/list";
     }
 
-    // TODO: implement
-    @RequestMapping(value="/signUp/sportsman={sportsmanId}/event={eventId}/sportId={sportId}", method = RequestMethod.POST)
-    public String signUp(@PathVariable("sportsmanId") long sportsmanId, @PathVariable("eventId") long eventId,
-                         @PathVariable("sportId") long sportId){
+    @RequestMapping(value="/signIn/{sportId}", method = RequestMethod.POST)
+    public String signUp(@PathVariable("sportId") long sportId, HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
+        System.out.println("signUp()");
+        log.debug("signUp()");
+        SportsmanDTO sportsman = (SportsmanDTO)request.getSession().getAttribute("authenticatedUser");
+        // something went wrong
+        if(sportsman == null){
+            log.debug("signUp() -> failure");
+            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to register you");
+            return "redirect:/event/list";
+        }
+
+        // TODO: it might be good to include some limitations into Sport (for ex. max sportsman per sport)
+        // create new registration
+        CreateEntryDTO entry = new CreateEntryDTO();
+        entry.setSportId(sportId);
+        entry.setSportsmanId(sportsman.getIdSportsman());
+        entryFacade.registerEntry(entry);
+
+        redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed up");
+
+        return "redirect:/event/list";
+    }
+
+    @RequestMapping(value="", method= RequestMethod.POST)
+    public String signOut(@PathVariable("sportId") long sportId, HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
+        SportsmanDTO sportsman = (SportsmanDTO)request.getSession().getAttribute("authenticatedUser");
+        // something went wrong
+        if(sportsman == null){
+            log.debug("signOut() -> failure");
+            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to unregister you");
+            return "redirect:/event/list";
+        }
+
+        
+        //entryFacade.deleteEntry(/* find entry by sport+sportsman */);
+
+        redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed out");
 
         return "redirect:/event/list";
     }

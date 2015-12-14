@@ -45,7 +45,10 @@
 
                     <%-- area for edit, delete buttons --%>
                 <div class="event_manipulation">
-                    <button class="btn_event_edit" type="submit">Edit</button>
+                    <form method="get" action="${pageContext.request.contextPath}/event/update/${event.idEvent}">
+                        <button class="btn_event_edit" type="submit">Edit</button>
+                    </form>
+
                     <form method="post" action="${pageContext.request.contextPath}/event/delete/${event.idEvent}">
                         <button class="btn_event_delete" type="submit">Delete</button>
                     </form>
@@ -62,9 +65,23 @@
                         <tbody>
                         <c:forEach var="sport" items="${event.sports}">
                             <tr>
-                                <td>1.</td>
+                                <td>${sport.idSport}</td>
                                 <td>${sport.name}</td>
-                                <td><s:url value="" var="" /><button class="btn_sport_signup" onclick="">Sign up</button></td>
+                                <%-- Sign up button --%>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${sport.isSportsmanRegistred('1')}">
+                                            <form method="post" action="${pageContext.request.contextPath}/event/signOut/${sport.idSport}">
+                                                <button type="submit" class="btn_sport_signup">Sign out</button>
+                                            </form>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form method="post" action="${pageContext.request.contextPath}/event/signIn/${sport.idSport}">
+                                                <button type="submit" class="btn_sport_signup">Sign in</button>
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -13,6 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class CreateEventDTO {
 
+    private Long idEvent;
+
     @NotNull
     @Size(min = 5, max = 50)
     private String name;
@@ -27,9 +29,20 @@ public class CreateEventDTO {
 
     private Set<SportDTO> sports;
 
+    private boolean isNew = true;
+
     /*********************
      * GETTERS & SETTERS *
      *********************/
+
+    public Long getIdEvent() {
+        return idEvent;
+    }
+
+    public void setIdEvent(Long idEvent) {
+        this.idEvent = idEvent;
+    }
+
     public String getName() {
         return name;
     }
@@ -68,6 +81,14 @@ public class CreateEventDTO {
 
     public void setSports(Set<SportDTO> sports) {
         this.sports = sports;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setIsNew(boolean isNew) {
+        this.isNew = isNew;
     }
 
     /**********

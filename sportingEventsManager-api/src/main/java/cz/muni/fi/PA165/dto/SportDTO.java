@@ -1,5 +1,9 @@
 package cz.muni.fi.PA165.dto;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  * Created by Vladimir on 24.11.2015.
  */
@@ -8,7 +12,7 @@ public class SportDTO {
     private Long idSport;
     private String name;
 
-
+    private Set<EntryDTO> entries = new HashSet<EntryDTO>();
 
     public String getName() {
         return name;
@@ -25,6 +29,28 @@ public class SportDTO {
     public void setIdSport(Long idSport) {
         this.idSport = idSport;
     }
+
+    public Set<EntryDTO> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(Set<EntryDTO> entries) {
+        this.entries = entries;
+    }
+
+    /**
+     * Lets check whether or not is the sportsman already registered to the sport
+     * @param id
+     * @return
+     */
+    public boolean isSportsmanRegistred(Long id){
+        for(Iterator<EntryDTO> itr = entries.iterator(); itr.hasNext();)
+            if(itr.next().getSportsman().getIdSportsman() == id) // the sportsman is already registred in this sport
+                return true;
+
+        return false;
+    }
+
 
     @Override
     public boolean equals(Object obj) {
