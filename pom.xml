@@ -72,6 +72,7 @@
         <module>sportingEventsManager-api</module>
         <module>sportingEventsManager-mvc</module>
         <module>sportingEventsManager-sampleData</module>
+        <module>sportingEventsManager-rest</module>
     </modules>
 
 </project>
