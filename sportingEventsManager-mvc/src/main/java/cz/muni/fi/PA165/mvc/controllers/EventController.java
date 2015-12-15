@@ -225,4 +225,37 @@ public class EventController {
 
         return "result/results";
     }
+
+    @RequestMapping(value="/addSport", method = RequestMethod.GET)
+    public String addSport(Model model){
+        log.debug("addSport()");
+        model.addAttribute("sportForm", new CreateSportDTO());
+
+        return "event/sportForm";
+    }
+
+    @RequestMapping(value = "/createSport", method = RequestMethod.GET)
+    public String createResult(@ModelAttribute("sportForm") @Valid CreateSportDTO formBean, BindingResult bResult,
+                               HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
+
+        SportsmanDTO sportsman = (SportsmanDTO)request.getSession().getAttribute("authenticatedUser");
+        // something went wrong
+        if(sportsman == null){
+            log.debug("signUp() -> failure");
+            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to register you");
+            return "redirect:/event/list";
+        }
+
+//        if(bResult.hasErrors()) {
+//            return "result/resultForm";
+//        }
+
+        sportFacade.addNewSport(formBean);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getName() +  " was created successfully");
+
+        log.debug("addResult()");
+        return "redirect:/event/results";
+    }
+
 }

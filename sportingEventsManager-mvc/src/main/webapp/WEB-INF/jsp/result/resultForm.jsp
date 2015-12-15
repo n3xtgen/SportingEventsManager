@@ -10,10 +10,10 @@
 
 
 
-        <form:form method="get" action="${pageContext.request.contextPath}/result/create" modelAttribute="resultForm">
+        <form:form method="get" action="${pageContext.request.contextPath}/result/update" modelAttribute="resultForm">
 
             <form:hidden path="idEntry" />
-            <form:hidden path="sport" />
+            <form:hidden path="sport"/>
             <form:hidden path="sport.idSport" />
             <form:hidden path="sport.name" />
             <form:hidden path="sportsman" />

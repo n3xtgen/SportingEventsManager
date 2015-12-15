@@ -59,6 +59,11 @@
                         <thead>
                         <tr>
                             <th> <h3>Competitions: </h3> </th>
+                            <td>
+                                <form method="get" action="${pageContext.request.contextPath}/event/addSport">
+                                    <button type="submit" class="btn_sport_add">Add competition</button>
+                                </form>
+                            </td>
                         </tr>
                         </thead>
 
