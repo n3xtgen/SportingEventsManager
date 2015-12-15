@@ -17,7 +17,40 @@ This project uses in memory database so you don't need any local resources, but 
 If you want to use this application you can utilize our web interface.  To run this UI please run following commands:
 
       1. $ cd  sporting-events-manager-mvc
-      2. $ mvn
+      2. $ mvn tomcat7:run
 
 This commands will start the application and insert sample data to it. To use web UI open your browser and go to "http://localhost:8080/sporting-events-manager-mvc".
+
+##REST
+You also can use our REST api. If you want to access to the application via rest you have to start REST API. 
+
+      1. $ cd  sporting-events-manager-rest
+      2. $ mvn tomcat7:run
+
+####After that you can use following commands to manage data in application :
+      
+**This command show you all endpoints in our application:**
+
+       $ curl -L -i -X GET http://localhost:8080/sporting-events-manager-rest 
+      
+**For list of all users:**
+
+       $ curl -i -X GET http://localhost:8080/sporting-events-manager-rest/users
+      
+**Show user with given ID:**
+
+       $ curl -i -X GET http://localhost:8080/sporting-events-manager-rest/users/{$ID}
+      
+**Show user with given ID:**
+
+       $ curl -i -X GET http://localhost:8080/sporting-events-manager-rest/users/{$ID}
+      
+**For create new user with parameters $NAME, $SURNAME, $EMAIL and $PASSWORD:**
+      
+        $ curl -i -H "Content-Type: application/json" -X POST -d '{"name":"$NAME","surname":"$SURNAME","email":"$EMAIL","password":"$PASSWORD"}' 
+            http://localhost:8080/sporting-events-manager-rest/users/create
+
+
+      
+
 
