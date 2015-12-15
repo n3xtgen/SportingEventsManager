@@ -10,11 +10,36 @@
 
 
 
-        <form:form method="post" action="${pageContext.request.contextPath}/result/create_result" modelAttribute="eventForm">
+        <form:form method="get" action="${pageContext.request.contextPath}/result/create" modelAttribute="resultForm">
 
-            
+            <form:hidden path="idEntry" />
+            <form:hidden path="sport" />
+            <form:hidden path="sportsman" />
+
+            <s:bind path="position">
+                <div class="form-group ${status.error ? 'has-error' : ''}">
+                    <label class="control-label col-sm-2">Position:</label>
+                    <div class="col-sm-10">
+                        <form:input path="position" id="position" type="text" class="form-control"
+                                    placeholder="position" />
+                        <form:errors path="position" />
+                    </div>
+                </div>
+            </s:bind>
+
+            <s:bind path="time">
+                <div class="form-group ${status.error ? 'has-error' : ''}">
+                    <label class="control-label col-sm-2">Time:</label>
+                    <div class="col-sm-10">
+                        <form:input path="time" id="time" type="text" class="form-control"
+                                    placeholder="HH:mm:SS" />
+                        <form:errors path="time" />
+                    </div>
+                </div>
+            </s:bind>
 
 
+            <button type="submit" class="btn btn-default">Add</button>
 
 
         </form:form>

@@ -7,11 +7,7 @@
 
 <my:pagetemplate title="Results">
     <jsp:attribute name="body">
-
-
-        <form method="get" action="${pageContext.request.contextPath}/result/show_resultForm">
-            <button type="submit" class="add_result" >Add result</button>
-        </form>
+        
 
         <div class="event_container">
             <table class="single_sport_table">
@@ -28,12 +24,25 @@
                     <td>${entry.sportsman.name}</td>
                     <td>&emsp;${entry.sportsman.surname}</td>
                     <td>&emsp;${entry.time}</td>
+                    <td>
+                    <c:choose>
+                        <c:when test="${entry.haveFinished()}">
+                            <form method="get" action="${pageContext.request.contextPath}/result/update/${entry.idEntry}">
+                                <button type="submit" class="add_result" >Edit result</button>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <form method="get" action="${pageContext.request.contextPath}/result/new/${entry.idEntry}">
+                                <button type="submit" class="add_result" >Add result</button>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+                    </td>
                 </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
-
 
 
     </jsp:attribute>

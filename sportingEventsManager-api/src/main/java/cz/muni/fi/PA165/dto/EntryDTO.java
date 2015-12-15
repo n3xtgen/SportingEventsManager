@@ -1,6 +1,7 @@
 package cz.muni.fi.PA165.dto;
 
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * @author n3xtgen
@@ -67,6 +68,11 @@ public class EntryDTO {
     public void setSportsman(SportsmanDTO sportsman) {
         this.sportsman = sportsman;
     }
+
+    public boolean haveFinished(){
+        return time != null;
+    }
+
 
     /***************************
      *** METHODS & FUNCTIONS ***

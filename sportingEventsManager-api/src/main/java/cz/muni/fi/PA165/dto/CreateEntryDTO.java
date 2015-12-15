@@ -1,6 +1,10 @@
 package cz.muni.fi.PA165.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.sql.Time;
 
 /**
  * @author n3xtgen
@@ -9,6 +13,11 @@ public class CreateEntryDTO {
 
     @NotNull
     private Long sportId;
+
+    @DateTimeFormat(pattern = "HH:mm:SS")
+    private Date time;
+
+    private int position;
 
     @NotNull
     private Long sportsmanId;
@@ -32,6 +41,23 @@ public class CreateEntryDTO {
     public void setSportsmanId(Long sportsmanId) {
         this.sportsmanId = sportsmanId;
     }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
 
     /***************************
      *** METHODS & FUNCTIONS ***
@@ -65,6 +91,8 @@ public class CreateEntryDTO {
         return "EventDTO{"
                 + "sportId= " + sportId
                 + ", sportsmanId= " + sportsmanId
+                + ", time= " + time
+                + ", position= " + position
                 + '}';
     }
 }
