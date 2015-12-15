@@ -15,6 +15,7 @@
             <form:hidden path="idEntry" />
             <form:hidden path="sport" />
             <form:hidden path="sportsman" />
+            <form:hidden path="entryState"/>
 
             <s:bind path="position">
                 <div class="form-group ${status.error ? 'has-error' : ''}">

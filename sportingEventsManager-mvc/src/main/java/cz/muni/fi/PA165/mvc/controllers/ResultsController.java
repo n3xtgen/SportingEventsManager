@@ -71,8 +71,9 @@ public class ResultsController {
             return "redirect:/event/list";
         }
 
-        if(bResult.hasErrors())
-            return "result/resultForm";
+//        if(bResult.hasErrors()) {
+//            return "result/resultForm";
+//        }
 
         entryFacade.updateEntry(formBean);
 
