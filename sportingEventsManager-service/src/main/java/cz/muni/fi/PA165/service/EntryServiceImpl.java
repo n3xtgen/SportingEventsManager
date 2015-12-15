@@ -89,4 +89,13 @@ public class EntryServiceImpl implements EntryService {
             throw new DataAccessException(ex);
         }
     }
+
+    @Override
+    public Entry findEntryBySportAndSportsman(Sport sport, Sportsman sportsman) {
+        try{
+            return entryDao.findBySportAndSportsman(sport, sportsman);
+        }catch(Exception ex){
+            throw new DataAccessException(ex);
+        }
+    }
 }

@@ -56,4 +56,12 @@ public class EntryDaoImpl implements EntryDao {
                 .setParameter("sportsman", sportsman)
                 .getResultList();
     }
+
+    @Override
+    public Entry findBySportAndSportsman(Sport sport, Sportsman sportsman) {
+        return entityManager.createQuery("SELECT e FROM Entry e WHERE e.sport = :sport AND e.sportsman = :sportsman", Entry.class)
+                .setParameter("sport", sport)
+                .setParameter("sportsman", sportsman)
+                .getSingleResult();
+    }
 }

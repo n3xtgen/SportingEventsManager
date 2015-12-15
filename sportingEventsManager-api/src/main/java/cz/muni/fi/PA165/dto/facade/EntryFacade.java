@@ -54,4 +54,11 @@ public interface EntryFacade {
      */
     Collection<EntryDTO> findEntriesBySportsmanId(Long sportsmanId);
 
+    /**
+     * Vrati registraci podle kombinace sportu a sportovce
+     * @param sportId
+     * @param sportsmanId
+     * @return
+     */
+    EntryDTO findEntryBySportsmanAndSportId(Long sportId, Long sportsmanId);
 }

@@ -109,4 +109,19 @@ public class EntryFacadeImpl implements EntryFacade {
 
         return beanMappingService.mapTo(entryService.findEntriesBySportsman(sportsman), EntryDTO.class);
     }
+
+    /**
+     * Vraci registraci podle kombinace sportu a sportovce
+     *
+     * @param sportId
+     * @param sportsmanId
+     * @return
+     */
+    @Override
+    public EntryDTO findEntryBySportsmanAndSportId(Long sportId, Long sportsmanId) {
+        Sport sport = sportService.findSportById(sportId);
+        Sportsman sportsman = sportsmanService.findSportsmanById(sportsmanId);
+
+        return beanMappingService.mapTo(entryService.findEntryBySportAndSportsman(sport, sportsman), EntryDTO.class);
+    }
 }

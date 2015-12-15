@@ -70,7 +70,7 @@
                                 <%-- Sign up button --%>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${sport.isSportsmanRegistred('1')}">
+                                        <c:when test="${sport.isSportsmanRegistred(signedUser.idSportsman)}">
                                             <form method="post" action="${pageContext.request.contextPath}/event/signOut/${sport.idSport}">
                                                 <button type="submit" class="btn_sport_signup">Sign out</button>
                                             </form>

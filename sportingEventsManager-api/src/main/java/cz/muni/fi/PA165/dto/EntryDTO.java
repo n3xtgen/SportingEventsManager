@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class EntryDTO {
 
-    private Long idSportResult;
+    private Long idEntry;
     private EntryState entryState;
     public enum EntryState { REGISTERED, STARTED, FINISHED, DISQUALIFIED}
     private int position;
@@ -20,12 +20,12 @@ public class EntryDTO {
      *** GETTERS & SETTERS ***
      *************************/
 
-    public Long getIdSportResult() {
-        return idSportResult;
+    public Long getIdEntry() {
+        return idEntry;
     }
 
-    public void setIdSportResult(Long idSportResult) {
-        this.idSportResult = idSportResult;
+    public void setIdEntry(Long idEntry) {
+        this.idEntry = idEntry;
     }
 
     public EntryState getEntryState() {
@@ -100,11 +100,11 @@ public class EntryDTO {
     @Override
     public String toString()
     {
-        return "EventDTO{"
-                + "id= " + idSportResult
-                + ", entryState= " + entryState.toString()
+        return "EntryDTO{"
+                + "id= " + idEntry
+                + ", entryState= " + (entryState != null ? entryState.toString() : "null")
                 + ", position= " + position
-                + ", time= " + time.toString()
+                + ", time= " + (time != null ? time.toString() : "null")
                 + '}';
     }
 }

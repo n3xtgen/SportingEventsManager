@@ -59,9 +59,9 @@ public class EventController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String eventsList(Model model){
-        model.addAttribute("events", eventFacade.getAllEvents());
-
+    public String eventsList(Model model, HttpServletRequest request){
+        model.addAttribute("events", eventFacade.getAllEvents()); // pass there all events
+        model.addAttribute("signedUser", request.getSession().getAttribute("authenticatedUser")); // we also need to pass there the user
         log.debug("eventList()");
         return "event/list";
     }
@@ -133,6 +133,14 @@ public class EventController {
         return "redirect:/event/list";
     }
 
+    /**
+     * Update the event in database
+     * @param formBean
+     * @param bResult
+     * @param model
+     * @param redirectAttributes
+     * @return
+     */
     @RequestMapping(value="/update", method= RequestMethod.POST)
     public String update(@ModelAttribute("eventForm") @Valid EventDTO formBean, BindingResult bResult,
                          Model model, RedirectAttributes redirectAttributes){
@@ -149,6 +157,14 @@ public class EventController {
         return "redirect:/event/list";
     }
 
+    /**
+     * Sign up for a specified sport
+     * @param sportId
+     * @param request
+     * @param redirectAttributes
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/signIn/{sportId}", method = RequestMethod.POST)
     public String signUp(@PathVariable("sportId") long sportId, HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
         System.out.println("signUp()");
@@ -173,7 +189,15 @@ public class EventController {
         return "redirect:/event/list";
     }
 
-    @RequestMapping(value="", method= RequestMethod.POST)
+    /**
+     * Sigh out from specified sport
+     * @param sportId
+     * @param request
+     * @param redirectAttributes
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="signOut/{sportId}", method= RequestMethod.POST)
     public String signOut(@PathVariable("sportId") long sportId, HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
         SportsmanDTO sportsman = (SportsmanDTO)request.getSession().getAttribute("authenticatedUser");
         // something went wrong
@@ -183,8 +207,10 @@ public class EventController {
             return "redirect:/event/list";
         }
 
-        
-        //entryFacade.deleteEntry(/* find entry by sport+sportsman */);
+        // find the registration and delete it
+        EntryDTO entry = entryFacade.findEntryBySportsmanAndSportId(sportId, sportsman.getIdSportsman());
+        if(entry != null)
+            entryFacade.deleteEntry(entry.getIdEntry());
 
         redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed out");
 

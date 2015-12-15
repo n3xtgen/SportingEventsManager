@@ -132,8 +132,8 @@ public class EventDTO {
                 + "id= " + idEvent
                 + ", name= " + name
                 + ", description= " + description
-                + ", start= " + startTime.toString()
-                + ", end= " + endTime.toString()
+                + ", start= " + (startTime != null ? startTime.toString() : "null")
+                + ", end= " + (endTime != null ? endTime.toString() : "null")
                 + '}';
     }
 }
