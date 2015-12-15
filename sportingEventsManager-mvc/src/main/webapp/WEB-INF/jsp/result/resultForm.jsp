@@ -14,6 +14,8 @@
 
             <form:hidden path="idEntry" />
             <form:hidden path="sport" />
+            <form:hidden path="sport.idSport" />
+            <form:hidden path="sport.name" />
             <form:hidden path="sportsman" />
             <form:hidden path="entryState"/>
 

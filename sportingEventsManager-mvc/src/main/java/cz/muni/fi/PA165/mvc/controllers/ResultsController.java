@@ -74,12 +74,15 @@ public class ResultsController {
 //        if(bResult.hasErrors()) {
 //            return "result/resultForm";
 //        }
+        formBean.setSportsman(sportsman);
+        log.debug(" ---->>createResult - sport " + (formBean.getSport() == null ? "null" : formBean.getSport().getName()));
 
         entryFacade.updateEntry(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getSportsman().getName() + " " + formBean.getSportsman().getSurname() + " was updated successfully");
 
         log.debug("addResult()");
-        return "redirect:/event/results";
+   
+        return "redirect:/event/list";
     }
 }
