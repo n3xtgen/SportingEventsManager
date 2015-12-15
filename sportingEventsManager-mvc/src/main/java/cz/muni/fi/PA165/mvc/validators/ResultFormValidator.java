@@ -22,8 +22,8 @@ public class ResultFormValidator implements Validator {
             CreateEntryDTO entry = (CreateEntryDTO) target;
 
             // lets check empty & whitespaces
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "position", "InputEmpty.eventForm.position");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "time", "InputEmpty.eventForm.time");
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "position", "InputEmpty.resultForm.position");
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "time", "InputEmpty.resultForm.time");
 
 
 //            if (entry.getStartTime() != null && entry.getEndTime() != null) {

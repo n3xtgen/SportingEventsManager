@@ -45,21 +45,15 @@ public class ResultsController {
 
     final static Logger log = LoggerFactory.getLogger(ResultsController.class);
 
-    @RequestMapping(value = "/new/{entryId}", method = RequestMethod.GET)
-    public String newResult(@PathVariable("entryId") Long entryId,  Model model){
-        model.addAttribute("resultForm", new CreateEntryDTO());
-        log.debug("addResult()");
-        return "result/resultForm";
-    }
 
-    @RequestMapping(value = "/update/{entryId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/show/{entryId}", method = RequestMethod.GET)
     public String updateResult(@PathVariable("entryId") Long entryId,  Model model){
         model.addAttribute("resultForm", entryFacade.findEntryById(entryId));
         log.debug("addResult()");
         return "result/resultForm";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String createResult(@ModelAttribute("resultForm") @Valid EntryDTO formBean, BindingResult bResult,
                                HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
 
