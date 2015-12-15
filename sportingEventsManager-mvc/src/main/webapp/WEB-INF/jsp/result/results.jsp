@@ -15,6 +15,12 @@
                 <tr>
                     <th> <h2 class="sport_name">${sport.name}</h2> </th>
                 </tr>
+                <tr>
+                    <th>Position</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Time</th>
+                </tr>
                 </thead>
 
                 <tbody>
@@ -23,7 +29,7 @@
                     <td>${entry.position}</td>
                     <td>${entry.sportsman.name}</td>
                     <td>&emsp;${entry.sportsman.surname}</td>
-                    <td>&emsp;${entry.time}</td>
+                    <td>&emsp;${entry.time}&emsp;</td>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/result/show/${entry.idEntry}">
                     <c:choose>

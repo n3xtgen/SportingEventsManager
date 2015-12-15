@@ -11,7 +11,7 @@
         <form method="get" action="${pageContext.request.contextPath}/event/new">
             <button type="submit" class="add_event" >Add event</button>
         </form>
-
+        <br/>
         <c:forEach var="event" items="${events}">
 
             <%-- area for a single event --%>
@@ -45,13 +45,21 @@
 
                     <%-- area for edit, delete buttons --%>
                 <div class="event_manipulation">
-                    <form method="get" action="${pageContext.request.contextPath}/event/update/${event.idEvent}">
-                        <button class="btn_event_edit" type="submit">Edit</button>
-                    </form>
+                    <table>
+                        <td>
+                            <form method="get" action="${pageContext.request.contextPath}/event/update/${event.idEvent}">
+                                <button class="btn_event_edit" type="submit">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="${pageContext.request.contextPath}/event/delete/${event.idEvent}">
+                                <button class="btn_event_delete" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </table>
 
-                    <form method="post" action="${pageContext.request.contextPath}/event/delete/${event.idEvent}">
-                        <button class="btn_event_delete" type="submit">Delete</button>
-                    </form>
+                    <br/>
+
                 </div>
                     <%-- area for sports inside of an event --%>
                 <div class="event_sports">
@@ -98,7 +106,7 @@
                     </table>
                 </div>
             </div>
-
+        <br/>
         </c:forEach>
    </jsp:attribute>
 </my:pagetemplate>

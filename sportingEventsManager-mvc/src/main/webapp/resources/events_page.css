@@ -1,6 +1,8 @@
 .event_container {
     border-style: solid;
     border-color: black;
+    padding-left: 20px;
+    background-color: #F9F3E3;
 }
 
 .event_form_without_errors {
@@ -13,4 +15,52 @@
 
 .event_form_input {
 
+}
+
+.event_sports{
+    background-color: #CFC8B5;
+}
+
+/* TABLE */
+
+td{
+    padding: 5px 15px 5px 15px;
+}
+
+table {
+    border-collapse: collapse;
+}
+tr {
+    border: solid;
+    border-width: 1px 0;
+}
+
+tr:first-child {
+    border-top: none;
+}
+tr:last-child {
+    border-bottom: none;
+}
+
+button {
+    background-color:#62868D;
+    -moz-border-radius:18px;
+    -webkit-border-radius:18px;
+    border-radius:18px;
+    border:1px solid #62868D;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:17px;
+    padding:6px 15px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #628682;
+}
+button:hover {
+    background-color:#73979A;
+}
+button:active {
+    position:relative;
+    top:1px;
 }
