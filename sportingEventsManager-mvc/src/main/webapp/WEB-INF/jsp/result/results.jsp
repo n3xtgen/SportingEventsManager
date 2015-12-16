@@ -9,7 +9,7 @@
     <jsp:attribute name="body">
         
 
-        <div class="event_container">
+        <div class="event_container animated fadeInLeft">
             <table class="single_sport_table">
                 <thead>
                 <tr>

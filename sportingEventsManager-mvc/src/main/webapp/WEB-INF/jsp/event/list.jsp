@@ -15,7 +15,7 @@
         <c:forEach var="event" items="${events}">
 
             <%-- area for a single event --%>
-            <div class="event_container">
+            <div class="event_container animated fadeIn">
                     <%-- area for event info --%>
                 <div class="event_info">
                     <table class="single_event_table">

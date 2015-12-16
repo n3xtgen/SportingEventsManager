@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
         <link href="${pageContext.request.contextPath}/resources/events_page.css" rel="stylesheet" >
+        <link href="${pageContext.request.contextPath}/resources/animate.css" rel="stylesheet">
         <jsp:invoke fragment="head"/>
     </head>
     <body>

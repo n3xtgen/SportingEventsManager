@@ -8,6 +8,7 @@
 <my:pagetemplate title="Users">
 <jsp:attribute name="body">
 <c:set var="userSession" scope="session" value="Hello"/>
+  <div class="animated fadeIn">
     <table class="table">
         <caption>All registred sportsmans</caption>
         <thead>
@@ -30,6 +31,6 @@
         </c:forEach>
         </tbody>
     </table>
-
+  </div>
 </jsp:attribute>
 </my:pagetemplate>
