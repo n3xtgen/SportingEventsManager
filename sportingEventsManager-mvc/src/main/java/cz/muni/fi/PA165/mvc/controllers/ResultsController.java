@@ -77,6 +77,6 @@ public class ResultsController {
 
         log.debug("addResult()");
    
-        return "redirect:/event/list";
+        return "redirect:/event/results";
     }
 }
