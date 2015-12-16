@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
  * 
  * @author jbouska
  */
-public class SportsmanAuthenticateDTO
+public class UserAuthenticateDTO
 {
      @NotNull
     private String email;

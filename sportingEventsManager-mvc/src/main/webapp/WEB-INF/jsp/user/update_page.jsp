@@ -8,20 +8,20 @@
 <my:pagetemplate title="Edit">
     <jsp:attribute name="body">
 
-        <form:form class="form-horizontal" role="form" method="post" modelAttribute="sportsmanUpdate"  action="${pageContext.request.contextPath}/user/update/${sportsmanUpdate.idSportsman}"
+        <form:form class="form-horizontal" role="form" method="post" modelAttribute="userUpdate"  action="${pageContext.request.contextPath}/user/update/${userUpdate.id}"
                    >
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="nameInput">Name:</label>
                 <div class="col-sm-10">
-                    <form:input type="text" class="form-control" path="name"  value="${sportsmanUpdate.name}"  id="nameInput"  />
+                    <form:input type="text" class="form-control" path="name"  value="${userUpdate.name}"  id="nameInput"  />
                     <form:errors path="name" cssClass="help-block"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="surnameInput">Surname:</label>
                 <div class="col-sm-10">
-                    <form:input type="text" class="form-control"  path="surname"  value="${sportsmanUpdate.surname}" id="surnameInput"  />
+                    <form:input type="text" class="form-control"  path="surname"  value="${userUpdate.surname}" id="surnameInput"  />
                     <form:errors path="surname" cssClass="help-block"/>
                 </div>
             </div>

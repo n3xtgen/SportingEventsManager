@@ -169,7 +169,7 @@ public class EventController {
     public String signUp(@PathVariable("sportId") long sportId, HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
         System.out.println("signUp()");
         log.debug("signUp()");
-        SportsmanDTO sportsman = (SportsmanDTO)request.getSession().getAttribute("authenticatedUser");
+        UserDTO sportsman = (UserDTO)request.getSession().getAttribute("authenticatedUser");
         // something went wrong
         if(sportsman == null){
             log.debug("signUp() -> failure");
@@ -181,7 +181,7 @@ public class EventController {
         // create new registration
         CreateEntryDTO entry = new CreateEntryDTO();
         entry.setSportId(sportId);
-        entry.setSportsmanId(sportsman.getIdSportsman());
+        entry.setSportsmanId(sportsman.getId());
         entryFacade.registerEntry(entry);
 
         redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed up");
@@ -199,7 +199,7 @@ public class EventController {
      */
     @RequestMapping(value="signOut/{sportId}", method= RequestMethod.POST)
     public String signOut(@PathVariable("sportId") long sportId, HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
-        SportsmanDTO sportsman = (SportsmanDTO)request.getSession().getAttribute("authenticatedUser");
+        UserDTO sportsman = (UserDTO)request.getSession().getAttribute("authenticatedUser");
         // something went wrong
         if(sportsman == null){
             log.debug("signOut() -> failure");
@@ -208,7 +208,7 @@ public class EventController {
         }
 
         // find the registration and delete it
-        EntryDTO entry = entryFacade.findEntryBySportsmanAndSportId(sportId, sportsman.getIdSportsman());
+        EntryDTO entry = entryFacade.findEntryBySportsmanAndSportId(sportId, sportsman.getId());
         if(entry != null)
             entryFacade.deleteEntry(entry.getIdEntry());
 
@@ -238,7 +238,7 @@ public class EventController {
     public String createResult(@ModelAttribute("sportForm") @Valid CreateSportDTO formBean, BindingResult bResult,
                                HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
 
-        SportsmanDTO sportsman = (SportsmanDTO)request.getSession().getAttribute("authenticatedUser");
+        UserDTO sportsman = (UserDTO)request.getSession().getAttribute("authenticatedUser");
         // something went wrong
         if(sportsman == null){
             log.debug("signUp() -> failure");

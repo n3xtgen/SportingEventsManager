@@ -15,25 +15,25 @@
 
              <tr>
                 <td><strong>email:</strong></td>
-                <td><c:out value="${sportsmanDetail.email}"/></td>
+                <td><c:out value="${userDetail.email}"/></td>
 
 
             </tr>
             <tr>
                 <td><strong>name:</strong></td>
-                <td><c:out value="${sportsmanDetail.name}"/></td>          
+                <td><c:out value="${userDetail.name}"/></td>
 
             </tr>
             <tr>
                 <td><strong>surname:</strong></td>
-                <td><c:out value="${sportsmanDetail.surname}"/></td>
+                <td><c:out value="${userDetail.surname}"/></td>
             </tr>
                        
             
 
         </table>
-                <c:if test="${sportsmanDetail.idSportsman ==  authenticatedUser.idSportsman}">
-                <a href="${pageContext.request.contextPath}/user/update/${sportsmanDetail.idSportsman}" ><button type="button" class="btn btn-primary btn-md">Edit</button></a>
+                <c:if test="${userDetail.id ==  authenticatedUser.id}">
+                <a href="${pageContext.request.contextPath}/user/update/${userDetail.id}" ><button type="button" class="btn btn-primary btn-md">Edit</button></a>
                 </c:if>
                 
 

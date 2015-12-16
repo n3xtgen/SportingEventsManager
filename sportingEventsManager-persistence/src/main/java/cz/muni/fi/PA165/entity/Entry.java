@@ -2,7 +2,7 @@ package cz.muni.fi.PA165.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
+
 import java.util.Date;
 
 /**
@@ -33,7 +33,7 @@ public class Entry {
      */
     @NotNull
     @ManyToOne
-    private Sportsman sportsman;
+    private Usr usr;
 
     /**
      * Stav ve kterem se sportovec v ramci zavodu nachazi.
@@ -81,12 +81,12 @@ public class Entry {
         this.sport = sport;
     }
 
-    public Sportsman getSportsman() {
-        return sportsman;
+    public Usr getUsr() {
+        return usr;
     }
 
-    public void setSportsman(Sportsman sportsman) {
-        this.sportsman = sportsman;
+    public void setUser(Usr usr) {
+        this.usr = usr;
     }
 
     public EntryState getEntryState() {
@@ -125,7 +125,7 @@ public class Entry {
         final Entry entry = (Entry) obj;
 
         if ( !getSport().equals(entry.getSport()) ) return false;
-        if ( !getSportsman().equals(entry.getSportsman()) ) return false;
+        if ( !getUsr().equals(entry.getUsr()) ) return false;
 
         return true;
     }
@@ -134,7 +134,7 @@ public class Entry {
     public int hashCode(){
         int hash;
         hash = 13 * getSport().hashCode();
-        hash = hash + 29 * getSportsman().hashCode();
+        hash = hash + 29 * getUsr().hashCode();
         return hash;
     }
 }

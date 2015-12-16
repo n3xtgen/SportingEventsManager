@@ -2,7 +2,8 @@ package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Sport;
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.entity.Usr;
+
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -51,17 +52,17 @@ public class EntryDaoImpl implements EntryDao {
     }
 
     @Override
-    public List<Entry> findBySportsman(Sportsman sportsman) {
-        return entityManager.createQuery("SELECT e FROM Entry e WHERE e.sportsman = :sportsman", Entry.class)
-                .setParameter("sportsman", sportsman)
+    public List<Entry> findByUser(Usr usr) {
+        return entityManager.createQuery("SELECT e FROM Entry e WHERE e.usr = :usr", Entry.class)
+                .setParameter("usr", usr)
                 .getResultList();
     }
 
     @Override
-    public Entry findBySportAndSportsman(Sport sport, Sportsman sportsman) {
-        return entityManager.createQuery("SELECT e FROM Entry e WHERE e.sport = :sport AND e.sportsman = :sportsman", Entry.class)
+    public Entry findBySportAndUser(Sport sport, Usr usr) {
+        return entityManager.createQuery("SELECT e FROM Entry e WHERE e.sport = :sport AND e.usr = :usr", Entry.class)
                 .setParameter("sport", sport)
-                .setParameter("sportsman", sportsman)
+                .setParameter("usr", usr)
                 .getSingleResult();
     }
 }

@@ -2,9 +2,9 @@ package cz.muni.fi.PA165.rest.controllers;
 
 import cz.muni.fi.PA165.rest.ApiUris;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import cz.muni.fi.PA165.dto.CreateSportsmanDTO;
-import cz.muni.fi.PA165.dto.SportsmanDTO;
-import cz.muni.fi.PA165.dto.facade.SportsmanFacade;
+import cz.muni.fi.PA165.dto.CreateUserDTO;
+import cz.muni.fi.PA165.dto.UserDTO;
+import cz.muni.fi.PA165.dto.facade.UserFacade;
 import cz.muni.fi.PA165.rest.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.PA165.rest.exceptions.ResourceNotFoundException;
 
@@ -31,7 +31,7 @@ public class UsersController {
     final static Logger logger = LoggerFactory.getLogger(UsersController.class);
 
     @Inject
-    private SportsmanFacade userFacade;
+    private UserFacade userFacade;
 
     /**
      * returns all users
@@ -40,10 +40,10 @@ public class UsersController {
      * @throws JsonProcessingException
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final Collection<SportsmanDTO> getUsers() throws JsonProcessingException {
+    public final Collection<UserDTO> getUsers() throws JsonProcessingException {
 
         logger.debug("rest getUsers()");
-        return userFacade.getAllSportsmans();
+        return userFacade.getAllUsers();
     }
 
     /**
@@ -55,10 +55,10 @@ public class UsersController {
      * @throws ResourceNotFoundException
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SportsmanDTO getUser(@PathVariable("id") long id) throws Exception {
+    public final UserDTO getUser(@PathVariable("id") long id) throws Exception {
 
         logger.debug("rest getUser({})", id);
-        SportsmanDTO userDTO = userFacade.findSportsmanById(id);
+        UserDTO userDTO = userFacade.findUserById(id);
         if (userDTO == null) {
             throw new ResourceNotFoundException();
         }
@@ -76,13 +76,13 @@ public class UsersController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SportsmanDTO createUser(@RequestBody CreateSportsmanDTO user) throws Exception {
+    public final UserDTO createUser(@RequestBody CreateUserDTO user) throws Exception {
 
         logger.debug("rest createUser()");
 
         try {
-            Long id = userFacade.registerSportsman(user);
-            return userFacade.findSportsmanById(id);
+            Long id = userFacade.registerUser(user);
+            return userFacade.findUserById(id);
         } catch (Exception ex) {
             throw new ResourceAlreadyExistingException();
         }

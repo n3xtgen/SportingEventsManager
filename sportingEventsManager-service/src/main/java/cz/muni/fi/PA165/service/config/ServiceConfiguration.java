@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165.service.config;
 
-import cz.muni.fi.PA165.dto.facade.EventFacade;
 import cz.muni.fi.PA165.service.EntryServiceImpl;
 import cz.muni.fi.PA165.service.EventServiceImpl;
 import cz.muni.fi.PA165.service.SportServiceImpl;
@@ -9,7 +8,6 @@ import cz.muni.fi.PA165.service.facade.EventFacadeImpl;
 import cz.muni.fi.PA165.service.facade.SportFacadeImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
-import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,12 +15,12 @@ import org.springframework.context.annotation.Import;
 
 
 import cz.muni.fi.PA165.ApplicationContext;
-import cz.muni.fi.PA165.service.SportsmanServiceImpl;
-import cz.muni.fi.PA165.service.facade.SportsmanFacadeImpl;
+import cz.muni.fi.PA165.service.UserServiceImpl;
+import cz.muni.fi.PA165.service.facade.UserFacadeImpl;
 
 @Configuration
 @Import(ApplicationContext.class)
-@ComponentScan(basePackageClasses = {SportsmanServiceImpl.class, SportsmanFacadeImpl.class, SportServiceImpl.class, SportFacadeImpl.class,
+@ComponentScan(basePackageClasses = {UserServiceImpl.class, UserFacadeImpl.class, SportServiceImpl.class, SportFacadeImpl.class,
 		EventServiceImpl.class, EventFacadeImpl.class, EntryServiceImpl.class, EntryFacadeImpl.class})
 
 public class ServiceConfiguration {

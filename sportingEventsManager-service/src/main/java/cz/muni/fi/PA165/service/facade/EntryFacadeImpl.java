@@ -5,11 +5,11 @@ import cz.muni.fi.PA165.dto.EntryDTO;
 import cz.muni.fi.PA165.dto.facade.EntryFacade;
 import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Sport;
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.entity.Usr;
 import cz.muni.fi.PA165.service.BeanMappingService;
 import cz.muni.fi.PA165.service.EntryService;
 import cz.muni.fi.PA165.service.SportService;
-import cz.muni.fi.PA165.service.SportsmanService;
+import cz.muni.fi.PA165.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +27,7 @@ public class EntryFacadeImpl implements EntryFacade {
     private SportService sportService;
 
     @Autowired
-    private SportsmanService sportsmanService;
+    private UserService userService;
 
     @Autowired
     private EntryService entryService;
@@ -43,11 +43,11 @@ public class EntryFacadeImpl implements EntryFacade {
     @Override
     public void registerEntry(CreateEntryDTO createEntryDto) {
         Sport sport = sportService.findSportById(createEntryDto.getSportId());
-        Sportsman sportsman = sportsmanService.findSportsmanById(createEntryDto.getSportsmanId());
+        Usr user = userService.findById(createEntryDto.getSportsmanId());
 
         Entry entry = new Entry();
         entry.setSport(sport);
-        entry.setSportsman(sportsman);
+        entry.setUser(user);
         entry.setEntryState(Entry.EntryState.REGISTERED);
         entryService.createEntry(entry);
 
@@ -105,9 +105,9 @@ public class EntryFacadeImpl implements EntryFacade {
      */
     @Override
     public Collection<EntryDTO> findEntriesBySportsmanId(Long sportsmanId) {
-        Sportsman sportsman = sportsmanService.findSportsmanById(sportsmanId);
+        Usr user = userService.findById(sportsmanId);
 
-        return beanMappingService.mapTo(entryService.findEntriesBySportsman(sportsman), EntryDTO.class);
+        return beanMappingService.mapTo(entryService.findEntriesBySportsman(user), EntryDTO.class);
     }
 
     /**
@@ -120,8 +120,8 @@ public class EntryFacadeImpl implements EntryFacade {
     @Override
     public EntryDTO findEntryBySportsmanAndSportId(Long sportId, Long sportsmanId) {
         Sport sport = sportService.findSportById(sportId);
-        Sportsman sportsman = sportsmanService.findSportsmanById(sportsmanId);
+        Usr user = userService.findById(sportsmanId);
 
-        return beanMappingService.mapTo(entryService.findEntryBySportAndSportsman(sport, sportsman), EntryDTO.class);
+        return beanMappingService.mapTo(entryService.findEntryBySportAndSportsman(sport, user), EntryDTO.class);
     }
 }

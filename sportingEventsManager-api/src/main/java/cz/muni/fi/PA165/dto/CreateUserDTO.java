@@ -1,30 +1,28 @@
 package cz.muni.fi.PA165.dto;
 
-import java.util.Date;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
+
 /**
- * 
+ *
  * @author jbouska
  */
-public class CreateSportsmanDTO {
+public class CreateUserDTO {
 
     private Long id;
-    
-    
+
     @NotNull
     @Size(min = 3, max = 50)
     private String name;
-    
+
     @NotNull
     @Size(min = 3, max = 50)
     private String surname;
-    
-       
+
     @NotNull
     @Size(min = 5, max = 20)
     private String password;
-    
+
     @NotNull
     private String email;
 
@@ -36,8 +34,6 @@ public class CreateSportsmanDTO {
         this.email = email;
     }
 
-    
-    
     public String getPassword() {
         return password;
     }
@@ -46,7 +42,6 @@ public class CreateSportsmanDTO {
         this.password = password;
     }
 
-   
     public Long getId() {
         return id;
     }
@@ -90,7 +85,7 @@ public class CreateSportsmanDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        CreateSportsmanDTO other = (CreateSportsmanDTO) obj;
+        CreateUserDTO other = (CreateUserDTO) obj;
         if (getEmail() == null) {
             if (other.getEmail() != null) {
                 return false;

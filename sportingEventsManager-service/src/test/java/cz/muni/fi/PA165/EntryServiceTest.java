@@ -3,7 +3,7 @@ package cz.muni.fi.PA165;
 import cz.muni.fi.PA165.dao.EntryDao;
 import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Sport;
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.entity.Usr;
 import cz.muni.fi.PA165.service.EntryService;
 import cz.muni.fi.PA165.service.config.ServiceConfiguration;
 import org.hibernate.service.spi.ServiceException;
@@ -17,8 +17,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.Date;
 
 import static org.mockito.Mockito.when;
 
@@ -42,8 +40,8 @@ public class EntryServiceTest extends AbstractTestNGSpringContextTests {
 
     private Sport sport;
 
-    private Sportsman sportsman1;
-    private Sportsman sportsman2;
+    private Usr user1;
+    private Usr user2;
 
     private Entry entry1;
     private Entry entry2;
@@ -53,20 +51,20 @@ public class EntryServiceTest extends AbstractTestNGSpringContextTests {
         sport = new Sport();
         sport.setName("Sport 1");
 
-        sportsman1 = new Sportsman();
-        sportsman1.setName("Pepa");
+        user1 = new Usr();
+        user1.setName("Pepa");
 
-        sportsman2 = new Sportsman();
-        sportsman2.setName("Stefan");
+        user2 = new Usr();
+        user2.setName("Stefan");
 
         entry1 = new Entry();
         entry1.setSport(sport);
-        entry1.setSportsman(sportsman1);
+        entry1.setUser(user1);
         entry1.setEntryState(Entry.EntryState.REGISTERED);
 
         entry2 = new Entry();
         entry2.setSport(sport);
-        entry2.setSportsman(sportsman2);
+        entry2.setUser(user2);
         entry2.setEntryState(Entry.EntryState.REGISTERED);
     }
 

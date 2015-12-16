@@ -11,24 +11,24 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.List;
 
-import cz.muni.fi.PA165.dao.SportsmanDao;
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.dao.UserDao;
+import cz.muni.fi.PA165.entity.Usr;
 
 /**
  *
  * @author jbouska
  */
 @Service
-public class SportsmanServiceImpl implements SportsmanService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private SportsmanDao sportsmanDao;
+    private UserDao userDao;
 
     @Override
-    public void registerSportsman(Sportsman u, String unencryptedPassword) {
+    public void registerSportsman(Usr u, String unencryptedPassword) {
         u.setPasswordHash(createHash(unencryptedPassword));
         try {
-            sportsmanDao.create(u);
+            userDao.create(u);
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
@@ -36,16 +36,16 @@ public class SportsmanServiceImpl implements SportsmanService {
     }
 
     @Override
-    public List<Sportsman> getAllSportsmans() {
+    public List<Usr> getAllSportsmans() {
         try {
-            return sportsmanDao.findAll();
+            return userDao.findAll();
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
     }
 
     @Override
-    public boolean authenticate(Sportsman u, String password) {
+    public boolean authenticate(Usr u, String password) {
         if (u == null) {
             return false;
         }
@@ -57,36 +57,36 @@ public class SportsmanServiceImpl implements SportsmanService {
     }
 
     @Override
-    public Sportsman findSportsmanById(Long sportsmanId) {
+    public Usr findById(Long sportsmanId) {
         try {
-            return sportsmanDao.findById(sportsmanId);
+            return userDao.findById(sportsmanId);
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
     }
 
     @Override
-    public List<Sportsman> findSportsmanBySurname(String surname) {
+    public List<Usr> findUserBySurname(String surname) {
         try {
-            return sportsmanDao.findBySurname(surname);
+            return userDao.findBySurname(surname);
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
     }
 
     @Override
-    public Sportsman findSportsmanByEmail(String email) {
+    public Usr findUserByEmail(String email) {
         try {
-            return sportsmanDao.findByEmail(email);
+            return userDao.findByEmail(email);
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
     }
 
     @Override
-    public void updateSportsman(Sportsman s) {
+    public void updateSportsman(Usr s) {
         try {
-            sportsmanDao.update(s);
+            userDao.update(s);
         } catch (Exception e) {
             throw new DataAccessException(e);
 
@@ -95,9 +95,9 @@ public class SportsmanServiceImpl implements SportsmanService {
     }
     
     @Override
-    public void deleteSportsman(Sportsman s) {
+    public void deleteSportsman(Usr s) {
         try {
-            sportsmanDao.delete(s);
+            userDao.delete(s);
         } catch (Exception e) {
             throw new DataAccessException(e);
 

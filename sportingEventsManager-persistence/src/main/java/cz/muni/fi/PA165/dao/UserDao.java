@@ -2,40 +2,40 @@ package cz.muni.fi.PA165.dao;
 
 import java.util.List;
 
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.entity.Usr;
 
 /**
  *
  * @author jbouska
  */
-public interface SportsmanDao {
+public interface UserDao {
 
 	/**
 	 *
 	 * @param id
 	 * @return sportsman or null if the sportsman does not exist
 	 */
-	public Sportsman findById(Long id);
+	public Usr findById(Long id);
 
 	/**
 	 *
 	 * @param s sportsman to create
 	 */
-	public void create(Sportsman s);
+	public void create(Usr s);
 
 	/**
 	 *
-	 * @param s Sportsman
-	 * @return Sportsman
+	 * @param s Usr
+	 * @return Usr
 	 */
-	public Sportsman update(Sportsman s);
+	public Usr update(Usr s);
 
 	/**
 	 *
 	 * @param s sportsman to delete
 	 * @throws cz.muni.fi.PA165.dao.exception.DataAccessException if there is a problem on persistent layer
 	 */
-	public void delete(Sportsman s);
+	public void delete(Usr s);
 
 	/**
 	 *
@@ -48,14 +48,14 @@ public interface SportsmanDao {
 	 * @param surname
 	 * @return sportsmans with selected surname
 	 */
-	public List<Sportsman> findBySurname(String surname);
+	public List<Usr> findBySurname(String surname);
 
         /**
 	 *
 	 * @param email
 	 * @return sportsmans with selected email
          */
-        public Sportsman findByEmail(String email);
+        public Usr findByEmail(String email);
         
 	
 

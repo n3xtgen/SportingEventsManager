@@ -6,9 +6,9 @@
 package cz.muni.fi.PA165;
 
 import cz.muni.fi.PA165.Exceptions.DataAccessException;
-import cz.muni.fi.PA165.dao.SportsmanDao;
-import cz.muni.fi.PA165.entity.Sportsman;
-import cz.muni.fi.PA165.service.SportsmanService;
+import cz.muni.fi.PA165.dao.UserDao;
+import cz.muni.fi.PA165.entity.Usr;
+import cz.muni.fi.PA165.service.UserService;
 import cz.muni.fi.PA165.service.config.ServiceConfiguration;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.springframework.test.util.AssertionErrors;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -32,32 +31,32 @@ import org.testng.annotations.Test;
  * @author jbouska
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class SportsmanServiceTest extends AbstractTransactionalTestNGSpringContextTests {
+public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Mock
-    private SportsmanDao sportsmanDao;
+    private UserDao userDao;
 
     @Autowired
     @InjectMocks
-    private SportsmanService sportsmanService;
+    private UserService userService;
 
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
 
-    private Sportsman s;
+    private Usr s;
     
-    private Sportsman s1;
+    private Usr s1;
 
     @BeforeMethod
     public void prepareTestData() {
-        s = new Sportsman();
+        s = new Usr();
         s.setName("Petr");
         s.setName("Filek");
         s.setEmail("Petr@filek.cz");
         
-        s1 = new Sportsman();
+        s1 = new Usr();
         s1.setName("Petr1");
         s1.setName("Filek1");
         s1.setEmail("Petr@filek1.cz");
@@ -68,7 +67,7 @@ public class SportsmanServiceTest extends AbstractTransactionalTestNGSpringConte
 @Test
     public void shouldSetSportsmanPasseordHash()
     {
-        sportsmanService.registerSportsman(s, "password");
+        userService.registerSportsman(s, "password");
        Assert.assertFalse(s.getPasswordHash().isEmpty());
        Assert.assertNotEquals(s.getPasswordHash(), "password");
     }
@@ -76,23 +75,23 @@ public class SportsmanServiceTest extends AbstractTransactionalTestNGSpringConte
     @Test
     public void shouldGetAllSportsmans()
     {
-        List<Sportsman> spList = new ArrayList<>();
+        List<Usr> spList = new ArrayList<>();
         spList.add(s);
         spList.add(s1);
         
-        when(sportsmanDao.findAll()).thenReturn(spList);
+        when(userDao.findAll()).thenReturn(spList);
         
-       Assert.assertEquals(sportsmanService.getAllSportsmans(),spList);
+       Assert.assertEquals(userService.getAllSportsmans(),spList);
     }
     
     @Test
     public void shouldAuthenticate()
     {
         //should set sportsmans password hash
-        sportsmanService.registerSportsman(s, "password");
+        userService.registerSportsman(s, "password");
        
-        Assert.assertTrue(sportsmanService.authenticate(s,"password"));
-        Assert.assertFalse(sportsmanService.authenticate(s,"fake"));
+        Assert.assertTrue(userService.authenticate(s,"password"));
+        Assert.assertFalse(userService.authenticate(s,"fake"));
         
     }
     
@@ -100,37 +99,37 @@ public class SportsmanServiceTest extends AbstractTransactionalTestNGSpringConte
     public void shouldFindByID()
     {
         long id = 1;
-        when(sportsmanDao.findById(id)).thenReturn(s);
+        when(userDao.findById(id)).thenReturn(s);
         
-        Assert.assertEquals(sportsmanService.findSportsmanById(id),s);
+        Assert.assertEquals(userService.findById(id),s);
     }
     
      @Test
     public void shouldFindByEmail()
     {
        String email = "Petr@filek.cz";
-        when(sportsmanDao.findByEmail(email)).thenReturn(s);
+        when(userDao.findByEmail(email)).thenReturn(s);
         
-        Assert.assertEquals(sportsmanService.findSportsmanByEmail(email),s);
+        Assert.assertEquals(userService.findUserByEmail(email),s);
     }
     
       @Test
     public void shouldFindBySurname()
     {
        String surname = "Filek";
-       List<Sportsman> spList = new ArrayList<>();
+       List<Usr> spList = new ArrayList<>();
         spList.add(s);
-        when(sportsmanDao.findBySurname(surname)).thenReturn(spList);
+        when(userDao.findBySurname(surname)).thenReturn(spList);
         
-        Assert.assertEquals(sportsmanService.findSportsmanBySurname(surname),spList);
+        Assert.assertEquals(userService.findUserBySurname(surname),spList);
     }
     
        @Test(expectedExceptions = DataAccessException.class)
     public void shouldThrowExceptoin()
     {
-       when(sportsmanDao.findAll()).thenThrow(new PersistenceException());
+       when(userDao.findAll()).thenThrow(new PersistenceException());
       
-       sportsmanService.getAllSportsmans();
+       userService.getAllSportsmans();
     }
     
     

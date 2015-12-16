@@ -2,7 +2,7 @@ package cz.muni.fi.PA165.dao;
 
 import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Sport;
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.entity.Usr;
 
 import java.util.List;
 
@@ -51,18 +51,18 @@ public interface EntryDao {
     public List<Entry> findBySport(Sport sport);
 
     /**
-     * Find entries by sportsman
-     * @param sportsman
+     * Find entries by usr
+     * @param usr
      * @return
      */
-    public List<Entry> findBySportsman(Sportsman sportsman);
+    public List<Entry> findByUser(Usr usr);
 
     /**
-     * Find entry by combination of sport and sportsman
+     * Find entry by combination of sport and usr
      * @param sport
-     * @param sportsman
+     * @param usr
      * @return
      */
-    public Entry findBySportAndSportsman(Sport sport, Sportsman sportsman);
+    public Entry findBySportAndUser(Sport sport, Usr usr);
 
 }

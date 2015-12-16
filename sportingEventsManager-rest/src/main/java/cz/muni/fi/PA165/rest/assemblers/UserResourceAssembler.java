@@ -9,22 +9,22 @@ import org.springframework.stereotype.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import cz.muni.fi.PA165.dto.SportsmanDTO;
+import cz.muni.fi.PA165.dto.UserDTO;
 
 /**
  *
  * @author jbouska
  */
 @Component
-public class UserResourceAssembler implements ResourceAssembler<SportsmanDTO, Resource<SportsmanDTO>> {
+public class UserResourceAssembler implements ResourceAssembler<UserDTO, Resource<UserDTO>> {
 
     @Override
-    public Resource<SportsmanDTO> toResource(SportsmanDTO sportsmanDTO) {
-        long id = sportsmanDTO.getIdSportsman();
-        Resource<SportsmanDTO> productResource = new Resource<SportsmanDTO>(sportsmanDTO);
+    public Resource<UserDTO> toResource(UserDTO userDTO) {
+        long id = userDTO.getId();
+        Resource<UserDTO> productResource = new Resource<UserDTO>(userDTO);
 
         try {
-            productResource.add(linkTo(SportsmanDTO.class).slash(sportsmanDTO.getIdSportsman()).withSelfRel());
+            productResource.add(linkTo(UserDTO.class).slash(userDTO.getId()).withSelfRel());
          
 
         } catch (Exception ex) {

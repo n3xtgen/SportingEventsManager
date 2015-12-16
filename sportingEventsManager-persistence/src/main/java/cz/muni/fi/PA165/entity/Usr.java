@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
  * @author jbouska
  */
 @Entity
-public class Sportsman {
+public class Usr {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idSportsman;
+	private Long id;
 
 	String passwordHash;
 
@@ -32,26 +32,26 @@ public class Sportsman {
 	/**
 	 * Seznam prihlasek sportovce k jednotlivym zavodum a jeho vysledek.
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sportsman")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usr")
 	private Set<Entry> entries = new HashSet<Entry>();
 
 	/********************
 	 *** CONSTRUCTORS ***
 	 ********************/
 
-	public Sportsman() {
+	public Usr() {
 	}
 
 	/*************************
 	 *** GETTERS & SETTERS ***
 	 *************************/
 
-	public Long getIdSportsman() {
-		return idSportsman;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdSportsman(Long id) {
-		this.idSportsman = id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getPasswordHash() {
@@ -112,10 +112,10 @@ public class Sportsman {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Sportsman)) {
+		if (!(obj instanceof Usr)) {
 			return false;
 		}
-		final Sportsman other = (Sportsman) obj;
+		final Usr other = (Usr) obj;
 		
                 if (!Objects.equals(getEmail(), other.getEmail())) {
 			return false;

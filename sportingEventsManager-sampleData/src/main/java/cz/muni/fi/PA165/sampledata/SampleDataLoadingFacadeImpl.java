@@ -3,11 +3,11 @@ package cz.muni.fi.PA165.sampledata;
 import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Event;
 import cz.muni.fi.PA165.entity.Sport;
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.entity.Usr;
 import cz.muni.fi.PA165.service.EntryService;
 import cz.muni.fi.PA165.service.EventService;
 import cz.muni.fi.PA165.service.SportService;
-import cz.muni.fi.PA165.service.SportsmanService;
+import cz.muni.fi.PA165.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     final static Logger log = LoggerFactory.getLogger(SampleDataLoadingFacadeImpl.class);
 
     @Autowired
-    private SportsmanService sportsmanService;
+    private UserService sportsmanService;
 
     @Autowired
     private EventService eventService;
@@ -46,8 +46,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     }
 
   
-    private Sportsman sportsman(String password, String name, String surname, String email) {
-        Sportsman s = new Sportsman();
+    private Usr sportsman(String password, String name, String surname, String email) {
+        Usr s = new Usr();
         s.setName(name);
         s.setSurname(surname);
         s.setEmail(email);
@@ -58,9 +58,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     }
 
    private void createSomeEvents(){
-       Sportsman sp = sportsman("password", "admin","bbb","email@mail.com");
-       Sportsman sp2 = sportsman("heslo", "Janko", "Hrasko", "test@test.test");
-       Sportsman sp3 = sportsman("sportovec", "Arnold", "Schwarzeneger", "sportovec@mail.com");
+       Usr sp = sportsman("password", "admin","bbb","email@mail.com");
+       Usr sp2 = sportsman("heslo", "Janko", "Hrasko", "test@test.test");
+       Usr sp3 = sportsman("sportovec", "Arnold", "Schwarzeneger", "sportovec@mail.com");
 
        // create 2 events
        Event evt1 = new Event();
@@ -111,13 +111,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
        Entry entry2 = new Entry();
 
        entry1.setSport(sport1);
-       entry1.setSportsman(sp);
+       entry1.setUser(sp);
        entry1.setPosition(14);
        entry1.setTime(dStart2);
      //  entry1.setEntryState(Entry.EntryState.REGISTERED);
 
        entry2.setSport(sport1);
-       entry2.setSportsman(sp2);
+       entry2.setUser(sp2);
        entry2.setPosition(2);
        entry2.setTime(dStart1);
      ///  entry1.setEntryState(Entry.EntryState.REGISTERED);

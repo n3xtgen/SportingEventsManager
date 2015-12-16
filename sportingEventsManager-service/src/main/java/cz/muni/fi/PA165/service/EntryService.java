@@ -2,7 +2,7 @@ package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Sport;
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.entity.Usr;
 
 import java.util.Collection;
 
@@ -50,17 +50,17 @@ public interface EntryService {
     Collection<Entry> findEntriesBySport(Sport sport);
 
     /**
-     * Find entry by sportsman
-     * @param sportsman
+     * Find entry by Usr
+     * @param Usr
      * @return set of entries
      */
-    Collection<Entry> findEntriesBySportsman(Sportsman sportsman);
+    Collection<Entry> findEntriesBySportsman(Usr Usr);
 
     /**
-     * Find entry by combination of sport and sportsman
+     * Find entry by combination of sport and Usr
      * @param sport
-     * @param sportsman
+     * @param Usr
      * @return
      */
-    Entry findEntryBySportAndSportsman(Sport sport, Sportsman sportsman);
+    Entry findEntryBySportAndSportsman(Sport sport, Usr Usr);
 }

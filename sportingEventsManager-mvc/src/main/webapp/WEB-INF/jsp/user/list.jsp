@@ -7,7 +7,6 @@
 
 <my:pagetemplate title="Users">
 <jsp:attribute name="body">
-<c:set var="userSession" scope="session" value="Hello"/>
     <table class="table">
         <caption>All registred sportsmans</caption>
         <thead>
@@ -21,7 +20,7 @@
         <tbody>
         <c:forEach items="${users}" var="user">
             <tr>
-                <td>${user.idSportsman}</td>
+                <td>${user.id}</td>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.surname}"/></td>
                 

@@ -2,7 +2,6 @@ package cz.muni.fi.PA165.mvc.controllers;
 
 import cz.muni.fi.PA165.dto.*;
 import cz.muni.fi.PA165.dto.facade.EntryFacade;
-import cz.muni.fi.PA165.mvc.validators.EventFormValidator;
 import cz.muni.fi.PA165.mvc.validators.ResultFormValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +56,7 @@ public class ResultsController {
     public String createResult(@ModelAttribute("resultForm") @Valid EntryDTO formBean, BindingResult bResult,
                                HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
 
-        SportsmanDTO sportsman = (SportsmanDTO)request.getSession().getAttribute("authenticatedUser");
+        UserDTO sportsman = (UserDTO)request.getSession().getAttribute("authenticatedUser");
         // something went wrong
         if(sportsman == null){
             log.debug("signUp() -> failure");
@@ -68,12 +67,12 @@ public class ResultsController {
 //        if(bResult.hasErrors()) {
 //            return "result/resultForm";
 //        }
-        formBean.setSportsman(sportsman);
+        formBean.setUser(sportsman);
         log.debug(" ---->>createResult - sport " + (formBean.getSport() == null ? "null" : formBean.getSport().getName()));
 
         entryFacade.updateEntry(formBean);
 
-        redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getSportsman().getName() + " " + formBean.getSportsman().getSurname() + " was updated successfully");
+        redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getUser().getName() + " " + formBean.getUser().getSurname() + " was updated successfully");
 
         log.debug("addResult()");
    

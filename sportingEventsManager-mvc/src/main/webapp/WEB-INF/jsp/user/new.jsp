@@ -8,7 +8,7 @@
 <my:pagetemplate title="Registration">
     <jsp:attribute name="body">
 
-        <form:form class="form-horizontal" role="form" method="post" modelAttribute="sportsmanCreate"  action="${pageContext.request.contextPath}/user/create"
+        <form:form class="form-horizontal" role="form" method="post" modelAttribute="userCreate"  action="${pageContext.request.contextPath}/user/create"
               >
             <div class="form-group">
                 <label class="control-label col-sm-2" for="emailInput">Email:</label>

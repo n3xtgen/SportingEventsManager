@@ -45,7 +45,7 @@ public class SportDTO {
      */
     public boolean isSportsmanRegistred(Long id){
         for(Iterator<EntryDTO> itr = entries.iterator(); itr.hasNext();)
-            if(itr.next().getSportsman().getIdSportsman() == id) // the sportsman is already registred in this sport
+            if(itr.next().getUser().getId() == id) // the sportsman is already registred in this sport
                 return true;
 
         return false;

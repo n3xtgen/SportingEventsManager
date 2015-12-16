@@ -1,7 +1,6 @@
 package cz.muni.fi.PA165.dto;
 
 import java.util.Date;
-import java.util.Iterator;
 
 /**
  * @author n3xtgen
@@ -15,7 +14,7 @@ public class EntryDTO {
     private Date time;
 
     private SportDTO sport;
-    private SportsmanDTO sportsman;
+    private UserDTO sportsman;
 
     /*************************
      *** GETTERS & SETTERS ***
@@ -61,11 +60,11 @@ public class EntryDTO {
         this.sport = sport;
     }
 
-    public SportsmanDTO getSportsman() {
+    public UserDTO getUser() {
         return sportsman;
     }
 
-    public void setSportsman(SportsmanDTO sportsman) {
+    public void setUser(UserDTO sportsman) {
         this.sportsman = sportsman;
     }
 

@@ -8,9 +8,9 @@ package cz.muni.fi.PA165.rest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.muni.fi.PA165.RootWebContext;
-import cz.muni.fi.PA165.dto.CreateSportsmanDTO;
-import cz.muni.fi.PA165.dto.SportsmanDTO;
-import cz.muni.fi.PA165.dto.facade.SportsmanFacade;
+import cz.muni.fi.PA165.dto.CreateUserDTO;
+import cz.muni.fi.PA165.dto.UserDTO;
+import cz.muni.fi.PA165.dto.facade.UserFacade;
 import cz.muni.fi.PA165.rest.controllers.UsersController;
 import java.io.IOException;
 import java.util.Arrays;
@@ -47,7 +47,7 @@ import org.testng.annotations.Test;
 public class UserControllerTest extends AbstractTestNGSpringContextTests {
 
     @Mock
-    private SportsmanFacade userFacade;
+    private UserFacade userFacade;
 
     @Autowired
     @InjectMocks
@@ -65,28 +65,28 @@ public class UserControllerTest extends AbstractTestNGSpringContextTests {
     @Test
     public void getAllUsers() throws Exception {
 
-        doReturn(Collections.unmodifiableList(this.createUsers())).when(userFacade).getAllSportsmans();
+        doReturn(Collections.unmodifiableList(this.createUsers())).when(userFacade).getAllUsers();
 
         mockMvc.perform(get("/users"))
                 .andExpect(status().isOk())
                 .andExpect(
                         content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(jsonPath("$.[?(@.idSportsman==1)].name").value("John"))
-                .andExpect(jsonPath("$.[?(@.idSportsman==2)].name").value("Petr"));
+                .andExpect(jsonPath("$.[?(@.id==1)].name").value("John"))
+                .andExpect(jsonPath("$.[?(@.id==2)].name").value("Petr"));
 
     }
 
     @Test
     public void createUser() throws Exception {
 
-        CreateSportsmanDTO sp = new CreateSportsmanDTO();
+        CreateUserDTO sp = new CreateUserDTO();
         sp.setName("newUser");
         sp.setSurname("surname");
         sp.setPassword("password");
         sp.setEmail("newUser@mail.cz");
 
-        doReturn(1l).when(userFacade).registerSportsman(
-                any(CreateSportsmanDTO.class));
+        doReturn(1l).when(userFacade).registerUser(
+                any(CreateUserDTO.class));
 
         String json = this.convertObjectToJsonBytes(sp);
 
@@ -102,10 +102,10 @@ public class UserControllerTest extends AbstractTestNGSpringContextTests {
     @Test
     public void getValidUser() throws Exception {
 
-        List<SportsmanDTO> users = this.createUsers();
+        List<UserDTO> users = this.createUsers();
 
-        doReturn(users.get(0)).when(userFacade).findSportsmanById(1l);
-        doReturn(users.get(1)).when(userFacade).findSportsmanById(2l);
+        doReturn(users.get(0)).when(userFacade).findUserById(1l);
+        doReturn(users.get(1)).when(userFacade).findUserById(2l);
 
         mockMvc.perform(get("/users/1"))
                 .andExpect(status().isOk())
@@ -123,22 +123,22 @@ public class UserControllerTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void getInvalidUser() throws Exception {
-        doReturn(null).when(userFacade).findSportsmanById(1l);
+        doReturn(null).when(userFacade).findUserById(1l);
 
         mockMvc.perform(get("/users/1"))
                 .andExpect(status().is4xxClientError());
 
     }
 
-    private List<SportsmanDTO> createUsers() {
-        SportsmanDTO userOne = new SportsmanDTO();
-        userOne.setIdSportsman(1l);
+    private List<UserDTO> createUsers() {
+        UserDTO userOne = new UserDTO();
+        userOne.setId(1l);
         userOne.setName("John");
         userOne.setSurname("Smith");
         userOne.setEmail("Smith@mail.com");
 
-        SportsmanDTO userTwo = new SportsmanDTO();
-        userTwo.setIdSportsman(2l);
+        UserDTO userTwo = new UserDTO();
+        userTwo.setId(2l);
         userTwo.setName("Petr");
         userTwo.setSurname("Pecka");
         userTwo.setEmail("Pecka@mail.cz");

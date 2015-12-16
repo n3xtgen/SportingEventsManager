@@ -2,28 +2,28 @@ package cz.muni.fi.PA165.service;
 
 import java.util.List;
 
-import cz.muni.fi.PA165.entity.Sportsman;
+import cz.muni.fi.PA165.entity.Usr;
 
 /**
  *
  * @author jbouska
  */
-public interface SportsmanService {
+public interface UserService {
 
     /**
-     * Register new Sportsman.
+     * Register new User.
      *
      * @param u sportsman to register
      * @param unencryptedPassword
      */
-    void registerSportsman(Sportsman u, String unencryptedPassword);
+    void registerSportsman(Usr u, String unencryptedPassword);
 
     /**
      * Get all sportsmans.
      *
      * @return list of sportsmans
      */
-    List<Sportsman> getAllSportsmans();
+    List<Usr> getAllSportsmans();
 
     /**
      * Authenticate sportsman.
@@ -32,7 +32,7 @@ public interface SportsmanService {
      * @param password
      * @return true if is authenticate
      */
-    boolean authenticate(Sportsman u, String password);
+    boolean authenticate(Usr u, String password);
 
     /**
      * Find sportsman by ID.
@@ -40,7 +40,7 @@ public interface SportsmanService {
      * @param sportsmanId
      * @return
      */
-    Sportsman findSportsmanById(Long sportsmanId);
+    Usr findById(Long sportsmanId);
 
     /**
      * Find sportsman by surname. 
@@ -48,7 +48,7 @@ public interface SportsmanService {
      * @param surname
      * @return
      */
-    List<Sportsman> findSportsmanBySurname(String surname);
+    List<Usr> findUserBySurname(String surname);
 
     /**
      * Find sportsman by email
@@ -56,18 +56,18 @@ public interface SportsmanService {
      * @param email
      * @return 
      */
-    Sportsman findSportsmanByEmail(String email);
+    Usr findUserByEmail(String email);
 
     /**
      * Update sportsman.
      * @param s 
      */
-    void updateSportsman(Sportsman s);
+    void updateSportsman(Usr s);
     
     /**
      * Delete sportsman
      * @param s 
      */ 
-    void deleteSportsman(Sportsman s);
+    void deleteSportsman(Usr s);
 
 }

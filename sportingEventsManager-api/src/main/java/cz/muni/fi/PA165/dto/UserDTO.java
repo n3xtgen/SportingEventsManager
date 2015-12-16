@@ -1,6 +1,5 @@
 package cz.muni.fi.PA165.dto;
 
-import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -8,9 +7,9 @@ import javax.validation.constraints.Size;
  * 
  * @author jbouska
  */
-public class SportsmanDTO {
+public class UserDTO {
 
-    private Long idSportsman;
+    private Long id;
     
     @NotNull
     @Size(min = 3, max = 50)
@@ -34,12 +33,12 @@ public class SportsmanDTO {
 
  
 
-    public Long getIdSportsman() {
-        return idSportsman;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdSportsman(Long idSportsman) {
-        this.idSportsman = idSportsman;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     
@@ -79,7 +78,7 @@ public class SportsmanDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        SportsmanDTO other = (SportsmanDTO) obj;
+        UserDTO other = (UserDTO) obj;
         if (getEmail() == null) {
             if (other.getEmail() != null) {
                 return false;
@@ -93,7 +92,7 @@ public class SportsmanDTO {
     @Override
     public String toString() {
         return "UserDTO{"
-                + "id=" + idSportsman
+                + "id=" + id
                 + ", email='" + getEmail() + '\''
                 + ", givenName='" + name + '\''
                 + ", surname='" + surname + '\''
