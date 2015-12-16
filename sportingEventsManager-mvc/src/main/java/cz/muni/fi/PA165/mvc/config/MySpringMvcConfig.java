@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.validation.Validator;
@@ -62,6 +63,14 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
+    }
+
+    @Bean
+    public SimpleMappingExceptionResolver exceptionMappings () {
+
+        SimpleMappingExceptionResolver exceptionMapper = new SimpleMappingExceptionResolver();
+        exceptionMapper.setDefaultErrorView("error");
+        return exceptionMapper;
     }
 
     /**

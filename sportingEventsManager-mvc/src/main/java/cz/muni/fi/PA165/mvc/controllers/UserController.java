@@ -6,6 +6,7 @@
 package cz.muni.fi.PA165.mvc.controllers;
 
 
+import cz.muni.fi.PA165.Exceptions.UserAlreadyExistException;
 import cz.muni.fi.PA165.dto.CreateUserDTO;
 import cz.muni.fi.PA165.dto.UserAuthenticateDTO;
 import cz.muni.fi.PA165.dto.UserDTO;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,11 +40,7 @@ public class UserController {
 
     @Autowired
     private UserFacade userFacade;
-    
-    
-     
-     
-    
+
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
