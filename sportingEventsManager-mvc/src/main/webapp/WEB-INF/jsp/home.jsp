@@ -9,12 +9,12 @@
 <jsp:attribute name="body">
 <body background="${pageContext.request.contextPath}/resources/images/background.jpg">
 
-   <p>Sporting Event Manager</p>
-
-   <p class="secondary">See the events, join to competitions and watch the results!</p>
-    <p class="third">To enter sign in or sign up.</p>
-<p class="third">Project for Masaryk University 2015</p>
-
+    <div class="animated fadeInUp">
+        <p>Sporting Event Manager</p>
+        <p class="secondary">See the events, join to competitions and watch the results!</p>
+        <p class="third">To enter sign in or sign up.</p>
+        <p class="third">Project for Masaryk University 2015</p>
+    </div>
 
 </body>
     <%--<div class="jumbotron animated bounce">--%>
