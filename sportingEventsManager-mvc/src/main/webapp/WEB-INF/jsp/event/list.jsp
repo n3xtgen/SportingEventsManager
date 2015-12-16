@@ -69,7 +69,7 @@
                         <tr>
                             <th> <h3>Competitions: </h3> </th>
                             <td>
-                                <form method="get" action="${pageContext.request.contextPath}/event/addSport">
+                                <form method="get" action="${pageContext.request.contextPath}/event/${event.idEvent}/addSport">
                                     <button type="submit" class="btn_sport_add">Add competition</button>
                                 </form>
                             </td>
@@ -84,7 +84,7 @@
                                 <%-- Sign up button --%>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${sport.isSportsmanRegistred(signedUser.idSportsman)}">
+                                        <c:when test="${sport.isSportsmanRegistred(signedUser.id)}">
                                             <form method="post" action="${pageContext.request.contextPath}/event/signOut/${sport.idSport}">
                                                 <button type="submit" class="btn_sport_signup">Sign out</button>
                                             </form>

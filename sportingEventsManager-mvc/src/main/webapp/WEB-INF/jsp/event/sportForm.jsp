@@ -10,6 +10,8 @@
 
         <form:form method="get" action="${pageContext.request.contextPath}/event/createSport" modelAttribute="sportForm">
 
+            <form:hidden path="event" />
+
             <s:bind path="name">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <label class="control-label col-sm-2">Name:</label>

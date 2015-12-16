@@ -1,5 +1,7 @@
 package cz.muni.fi.PA165.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -11,10 +13,11 @@ public class EntryDTO {
     private EntryState entryState;
     public enum EntryState { REGISTERED, STARTED, FINISHED, DISQUALIFIED}
     private int position;
+    @DateTimeFormat(pattern="HH:mm:ss")
     private Date time;
 
     private SportDTO sport;
-    private UserDTO sportsman;
+    private UserDTO usr;
 
     /*************************
      *** GETTERS & SETTERS ***
@@ -60,12 +63,12 @@ public class EntryDTO {
         this.sport = sport;
     }
 
-    public UserDTO getUser() {
-        return sportsman;
+    public UserDTO getUsr() {
+        return usr;
     }
 
-    public void setUser(UserDTO sportsman) {
-        this.sportsman = sportsman;
+    public void setUsr(UserDTO usr) {
+        this.usr = usr;
     }
 
     public boolean haveFinished(){

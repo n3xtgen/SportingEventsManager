@@ -27,8 +27,8 @@
                 <c:forEach var="entry" items="${entries}">
                 <tr>
                     <td>${entry.position}</td>
-                    <td>${entry.sportsman.name}</td>
-                    <td>&emsp;${entry.sportsman.surname}</td>
+                    <td>${entry.usr.name}</td>
+                    <td>&emsp;${entry.usr.surname}</td>
                     <fmt:formatDate value="${entry.time}" var="dateString" pattern="HH:mm:SS"/>
                     <td>&emsp;${dateString}&emsp;</td>
                     <td>

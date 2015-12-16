@@ -13,12 +13,22 @@ public class CreateSportDTO {
     @Size(min = 3, max = 50)
     private String name;
 
+    private long event;
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getEvent() {
+        return event;
+    }
+
+    public void setEvent(long event) {
+        this.event = event;
     }
 
     @Override

@@ -5,6 +5,7 @@ import cz.muni.fi.PA165.dto.SportDTO;
 import cz.muni.fi.PA165.dto.facade.SportFacade;
 import cz.muni.fi.PA165.entity.Sport;
 import cz.muni.fi.PA165.service.BeanMappingService;
+import cz.muni.fi.PA165.service.EventService;
 import cz.muni.fi.PA165.service.SportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class SportFacadeImpl implements SportFacade {
 
     @Autowired
     private SportService sportService;
+
+    @Autowired
+    private EventService eventService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -53,6 +57,7 @@ public class SportFacadeImpl implements SportFacade {
     public void addNewSport(CreateSportDTO s) {
         Sport sport = new Sport();
         sport.setName(s.getName());
+        sport.setEvent(eventService.findEventById(s.getEvent())); // add event reference
         sportService.addNewSport(sport);
     }
 }

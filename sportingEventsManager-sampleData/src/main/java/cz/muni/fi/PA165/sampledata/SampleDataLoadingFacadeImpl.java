@@ -112,7 +112,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
        Entry entry2 = new Entry();
 
        entry1.setSport(sport1);
-       entry1.setUser(sp);
+       entry1.setUser(sp3);
        entry1.setPosition(14);
        entry1.setTime(dStart2);
      //  entry1.setEntryState(Entry.EntryState.REGISTERED);

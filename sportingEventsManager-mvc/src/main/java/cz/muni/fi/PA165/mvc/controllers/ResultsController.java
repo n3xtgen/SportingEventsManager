@@ -32,7 +32,7 @@ public class ResultsController {
     protected void initBinder(WebDataBinder binder){
         if((binder.getTarget() instanceof CreateEntryDTO) || (binder.getTarget() instanceof EntryDTO)) {
             // we need to convert String to Date
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:SS");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
             binder.registerCustomEditor(Date.class, "time", new CustomDateEditor(dateFormat, false));
 
             binder.addValidators(new ResultFormValidator());
@@ -48,33 +48,28 @@ public class ResultsController {
     @RequestMapping(value = "/show/{entryId}", method = RequestMethod.GET)
     public String updateResult(@PathVariable("entryId") Long entryId,  Model model){
         model.addAttribute("resultForm", entryFacade.findEntryById(entryId));
-        log.debug("addResult()");
+        log.debug("updateResult()");
         return "result/resultForm";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String createResult(@ModelAttribute("resultForm") @Valid EntryDTO formBean, BindingResult bResult,
                                HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
-
         UserDTO sportsman = (UserDTO)request.getSession().getAttribute("authenticatedUser");
-        // something went wrong
-        if(sportsman == null){
-            log.debug("signUp() -> failure");
-            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to register you");
-            return "redirect:/event/list";
+
+        log.debug("createResult: " + formBean.getTime() == null ? "null" : formBean.getTime().toString());
+
+        if(bResult.hasErrors()) {
+            log.debug("createResult - has errors");
+            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to change results for " + sportsman.getName());
+            return "result/resultForm";
         }
 
-//        if(bResult.hasErrors()) {
-//            return "result/resultForm";
-//        }
-        formBean.setUser(sportsman);
-        log.debug(" ---->>createResult - sport " + (formBean.getSport() == null ? "null" : formBean.getSport().getName()));
-
+        formBean.setUsr(sportsman);
         entryFacade.updateEntry(formBean);
+        redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getUsr().getName() + " " + formBean.getUsr().getSurname() + " was updated successfully");
 
-        redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getUser().getName() + " " + formBean.getUser().getSurname() + " was updated successfully");
-
-        log.debug("addResult()");
+        log.debug("createResult()");
    
         return "redirect:/event/list";
     }

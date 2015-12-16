@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="emailInput">Email:</label>
                 <div class="col-sm-10">
-                    <form:input type="email" class="form-control" path="email" id="emailInput" placeholder="Enter email" />
+                    <form:input type="email" class="form-control" path="email" id="emailInput" value="email@mail.com" placeholder="Enter email" />
                      <form:errors path="email" cssClass="help-block"/>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="pwd">Password:</label>
                 <div class="col-sm-10">
-                    <form:input type="password" path="password" class="form-control" id="pwd" />
+                    <form:input type="password" path="password" class="form-control" value="password" id="pwd" />
                      <form:errors path="password" cssClass="help-block"/>
                 </div>
             </div>

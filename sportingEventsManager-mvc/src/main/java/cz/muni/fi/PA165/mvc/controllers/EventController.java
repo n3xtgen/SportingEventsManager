@@ -60,6 +60,7 @@ public class EventController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String eventsList(Model model, HttpServletRequest request){
+
         model.addAttribute("events", eventFacade.getAllEvents()); // pass there all events
         model.addAttribute("signedUser", request.getSession().getAttribute("authenticatedUser")); // we also need to pass there the user
         log.debug("eventList()");
@@ -226,36 +227,31 @@ public class EventController {
         return "result/results";
     }
 
-    @RequestMapping(value="/addSport", method = RequestMethod.GET)
-    public String addSport(Model model){
-        log.debug("addSport()");
-        model.addAttribute("sportForm", new CreateSportDTO());
+    @RequestMapping(value="/{eventId}/addSport", method = RequestMethod.GET)
+    public String addSport(Model model, @PathVariable("eventId") long eventId){
+
+        CreateSportDTO sport = new CreateSportDTO();
+        sport.setEvent(eventId); // pass event to sport form
+        model.addAttribute("sportForm", sport);
 
         return "event/sportForm";
     }
 
     @RequestMapping(value = "/createSport", method = RequestMethod.GET)
-    public String createResult(@ModelAttribute("sportForm") @Valid CreateSportDTO formBean, BindingResult bResult,
+    public String createSport(@ModelAttribute("sportForm") @Valid CreateSportDTO formBean, BindingResult bResult,
                                HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
 
-        UserDTO sportsman = (UserDTO)request.getSession().getAttribute("authenticatedUser");
-        // something went wrong
-        if(sportsman == null){
-            log.debug("signUp() -> failure");
-            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to register you");
-            return "redirect:/event/list";
+       if(bResult.hasErrors()) {
+           redirectAttributes.addFlashAttribute("alert_danger", "System was not able to create new sport");
+           return "result/resultForm";
         }
 
-//        if(bResult.hasErrors()) {
-//            return "result/resultForm";
-//        }
-
+        // add create new sport
         sportFacade.addNewSport(formBean);
-
         redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getName() +  " was created successfully");
 
-        log.debug("addResult()");
-        return "redirect:/event/results";
+        log.debug("createSport()");
+        return "redirect:/event/list";
     }
 
 }

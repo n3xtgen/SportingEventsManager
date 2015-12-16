@@ -16,7 +16,7 @@
             <form:hidden path="sport"/>
             <form:hidden path="sport.idSport" />
             <form:hidden path="sport.name" />
-            <form:hidden path="sportsman" />
+            <form:hidden path="usr" />
             <form:hidden path="entryState"/>
 
             <s:bind path="position">
