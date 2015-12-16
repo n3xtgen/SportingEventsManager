@@ -33,6 +33,7 @@ public class UserFacadeImpl implements UserFacade {
     public UserDTO findUserById(Long id) {
         Usr user = userService.findById(id);
         return (user == null) ? null : beanMappingService.mapTo(user, UserDTO.class);
+
     }
 
    
@@ -55,6 +56,7 @@ public class UserFacadeImpl implements UserFacade {
     public long registerUser(CreateUserDTO s) {
         
        Usr sp = new Usr();
+       sp.setAdmin(false);
        sp.setName(s.getName());
        sp.setSurname(s.getSurname());
        sp.setEmail(s.getEmail());
@@ -62,6 +64,7 @@ public class UserFacadeImpl implements UserFacade {
        s.setId(sp.getId());
         return sp.getId();
     }
+
 
     @Override
     public Collection<UserDTO> getAllUsers() {

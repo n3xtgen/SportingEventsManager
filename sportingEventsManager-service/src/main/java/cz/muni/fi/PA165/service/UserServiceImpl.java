@@ -10,6 +10,7 @@ import javax.crypto.spec.PBEKeySpec;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.logging.Logger;
 
 import cz.muni.fi.PA165.dao.UserDao;
 import cz.muni.fi.PA165.entity.Usr;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
         u.setPasswordHash(createHash(unencryptedPassword));
         try {
             userDao.create(u);
+
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
@@ -103,6 +105,9 @@ public class UserServiceImpl implements UserService {
 
         }
     }
+
+
+
 
     //see  https://crackstation.net/hashing-security.htm#javasourcecode
     private static String createHash(String password) {

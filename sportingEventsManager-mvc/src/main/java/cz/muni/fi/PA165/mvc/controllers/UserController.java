@@ -6,7 +6,6 @@
 package cz.muni.fi.PA165.mvc.controllers;
 
 
-import cz.muni.fi.PA165.Exceptions.UserAlreadyExistException;
 import cz.muni.fi.PA165.dto.CreateUserDTO;
 import cz.muni.fi.PA165.dto.UserAuthenticateDTO;
 import cz.muni.fi.PA165.dto.UserDTO;
@@ -57,8 +56,8 @@ public class UserController {
 
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String detailSportsman(@PathVariable long id, Model model) {
-        log.debug("detail()");
         model.addAttribute("userDetail", userFacade.findUserById(id));
+        log.info("je admin??" + userFacade.findUserById(id).isAdmin());
         return "user/detail";
     }
 

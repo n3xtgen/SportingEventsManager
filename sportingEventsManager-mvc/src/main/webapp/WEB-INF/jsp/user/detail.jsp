@@ -28,8 +28,12 @@
                 <td><strong>surname:</strong></td>
                 <td><c:out value="${userDetail.surname}"/></td>
             </tr>
-                       
-            
+                   <c:if test="${userDetail.admin}">
+
+                    <tr>
+                             <td><strong>Admin</strong></td>
+                    </tr>
+                    </c:if>
 
         </table>
                 <c:if test="${userDetail.id ==  authenticatedUser.id}">

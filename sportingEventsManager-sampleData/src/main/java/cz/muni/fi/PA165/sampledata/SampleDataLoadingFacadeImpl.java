@@ -46,8 +46,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     }
 
   
-    private Usr sportsman(String password, String name, String surname, String email) {
+    private Usr user(String password, String name, String surname, String email, boolean isAdmin) {
         Usr s = new Usr();
+        s.setAdmin(isAdmin);
         s.setName(name);
         s.setSurname(surname);
         s.setEmail(email);
@@ -58,9 +59,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     }
 
    private void createSomeEvents(){
-       Usr sp = sportsman("password", "admin","bbb","email@mail.com");
-       Usr sp2 = sportsman("heslo", "Janko", "Hrasko", "test@test.test");
-       Usr sp3 = sportsman("sportovec", "Arnold", "Schwarzeneger", "sportovec@mail.com");
+       Usr sp = user("password", "admin","bbb","email@mail.com",true);
+       Usr sp2 = user("heslo", "Janko", "Hrasko", "test@test.test",false);
+       Usr sp3 = user("sportovec", "Arnold", "Schwarzeneger", "sportovec@mail.com",false);
 
        // create 2 events
        Event evt1 = new Event();

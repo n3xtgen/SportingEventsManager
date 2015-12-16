@@ -18,8 +18,8 @@ public class UserDTO {
     @NotNull
     @Size(min = 3, max = 50)
     private String surname;
-    
-    
+
+    private boolean admin;
     
     private String email;
 
@@ -31,7 +31,17 @@ public class UserDTO {
         this.email = email;
     }
 
- 
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public boolean getAdmin() {
+       return isAdmin();
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.admin = isAdmin;
+    }
 
     public Long getId() {
         return id;

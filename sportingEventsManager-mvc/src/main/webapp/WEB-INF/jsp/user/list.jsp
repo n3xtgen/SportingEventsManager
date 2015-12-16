@@ -16,6 +16,7 @@
             <th>id</th>
             <th>name</th>
             <th>surname</th>
+            <th>is Admin</th>
             
         </tr>
         </thead>
@@ -25,7 +26,8 @@
                 <td>${user.id}</td>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.surname}"/></td>
-                
+                <td><c:out value="${user.admin}"/></td>
+
                 
             </tr>
         </c:forEach>

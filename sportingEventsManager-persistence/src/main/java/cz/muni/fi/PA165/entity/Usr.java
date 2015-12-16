@@ -29,6 +29,10 @@ public class Usr {
 	@Column(nullable=false,unique=true)
 	private String email;
 
+	@NotNull
+	private boolean admin;
+
+
 	/**
 	 * Seznam prihlasek sportovce k jednotlivym zavodum a jeho vysledek.
 	 */
@@ -95,6 +99,19 @@ public class Usr {
 	public void removeEntry(Entry entry) {
 		entries.remove(entry);
 	}
+
+	public boolean getAdmin() {
+		return admin;
+	}
+
+	public boolean isAdmin() {
+		return getAdmin();
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.admin = isAdmin;
+	}
+
 
 	/***************************
 	 *** METHODS & FUNCTIONS ***

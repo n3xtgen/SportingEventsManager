@@ -56,6 +56,8 @@ public interface UserDao {
 	 * @return sportsmans with selected email
          */
         public Usr findByEmail(String email);
+
+
         
 	
 

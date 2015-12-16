@@ -48,6 +48,8 @@ public interface UserFacade {
 	 * Try to authenticate a user. Return true only if the hashed password matches the records.
 	 */
 	boolean authenticate(UserAuthenticateDTO s);
+
+
         
         
 
