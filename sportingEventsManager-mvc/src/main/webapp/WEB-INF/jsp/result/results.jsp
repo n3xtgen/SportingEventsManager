@@ -9,7 +9,7 @@
     <jsp:attribute name="body">
         
 
-        <div class="event_container">
+        <div class="event_container animated fadeInLeft">
             <table class="single_sport_table">
                 <thead>
                 <tr>
@@ -29,7 +29,8 @@
                     <td>${entry.position}</td>
                     <td>${entry.sportsman.name}</td>
                     <td>&emsp;${entry.sportsman.surname}</td>
-                    <td>&emsp;${entry.time}&emsp;</td>
+                    <fmt:formatDate value="${entry.time}" var="dateString" pattern="HH:mm:SS"/>
+                    <td>&emsp;${dateString}&emsp;</td>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/result/show/${entry.idEntry}">
                     <c:choose>

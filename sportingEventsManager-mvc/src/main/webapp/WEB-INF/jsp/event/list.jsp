@@ -4,10 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<link href="${pageContext.request.contextPath}/resources/background.css" rel="stylesheet">
 
 <my:pagetemplate title="Events">
     <jsp:attribute name="body">
-
+<body background="${pageContext.request.contextPath}/resources/images/events.jpg">
         <form method="get" action="${pageContext.request.contextPath}/event/new">
             <button type="submit" class="add_event" >Add event</button>
         </form>
@@ -15,7 +16,7 @@
         <c:forEach var="event" items="${events}">
 
             <%-- area for a single event --%>
-            <div class="event_container">
+            <div class="event_container animated fadeIn">
                     <%-- area for event info --%>
                 <div class="event_info">
                     <table class="single_event_table">
@@ -108,5 +109,6 @@
             </div>
         <br/>
         </c:forEach>
+</body>
    </jsp:attribute>
 </my:pagetemplate>
