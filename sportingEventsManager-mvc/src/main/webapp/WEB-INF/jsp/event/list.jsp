@@ -9,9 +9,11 @@
 <my:pagetemplate title="Events">
     <jsp:attribute name="body">
 <body background="${pageContext.request.contextPath}/resources/images/events.jpg">
-        <form method="get" action="${pageContext.request.contextPath}/event/new">
-            <button type="submit" class="add_event" >Add event</button>
-        </form>
+        <c:if test="${signedUser.admin==true}">
+            <form method="get" action="${pageContext.request.contextPath}/event/new">
+                <button type="submit" class="add_event" >Add event</button>
+            </form>
+        </c:if>
         <br/>
         <c:forEach var="event" items="${events}">
 
@@ -44,63 +46,71 @@
                     </table>
                 </div>
 
+                 <c:if test="${signedUser.admin==true}">
                     <%-- area for edit, delete buttons --%>
-                <div class="event_manipulation">
-                    <table>
-                        <td>
-                            <form method="get" action="${pageContext.request.contextPath}/event/update/${event.idEvent}">
-                                <button class="btn_event_edit" type="submit">Edit</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form method="post" action="${pageContext.request.contextPath}/event/delete/${event.idEvent}">
-                                <button class="btn_event_delete" type="submit">Delete</button>
-                            </form>
-                        </td>
-                    </table>
+                    <div class="event_manipulation">
+                        <table>
+                            <td>
+                                <form method="get" action="${pageContext.request.contextPath}/event/update/${event.idEvent}">
+                                    <button class="btn_event_edit" type="submit">Edit</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form method="post" action="${pageContext.request.contextPath}/event/delete/${event.idEvent}">
+                                    <button class="btn_event_delete" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </table>
 
-                    <br/>
+                        <br/>
 
-                </div>
+                    </div>
+                </c:if>
+
                     <%-- area for sports inside of an event --%>
                 <div class="event_sports">
                     <table class="sport_list_table">
                         <thead>
                         <tr>
                             <th> <h3>Competitions: </h3> </th>
-                            <td>
-                                <form method="get" action="${pageContext.request.contextPath}/event/${event.idEvent}/addSport">
-                                    <button type="submit" class="btn_sport_add">Add competition</button>
-                                </form>
-                            </td>
+                            <c:if test="${signedUser.admin==true}">
+                                <td>
+                                    <form method="get" action="${pageContext.request.contextPath}/event/${event.idEvent}/addSport">
+                                        <button type="submit" class="btn_sport_add">Add competition</button>
+                                    </form>
+                                </td>
+                            </c:if>
                         </tr>
                         </thead>
 
                         <tbody>
                         <c:forEach var="sport" items="${event.sports}">
-                            <tr>
                                 <td>${sport.idSport}</td>
                                 <td>${sport.name}</td>
+                                <c:if test="${signedUser.admin==false}">
                                 <%-- Sign up button --%>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${sport.isSportsmanRegistred(signedUser.id)}">
-                                            <form method="post" action="${pageContext.request.contextPath}/event/signOut/${sport.idSport}">
-                                                <button type="submit" class="btn_sport_signup">Sign out</button>
-                                            </form>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <form method="post" action="${pageContext.request.contextPath}/event/signIn/${sport.idSport}">
-                                                <button type="submit" class="btn_sport_signup">Sign in</button>
-                                            </form>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td>
-                                    <form method="get" action="${pageContext.request.contextPath}/event/results/${sport.idSport}">
-                                        <button type="submit" class="btn_sport_results">Results</button>
-                                    </form>
-                                </td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${sport.isSportsmanRegistred(signedUser.id)}">
+                                                <form method="post" action="${pageContext.request.contextPath}/event/signOut/${sport.idSport}">
+                                                    <button type="submit" class="btn_sport_signup">Sign out</button>
+                                                </form>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <form method="post" action="${pageContext.request.contextPath}/event/signIn/${sport.idSport}">
+                                                    <button type="submit" class="btn_sport_signup">Sign in</button>
+                                                </form>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </c:if>
+                                <c:if test="${signedUser.admin==true}">
+                                    <td>
+                                        <form method="get" action="${pageContext.request.contextPath}/event/results/${sport.idSport}">
+                                            <button type="submit" class="btn_sport_results">Results</button>
+                                        </form>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>

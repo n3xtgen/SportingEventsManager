@@ -39,11 +39,11 @@ public class EventFormValidator implements Validator {
                     errors.rejectValue("endTime", "InputEmpty.eventForm.endDateBeforeStart");
                 }
 
-                // TODO: cant use reject value like this
+                // TODO: use MIN_EVENT_LENGTH in error message
                 // lets say we want only events that last at least MIN_EVENT_LENGTH
                 if (evt.getEndTime().getTime() - evt.getStartTime().getTime() < MIN_EVENT_LENGTH) {
-                    errors.rejectValue("startTime", "Event has to last at least " + (MIN_EVENT_LENGTH / HOUR_IN_MS) + " hour.");
-                    errors.rejectValue("endTime", "Event has to last at least " + (MIN_EVENT_LENGTH / HOUR_IN_MS) + " hour.");
+                    errors.rejectValue("startTime", "InputWrong.eventForm.eventTooShort");
+                    errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
                 }
             }
         }
@@ -63,11 +63,11 @@ public class EventFormValidator implements Validator {
                     errors.rejectValue("endTime", "InputEmpty.eventForm.endDateBeforeStart");
                 }
 
-                // TODO: cant use reject value like this
+                // TODO: use MIN_EVENT_LENGTH in error message
                 // lets say we want only events that last at least MIN_EVENT_LENGTH
                 if (evt.getEndTime().getTime() - evt.getStartTime().getTime() < MIN_EVENT_LENGTH) {
-                    errors.rejectValue("startTime", "Event has to last at least " + (MIN_EVENT_LENGTH / HOUR_IN_MS) + " hour.");
-                    errors.rejectValue("endTime", "Event has to last at least " + (MIN_EVENT_LENGTH / HOUR_IN_MS) + " hour.");
+                    errors.rejectValue("startTime", "InputWrong.eventForm.eventTooShort");
+                    errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
                 }
             }
         }
