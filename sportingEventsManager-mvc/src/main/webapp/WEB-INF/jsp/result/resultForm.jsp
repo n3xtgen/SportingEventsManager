@@ -17,6 +17,11 @@
             <form:hidden path="sport.idSport" />
             <form:hidden path="sport.name" />
             <form:hidden path="usr" />
+            <form:hidden path="usr.id" />
+            <form:hidden path="usr.name" />
+            <form:hidden path="usr.surname" />
+            <form:hidden path="usr.email" />
+            <form:hidden path="usr.admin" />
             <form:hidden path="entryState"/>
 
             <s:bind path="position">

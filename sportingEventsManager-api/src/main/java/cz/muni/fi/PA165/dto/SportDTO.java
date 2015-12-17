@@ -44,15 +44,10 @@ public class SportDTO {
      * @return
      */
     public boolean isSportsmanRegistred(Long id){
-        for(Iterator<EntryDTO> itr = entries.iterator(); itr.hasNext();) {
-            EntryDTO entry = ((EntryDTO)(itr.next()));
-            System.out.println("---------> entries size: " + entries.size() + " , curr: id= " + entry.getIdEntry() +
-                    " , sport= " + (entry.getSport() == null ? "null" : entry.getSport().getName()) +
-                    " , sportsman= " + ((entry.getUsr() == null) ? "null" : entry.getUsr().getName()));
-
-            if (entry.getUsr().getId() == id) // the sportsman is already registred in this sport
+        for(Iterator<EntryDTO> itr = entries.iterator(); itr.hasNext();)
+            if (itr.next().getUsr().getId() == id) // the sportsman is already registred in this sport
                 return true;
-        }
+
         return false;
     }
 
@@ -87,11 +82,14 @@ public class SportDTO {
         return result;
     }
 
+    /**
+     * @NOTE: if you ever happen to change this method, please make sure to change dependent SportDTOPropertyEditor
+     */
     @Override
     public String toString() {
         return "SportDTO{"
                 + "id=" + idSport
-                + "name=" + name
+                + ", name=" + name
                 + '}';
     }
 

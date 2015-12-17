@@ -99,6 +99,9 @@ public class UserDTO {
         return true;
     }
 
+    /**
+     * @NOTE: if you ever happen to change this method, please make sure to change dependent UserDTOPropertyEditor
+     */
     @Override
     public String toString() {
         return "UserDTO{"
@@ -106,6 +109,7 @@ public class UserDTO {
                 + ", email='" + getEmail() + '\''
                 + ", givenName='" + name + '\''
                 + ", surname='" + surname + '\''
+                + ", isAdmin='" + (isAdmin() ? "true" : "false") + '\''
                 + '}';
     }
 }
