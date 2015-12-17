@@ -30,10 +30,8 @@
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="${pageContext.request.contextPath}/event/list">Events..</a></li>
+                        <li><a href="${pageContext.request.contextPath}/event/list">Events</a></li>
                         <li><a href="${pageContext.request.contextPath}/user/list">All registred sportsmans</a></li>
-                        <li><a href="#">Page 2</a></li>
-                        <li><a href="#">Page 3</a></li>
                     </ul>
                     <c:if test="${empty authenticatedUser}">
                         <ul class="nav navbar-nav navbar-right">

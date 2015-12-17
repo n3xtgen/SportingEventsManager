@@ -29,7 +29,7 @@
                     <td>${entry.position}</td>
                     <td>${entry.usr.name}</td>
                     <td>&emsp;${entry.usr.surname}</td>
-                    <fmt:formatDate value="${entry.time}" var="dateString" pattern="HH:mm:SS"/>
+                    <fmt:formatDate value="${entry.time}" var="dateString" pattern="HH:mm:ss"/>
                     <td>&emsp;${dateString}&emsp;</td>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/result/show/${entry.idEntry}">

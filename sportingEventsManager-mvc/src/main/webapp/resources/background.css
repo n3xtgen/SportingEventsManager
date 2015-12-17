@@ -22,9 +22,12 @@ body {
 }
 
 p {
-    color: #ff0000;
+    color: #009688;
     font-size: 50px;
     text-align: center;
+    vertical-align: text-bottom;
+    display: inline-block;
+    font-weight: bold;
 }
 
 p.secondary {

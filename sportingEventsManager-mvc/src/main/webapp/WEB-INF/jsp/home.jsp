@@ -12,7 +12,9 @@
     <div class="animated fadeInUp">
         <p>Sporting Event Manager</p>
         <p class="secondary">See the events, join to competitions and watch the results!</p>
+        <br/>
         <p class="third">To enter sign in or sign up.</p>
+        <br/>
         <p class="third">Project for Masaryk University 2015</p>
     </div>
 
