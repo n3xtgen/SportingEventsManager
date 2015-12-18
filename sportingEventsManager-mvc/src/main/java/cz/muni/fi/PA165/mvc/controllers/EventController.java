@@ -45,7 +45,7 @@ public class EventController {
     protected void initBinder(WebDataBinder binder){
         if((binder.getTarget() instanceof CreateEventDTO) || (binder.getTarget() instanceof EventDTO)) {
             // we need to convert String to Date
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             binder.registerCustomEditor(Date.class, "startDate", new CustomDateEditor(dateFormat, false));
             binder.registerCustomEditor(Date.class, "endDate", new CustomDateEditor(dateFormat, false));
 

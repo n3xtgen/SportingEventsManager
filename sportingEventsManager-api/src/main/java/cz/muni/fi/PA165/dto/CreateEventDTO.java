@@ -21,10 +21,8 @@ public class CreateEventDTO {
 
     private String description;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     private Set<SportDTO> sports;

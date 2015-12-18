@@ -51,8 +51,7 @@
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <label class="control-label col-sm-2">Starts:</label>
                     <div class="col-sm-10">
-                        <form:input path="startTime" id="startTime" type="text" class="form-control"
-                                    placeholder="YYYY-MM-DD"/>
+                        <form:input path="startTime" id="startTime" autocomplete="off" type="text" class="form-control" />
                         <form:errors path="startTime" />
                     </div>
                 </div>
@@ -63,8 +62,7 @@
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <label class="control-label col-sm-2">Ends:</label>
                     <div class="col-sm-10">
-                        <form:input path="endTime" id="endTime" type="text" class="form-control"
-                                    placeholder="YYYY-MM-DD"/>
+                        <form:input path="endTime" id="endTime" autocomplete="off" type="text" class="form-control" />
                         <form:errors path="endTime" />
                     </div>
                 </div>

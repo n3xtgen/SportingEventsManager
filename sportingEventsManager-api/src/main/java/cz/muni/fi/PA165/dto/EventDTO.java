@@ -13,9 +13,7 @@ public class EventDTO {
     private Long        idEvent;
     private String      name;
     private String      description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date        startTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date        endTime;
     private Set<SportDTO>  sports;
 
