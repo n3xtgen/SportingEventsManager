@@ -50,8 +50,8 @@ public interface SportService {
 
     /**
      * Create new sport
-     *
      * @param s
+     * @return
      */
-    void addNewSport(Sport s);
+    Long addNewSport(Sport s);
 }

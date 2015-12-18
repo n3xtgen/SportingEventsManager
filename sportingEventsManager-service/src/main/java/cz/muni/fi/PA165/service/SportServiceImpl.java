@@ -63,11 +63,12 @@ public class SportServiceImpl implements SportService{
     }
 
     @Override
-    public void addNewSport(Sport s) {
+    public Long addNewSport(Sport s) {
         try {
             sportDao.create(s);
         } catch (Exception e) {
             throw new DataAccessException(e);
         }
+        return s.getIdSport();
     }
 }

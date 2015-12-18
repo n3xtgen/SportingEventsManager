@@ -58,6 +58,6 @@ public class SportFacadeImpl implements SportFacade {
         Sport sport = new Sport();
         sport.setName(s.getName());
         sport.setEvent(eventService.findEventById(s.getEvent())); // add event reference
-        sportService.addNewSport(sport);
+        s.setIdSport(sportService.addNewSport(sport));
     }
 }

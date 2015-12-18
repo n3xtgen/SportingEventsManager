@@ -63,7 +63,7 @@ public class SportDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        CreateSportDTO other = (CreateSportDTO) obj;
+        SportDTO other = (SportDTO) obj;
         if (getName() == null) {
             if (other.getName() != null) {
                 return false;

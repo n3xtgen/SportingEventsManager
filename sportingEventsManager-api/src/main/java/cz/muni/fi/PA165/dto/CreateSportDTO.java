@@ -9,11 +9,21 @@ import javax.validation.constraints.Size;
  */
 public class CreateSportDTO {
 
+    private Long idSport;
+
     @NotNull
     @Size(min = 3, max = 50)
     private String name;
 
     private long event;
+
+    public Long getIdSport() {
+        return idSport;
+    }
+
+    public void setIdSport(Long idSport) {
+        this.idSport = idSport;
+    }
 
     public String getName() {
         return name;

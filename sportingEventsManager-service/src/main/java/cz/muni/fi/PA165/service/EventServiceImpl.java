@@ -56,12 +56,13 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void createEvent(Event evt) {
+    public Long createEvent(Event evt) {
         try{
             eventDao.create(evt);
         }catch(Exception ex){
             throw new DataAccessException(ex);
         }
+        return evt.getIdEvent();
     }
 
     @Override
@@ -91,6 +92,11 @@ public class EventServiceImpl implements EventService{
 
     @Override
     public void removeSport(Event evt, Sport sport) {
-        evt.removeSport(sport);
+        try {
+            evt.removeSport(sport);
+            eventDao.update(evt);
+        }catch(Exception ex){
+        throw new DataAccessException(ex);
+    }
     }
 }

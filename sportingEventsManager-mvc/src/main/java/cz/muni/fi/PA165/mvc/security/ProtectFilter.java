@@ -13,7 +13,7 @@ import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = { "/user/detail/*" , "/user/list/*", "/event/*"})
+@WebFilter(urlPatterns = { "/user/detail/*" , "/user/list/*", "/event/*", "/result/*"})
 public class ProtectFilter implements Filter {
 
     final static Logger log = LoggerFactory.getLogger(ProtectFilter.class);

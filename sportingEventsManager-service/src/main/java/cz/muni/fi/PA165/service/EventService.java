@@ -54,8 +54,9 @@ public interface EventService {
     /**
      * create an event
      * @param evt
+     * @return
      */
-    void createEvent(Event evt);
+    Long createEvent(Event evt);
 
     /**
      * Add sport to an event

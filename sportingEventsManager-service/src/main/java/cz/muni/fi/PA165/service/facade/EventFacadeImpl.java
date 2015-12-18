@@ -61,7 +61,7 @@ public class EventFacadeImpl implements EventFacade {
         e.setDescription(evt.getDescription());
         e.setStartTime(evt.getStartTime());
         e.setEndTime(evt.getEndTime());
-        eventService.createEvent(e);
+        evt.setIdEvent(eventService.createEvent(e));
     }
 
     @Override
