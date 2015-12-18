@@ -36,14 +36,14 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="pwd">Password:</label>
                 <div class="col-sm-10">
-                    <form:input type="password" path="password" class="form-control" id="pwd" />
+                    <form:input type="password" path="password" class="form-control" id="pwd" placeholder="Enter password" />
                      <form:errors path="password" cssClass="help-block"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default">Sign up</button>
                 </div>
             </div>
         </form:form>

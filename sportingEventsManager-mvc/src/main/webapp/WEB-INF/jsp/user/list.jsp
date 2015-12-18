@@ -5,30 +5,28 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Users">
+<my:pagetemplate title="All users">
 <jsp:attribute name="body">
 
   <div class="animated fadeIn">
     <table class="table">
-        <caption>All registred sportsmans</caption>
         <thead>
         <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>surname</th>
-            <th>is Admin</th>
-            
+            <th width="40">Id</th>
+            <th width="200">Name</th>
+            <th width="200">Surname</th>
+            <th>Email</th>
+            <th width="60">Admin</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${users}" var="user">
             <tr>
-                <td>${user.id}</td>
-                <td><c:out value="${user.name}"/></td>
+                <td><c:out value="${user.id}"/></td>
+                <td><a href="${pageContext.request.contextPath}/user/detail/${user.id}"><c:out value="${user.name}"/></a></td>
                 <td><c:out value="${user.surname}"/></td>
-                <td><c:out value="${user.admin}"/></td>
-
-                
+                <td><c:out value="${user.email}"/></td>
+                <td style="text-align: right;"><c:if test="${user.admin}"><span class="glyphicon glyphicon-ok"></span></c:if></td>
             </tr>
         </c:forEach>
         </tbody>

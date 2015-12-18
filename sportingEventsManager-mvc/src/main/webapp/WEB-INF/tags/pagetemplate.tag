@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
         <link href="${pageContext.request.contextPath}/resources/events_page.css" rel="stylesheet" >
         <link href="${pageContext.request.contextPath}/resources/animate.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/global.css" rel="stylesheet">
         <jsp:invoke fragment="head"/>
     </head>
     <body>
@@ -30,19 +31,19 @@
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li><a href="${pageContext.request.contextPath}/event/list">Events</a></li>
-                        <li><a href="${pageContext.request.contextPath}/user/list">All registred sportsmans</a></li>
+                        <li><a href="${pageContext.request.contextPath}/event/list">Sporting events</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/list">All users</a></li>
                     </ul>
                     <c:if test="${empty authenticatedUser}">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="${pageContext.request.contextPath}/user/new"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                            <li><a href="${pageContext.request.contextPath}/user/login_page"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/new"><span class="glyphicon glyphicon-user"></span>Sign up</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/login_page"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
                         </ul>
                     </c:if>        
                     <c:if test="${not empty authenticatedUser}">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="${pageContext.request.contextPath}/user/detail/${authenticatedUser.id}"><span class="glyphicon glyphicon-user"></span>"${authenticatedUser.name}"</a></li>
-                            <li><a href="${pageContext.request.contextPath}/user/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/detail/${authenticatedUser.id}"><span class="glyphicon glyphicon-user"></span>"${authenticatedUser.email}"</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
                         </ul>
                     </c:if>
 
