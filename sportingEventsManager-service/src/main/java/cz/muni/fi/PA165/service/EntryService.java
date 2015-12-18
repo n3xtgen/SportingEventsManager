@@ -15,7 +15,7 @@ public interface EntryService {
      * Create new entry
      * @param entry
      */
-    void createEntry(Entry entry);
+    Long createEntry(Entry entry);
 
     /**
      * Update entry

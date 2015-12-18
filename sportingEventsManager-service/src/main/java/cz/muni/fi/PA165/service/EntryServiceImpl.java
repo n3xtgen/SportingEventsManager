@@ -29,12 +29,13 @@ public class EntryServiceImpl implements EntryService {
     private EntryDao entryDao;
 
     @Override
-    public void createEntry(Entry entry) {
+    public Long createEntry(Entry entry) {
         try {
             entryDao.create(entry);
         } catch(Exception ex) {
             throw new DataAccessException(ex);
         }
+        return entry.getIdEntry();
     }
 
     @Override

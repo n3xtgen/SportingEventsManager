@@ -85,7 +85,7 @@ public class Entry {
         return usr;
     }
 
-    public void setUser(Usr usr) {
+    public void setUsr(Usr usr) {
         this.usr = usr;
     }
 
@@ -123,7 +123,6 @@ public class Entry {
         if (this == obj) return true;
 
         final Entry entry = (Entry) obj;
-
         if ( !getSport().equals(entry.getSport()) ) return false;
         if ( !getUsr().equals(entry.getUsr()) ) return false;
 

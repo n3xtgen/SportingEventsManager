@@ -47,9 +47,9 @@ public class EntryFacadeImpl implements EntryFacade {
 
         Entry entry = new Entry();
         entry.setSport(sport);
-        entry.setUser(user);
+        entry.setUsr(user);
         entry.setEntryState(Entry.EntryState.REGISTERED);
-        entryService.createEntry(entry);
+        createEntryDto.setEntryId(entryService.createEntry(entry));
 
     }
 

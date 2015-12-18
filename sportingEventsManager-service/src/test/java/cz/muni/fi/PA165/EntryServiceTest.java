@@ -59,12 +59,12 @@ public class EntryServiceTest extends AbstractTestNGSpringContextTests {
 
         entry1 = new Entry();
         entry1.setSport(sport);
-        entry1.setUser(user1);
+        entry1.setUsr(user1);
         entry1.setEntryState(Entry.EntryState.REGISTERED);
 
         entry2 = new Entry();
         entry2.setSport(sport);
-        entry2.setUser(user2);
+        entry2.setUsr(user2);
         entry2.setEntryState(Entry.EntryState.REGISTERED);
     }
 

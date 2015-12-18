@@ -11,6 +11,8 @@ import java.sql.Time;
  */
 public class CreateEntryDTO {
 
+    private Long entryId;
+
     @NotNull
     private Long sportId;
 
@@ -22,9 +24,18 @@ public class CreateEntryDTO {
     @NotNull
     private Long sportsmanId;
 
+
     /*************************
      *** GETTERS & SETTERS ***
      *************************/
+
+    public Long getEntryId() {
+        return entryId;
+    }
+
+    public void setEntryId(Long entryId) {
+        this.entryId = entryId;
+    }
 
     public Long getSportId() {
         return sportId;

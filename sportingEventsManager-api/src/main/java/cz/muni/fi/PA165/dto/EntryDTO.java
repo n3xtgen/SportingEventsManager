@@ -87,22 +87,27 @@ public class EntryDTO {
 
         final EntryDTO entry = (EntryDTO) obj;
 
-        //if ( !getIdSportResult().equals(entry.getIdSportResult()) ) return false;
-        //if ( !getEntryState().equals(entry.getEntryState()) ) return false;
-        if ( getPosition() != entry.getPosition() ) return false;
-        if ( !getTime().equals(entry.getTime()) ) return false;
-
-        return true;
+        // TODO: not quite sure what should be compared ... but i guess ID, sportID, userID should be enough
+        return (getIdEntry() == entry.getIdEntry() &&
+                //getPosition() == entry.getPosition() &&
+                //getTime() == null ? entry.getTime() == null : getTime().equals(entry.getTime())) &&
+                //getEntryState() == null ? entry.getEntryState() == null : getEntryState().equals(entry.getEntryState()) &&
+                getSport() == null ? entry.getSport() == null : getSport().getIdSport() == entry.getSport().getIdSport() &&
+                getUsr() == null ? entry.getUsr() == null : getUsr().getId() == entry.getUsr().getId());
     }
 
     @Override
     public int hashCode(){
         int hash;
-//        hash = 13 * getIdSportResult().hashCode();
-//        hash = hash + 17 * getEntryState().hashCode();
-//        hash = hash + 29 * getPosition();
-//        hash = hash + 37 * getTime().hashCode();
-        return 57;
+
+        hash = 13 * getIdEntry().hashCode();
+        //hash = hash + 17 * getPosition();
+        //hash = hash + 29 * (getTime() == null ? 0 : getTime().hashCode());
+        //hash = hash + 37 * (getEntryState() == null ? 0 : getEntryState().hashCode());
+        hash = hash + 41 * (getSport() == null ? 0 : getSport().hashCode());
+        hash = hash + 43 * (getUsr() == null ? 0 : getUsr().hashCode());
+
+        return hash;
     }
 
     @Override

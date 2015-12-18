@@ -87,11 +87,11 @@ public class EntryDaoTest extends AbstractTestNGSpringContextTests {
     public void shouldfindAll() {
         Entry ent1 = new Entry();
         ent1.setSport(sport);
-        ent1.setUser(usr1);
+        ent1.setUsr(usr1);
         ent1.setEntryState(Entry.EntryState.REGISTERED);
         Entry ent2 = new Entry();
         ent2.setSport(sport);
-        ent2.setUser(usr2);
+        ent2.setUsr(usr2);
         ent2.setEntryState(Entry.EntryState.REGISTERED);
 
         entryDao.create(ent1);
@@ -108,11 +108,11 @@ public class EntryDaoTest extends AbstractTestNGSpringContextTests {
     public void shouldfindBySport() {
         Entry ent1 = new Entry();
         ent1.setSport(sport);
-        ent1.setUser(usr1);
+        ent1.setUsr(usr1);
         ent1.setEntryState(Entry.EntryState.REGISTERED);
         Entry ent2 = new Entry();
         ent2.setSport(sport);
-        ent2.setUser(usr2);
+        ent2.setUsr(usr2);
         ent2.setEntryState(Entry.EntryState.REGISTERED);
 
         entryDao.create(ent1);
@@ -129,11 +129,11 @@ public class EntryDaoTest extends AbstractTestNGSpringContextTests {
     public void shouldfindBySportsman() {
         Entry ent1 = new Entry();
         ent1.setSport(sport);
-        ent1.setUser(usr1);
+        ent1.setUsr(usr1);
         ent1.setEntryState(Entry.EntryState.REGISTERED);
         Entry ent2 = new Entry();
         ent2.setSport(sport);
-        ent2.setUser(usr2);
+        ent2.setUsr(usr2);
         ent2.setEntryState(Entry.EntryState.REGISTERED);
 
         entryDao.create(ent1);
