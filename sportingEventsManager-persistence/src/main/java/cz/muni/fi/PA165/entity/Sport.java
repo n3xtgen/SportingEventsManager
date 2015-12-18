@@ -30,7 +30,7 @@ public class Sport {
     /**
      * Seznam prihlasek jednotlivych sportovcu k zavodu a jejich vysledku.
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sport")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sport", orphanRemoval = true)
     private Set<Entry> entries = new HashSet<Entry>();
 
     /********************

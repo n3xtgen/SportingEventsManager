@@ -36,7 +36,7 @@ public class Usr {
 	/**
 	 * Seznam prihlasek sportovce k jednotlivym zavodum a jeho vysledek.
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usr")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usr", orphanRemoval = true)
 	private Set<Entry> entries = new HashSet<Entry>();
 
 	/********************

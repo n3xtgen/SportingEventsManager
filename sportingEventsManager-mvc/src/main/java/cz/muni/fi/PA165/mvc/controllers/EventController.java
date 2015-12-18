@@ -218,6 +218,12 @@ public class EventController {
         return "redirect:/event/list";
     }
 
+    /**
+     * show results of a chosen sport
+     * @param sportId
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/results/{sportId}", method = RequestMethod.GET)
     public String showResults(@PathVariable("sportId") long sportId, Model model){
         log.debug("showResults()");
@@ -227,6 +233,13 @@ public class EventController {
         return "result/results";
     }
 
+
+    /**
+     * Create sport, invoked by pressing Add competition button
+     * @param model
+     * @param eventId
+     * @return
+     */
     @RequestMapping(value="/{eventId}/addSport", method = RequestMethod.GET)
     public String addSport(Model model, @PathVariable("eventId") long eventId){
 
@@ -237,6 +250,15 @@ public class EventController {
         return "event/sportForm";
     }
 
+    /**
+     * Create sport, invoked by submiting New sport form
+     * @param formBean
+     * @param bResult
+     * @param request
+     * @param redirectAttributes
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/createSport", method = RequestMethod.GET)
     public String createSport(@ModelAttribute("sportForm") @Valid CreateSportDTO formBean, BindingResult bResult,
                                HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
@@ -251,6 +273,29 @@ public class EventController {
         redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getName() +  " was created successfully");
 
         log.debug("createSport()");
+        return "redirect:/event/list";
+    }
+
+    /**
+     * delete sport, invoked by pressing delete button belonging to the sport
+     * @param sportId
+     * @param eventId
+     * @param redirectAttributes
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/deleteSport/{sportId}/{eventId}", method = RequestMethod.POST)
+    public String deleteSport(@PathVariable("sportId") long sportId, @PathVariable("eventId") long eventId,
+                              RedirectAttributes redirectAttributes, Model model){
+
+        SportDTO delSport = sportFacade.findSportById(sportId);
+        EventDTO event = eventFacade.findEventById(eventId);
+        // remove the sport from event
+        eventFacade.removeSport(eventId, sportId);
+
+        redirectAttributes.addFlashAttribute("alert_success", delSport.getName() + " was successfully removed from " +
+                                             event.getName());
+        log.debug("deleteSport()");
         return "redirect:/event/list";
     }
 

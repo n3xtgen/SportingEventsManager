@@ -64,6 +64,9 @@
                                 <th width="200">Name</th>
                                 <th></th>
                                 <th width="100">Results</th>
+                                <c:if test="${signedUser.admin==true}">
+                                    <th width="100"></th>
+                                </c:if>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,6 +76,7 @@
                                 <td>${sport.name}</td>
                                 <td>
                                     <c:choose>
+                                        <%-- for signed user, show Leave button otherwise show Enter button --%>
                                         <c:when test="${sport.isSportsmanRegistred(signedUser.id)}">
                                             <form method="post" action="${pageContext.request.contextPath}/event/signOut/${sport.idSport}">
                                                 <button type="submit" class="btn btn-default btn-event">Leave</button>
@@ -85,11 +89,21 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
+                                <div class="event_sport_control_butttons">
                                 <td>
                                     <form method="get" action="${pageContext.request.contextPath}/event/results/${sport.idSport}">
                                         <button type="submit" class="btn btn-default btn-event">Results</button>
                                     </form>
                                 </td>
+                                <%-- Delete button, just for the admin role --%>
+                                <c:if test="${signedUser.admin==true}">
+                                <td>
+                                    <form method="post" action="${pageContext.request.contextPath}/event/deleteSport/${sport.idSport}/${event.idEvent}">
+                                        <button type="submit" class="btn btn-default btn-event">Delete</button>
+                                    </form>
+                                </td>
+                                </c:if>
+                                </div>
                             </tr>
                         </c:forEach>
                         </tbody>

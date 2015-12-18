@@ -2,6 +2,7 @@ package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.Exceptions.DataAccessException;
 import cz.muni.fi.PA165.dao.EventDao;
+import cz.muni.fi.PA165.dao.SportDao;
 import cz.muni.fi.PA165.entity.Event;
 import cz.muni.fi.PA165.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class EventServiceImpl implements EventService{
 
     @Autowired
     private EventDao eventDao;
+
+    @Autowired
+    private SportDao sportDao;
 
     @Override
     public Event findEventById(Long id) {
@@ -94,7 +98,9 @@ public class EventServiceImpl implements EventService{
     public void removeSport(Event evt, Sport sport) {
         try {
             evt.removeSport(sport);
-            eventDao.update(evt);
+            sportDao.delete(sport);
+            //eventDao.update(evt);
+
         }catch(Exception ex){
         throw new DataAccessException(ex);
     }
