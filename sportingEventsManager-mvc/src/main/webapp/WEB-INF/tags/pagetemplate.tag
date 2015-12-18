@@ -1,5 +1,6 @@
 <%@ tag pageEncoding="utf-8" dynamic-attributes="dynattrs" trimDirectiveWhitespaces="true" %>
 <%@ attribute name="title" required="false" %>
+<%@ attribute name="backgroundimg" required="false" %>
 <%@ attribute name="head" fragment="true" %>
 <%@ attribute name="body" fragment="true" required="true" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
@@ -17,12 +18,11 @@
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
-        <link href="${pageContext.request.contextPath}/resources/events_page.css" rel="stylesheet" >
         <link href="${pageContext.request.contextPath}/resources/animate.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/global.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet">
         <jsp:invoke fragment="head"/>
     </head>
-    <body>
+    <body background="<c:out value='${backgroundimg}'/>">
         <!-- navigation bar -->
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -52,15 +52,17 @@
         </nav>
 
         <div class="container">
-
             <!-- page title -->
-            <c:if test="${not empty title}">
+            <c:if test="${not empty title and title != 'Sporting Events Manager'}">
                 <div class="page-header">
-                    <h1><c:out value="${title}"/></h1>
+                    <c:if test="${title != 'Events'}">
+                        <h1><c:out value="${title}"/></h1>
+                    </c:if>
+                    <c:if test="${title == 'Events'}">
+                        <h1 style=" color: white;"><c:out value="${title}"/></h1>
+                    </c:if>
                 </div>
             </c:if>
-
-
 
             <!-- alerts -->
             <c:if test="${not empty alert_danger}">
@@ -78,12 +80,9 @@
                 <div class="alert alert-warning" role="alert"><c:out value="${alert_warning}"/></div>
             </c:if>
 
-            <!-- page body -->
             <jsp:invoke fragment="body"/>
-
-
         </div>
-        <!-- javascripts placed at the end of the document so the pages load faster -->
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </body>

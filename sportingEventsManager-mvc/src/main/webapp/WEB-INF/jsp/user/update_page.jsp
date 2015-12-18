@@ -8,8 +8,7 @@
 <my:pagetemplate title="Edit">
     <jsp:attribute name="body">
 
-        <form:form class="form-horizontal" role="form" method="post" modelAttribute="userUpdate"  action="${pageContext.request.contextPath}/user/update/${userUpdate.id}"
-                   >
+        <form:form class="form-horizontal" role="form" method="post" modelAttribute="userUpdate"  action="${pageContext.request.contextPath}/user/update/${userUpdate.id}">
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="nameInput">Name:</label>
@@ -26,7 +25,6 @@
                 </div>
             </div>
            
-
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default">Submit</button>

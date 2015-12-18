@@ -4,12 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link href="${pageContext.request.contextPath}/resources/background.css" rel="stylesheet">
+
 <my:pagetemplate>
 <jsp:attribute name="body">
-<body background="${pageContext.request.contextPath}/resources/images/background.jpg">
 
-    Pri komunikaci s databazi doslo k chybe.
+    <strong style="margin: 0 auto; color: red; display: block;">Pri komunikaci s databazi doslo k chybe.</strong>
 
 </jsp:attribute>
 </my:pagetemplate>
