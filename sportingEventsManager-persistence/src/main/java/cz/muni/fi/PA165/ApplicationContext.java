@@ -4,10 +4,6 @@ package cz.muni.fi.PA165;
  * Created by jbouska on 26.10.15.
  */
 
-import cz.muni.fi.PA165.dao.EntryDao;
-import cz.muni.fi.PA165.dao.EventDao;
-import cz.muni.fi.PA165.dao.UserDao;
-
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,20 +18,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-import cz.muni.fi.PA165.dao.SportDao;
-
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses={SportDao.class, EventDao.class, UserDao.class, EntryDao.class})
+@ComponentScan(basePackages = "cz.muni.fi.PA165.dao")
 public class ApplicationContext {
-
 
 	@Bean
 	public JpaTransactionManager transactionManager(){
 		return  new JpaTransactionManager(entityManagerFactory().getObject());
 	}
-
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean  entityManagerFactory(){

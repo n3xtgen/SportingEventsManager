@@ -11,12 +11,14 @@ import java.util.List;
 import cz.muni.fi.PA165.entity.Usr;
 
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
 
 /**
  *
  * @author jbouska
  */
 @Repository
+@Transactional
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext

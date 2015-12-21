@@ -7,11 +7,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import javax.transaction.Transactional;
 
 /**
  * @author Vladimir
  */
 @Repository
+@Transactional
 public class SportDaoImpl implements SportDao {
 
     @PersistenceContext

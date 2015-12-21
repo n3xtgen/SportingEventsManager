@@ -8,19 +8,24 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Date;
+import javax.transaction.Transactional;
 
 /**
  * @author Jamik (Lukas Gryc)
  */
 @Repository
+@Transactional
 public class EventDaoImpl implements EventDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public void create(Event evt) {
         entityManager.persist(evt);
+        entityManager.flush();
+        entityManager.refresh(evt);
     }
 
     @Override

@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-import java.text.CollationElementIterator;
 import java.util.Collection;
 import java.util.Date;
 
@@ -23,10 +21,10 @@ import java.util.Date;
 @Transactional
 public class EventFacadeImpl implements EventFacade {
 
-    @Inject
+    @Autowired
     private EventService eventService;
 
-    @Inject
+    @Autowired
     private SportService sportService;
 
     @Autowired

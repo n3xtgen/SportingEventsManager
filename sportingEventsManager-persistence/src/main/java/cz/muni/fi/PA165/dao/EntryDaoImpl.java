@@ -9,11 +9,13 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import javax.transaction.Transactional;
 
 /**
  * @author n3xtgen
  */
 @Repository
+@Transactional
 public class EntryDaoImpl implements EntryDao {
 
     @PersistenceContext
