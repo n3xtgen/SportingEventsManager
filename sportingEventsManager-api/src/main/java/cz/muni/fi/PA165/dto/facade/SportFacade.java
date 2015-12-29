@@ -45,4 +45,11 @@ public interface SportFacade {
      * @param s
      */
     void addNewSport(CreateSportDTO s);
+    
+    /**
+     * Update sport results.
+     * 
+     * @param s 
+     */
+    public void updateSportResults(SportDTO s);
 }

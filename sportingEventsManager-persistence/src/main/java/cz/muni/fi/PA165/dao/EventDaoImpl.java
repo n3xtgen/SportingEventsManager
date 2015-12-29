@@ -25,7 +25,7 @@ public class EventDaoImpl implements EventDao {
     public void create(Event evt) {
         entityManager.persist(evt);
         entityManager.flush();
-        entityManager.refresh(evt);
+        entityManager.refresh(evt);//entityManager.isJoinedToTransaction();
     }
 
     @Override

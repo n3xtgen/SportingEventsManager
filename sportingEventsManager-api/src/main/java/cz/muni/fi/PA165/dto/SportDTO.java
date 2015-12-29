@@ -1,8 +1,8 @@
 package cz.muni.fi.PA165.dto;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Vladimir on 24.11.2015.
@@ -12,7 +12,7 @@ public class SportDTO {
     private Long idSport;
     private String name;
 
-    private Set<EntryDTO> entries = new HashSet<EntryDTO>();
+    private List<EntryDTO> entries = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -30,11 +30,11 @@ public class SportDTO {
         this.idSport = idSport;
     }
 
-    public Set<EntryDTO> getEntries() {
+    public List<EntryDTO> getEntries() {
         return entries;
     }
 
-    public void setEntries(Set<EntryDTO> entries) {
+    public void setEntries(List<EntryDTO> entries) {
         this.entries = entries;
     }
 

@@ -91,7 +91,7 @@
                                 </td>
                                 <div class="event_sport_control_butttons">
                                 <td>
-                                    <form method="get" action="${pageContext.request.contextPath}/event/results/${sport.idSport}">
+                                    <form method="get" action="${pageContext.request.contextPath}/result/${sport.idSport}">
                                         <button type="submit" class="btn btn-default btn-event">Results</button>
                                     </form>
                                 </td>

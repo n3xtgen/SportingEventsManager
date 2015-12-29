@@ -55,10 +55,10 @@
             <!-- page title -->
             <c:if test="${not empty title and title != 'Sporting Events Manager'}">
                 <div class="page-header">
-                    <c:if test="${title != 'Events'}">
+                    <c:if test="${title != 'Events' and title != 'Competition results'}">
                         <h1><c:out value="${title}"/></h1>
                     </c:if>
-                    <c:if test="${title == 'Events'}">
+                    <c:if test="${title == 'Events' or title == 'Competition results'}">
                         <h1 style=" color: white;"><c:out value="${title}"/></h1>
                     </c:if>
                 </div>
@@ -88,7 +88,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jquery.datetimepicker.css" />
         <script src="${pageContext.request.contextPath}/resources/jquery.js"></script>
         <script src="${pageContext.request.contextPath}/resources/jquery.datetimepicker.full.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/functions.js" />
+        <script src="${pageContext.request.contextPath}/resources/functions.js"></script>
 
         <script>
             jQuery("#startTime").datetimepicker();

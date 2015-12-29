@@ -219,22 +219,6 @@ public class EventController {
     }
 
     /**
-     * show results of a chosen sport
-     * @param sportId
-     * @param model
-     * @return
-     */
-    @RequestMapping(value="/results/{sportId}", method = RequestMethod.GET)
-    public String showResults(@PathVariable("sportId") long sportId, Model model){
-        log.debug("showResults()");
-        model.addAttribute("entries", entryFacade.findEntriesBySportId(sportId));
-        model.addAttribute("sport", sportFacade.findSportById(sportId));
-
-        return "result/results";
-    }
-
-
-    /**
      * Create sport, invoked by pressing Add competition button
      * @param model
      * @param eventId

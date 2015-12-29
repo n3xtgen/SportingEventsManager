@@ -1,17 +1,16 @@
 package cz.muni.fi.PA165.service.facade;
 
-import cz.muni.fi.PA165.dto.CreateSportDTO;
-import cz.muni.fi.PA165.dto.SportDTO;
+import cz.muni.fi.PA165.dto.*;
 import cz.muni.fi.PA165.dto.facade.SportFacade;
+import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Sport;
-import cz.muni.fi.PA165.service.BeanMappingService;
-import cz.muni.fi.PA165.service.EventService;
-import cz.muni.fi.PA165.service.SportService;
+import cz.muni.fi.PA165.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Vladimir on 25.11.2015.
@@ -25,6 +24,9 @@ public class SportFacadeImpl implements SportFacade {
 
     @Autowired
     private EventService eventService;
+    
+    @Autowired
+    private EntryService entryService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -59,5 +61,16 @@ public class SportFacadeImpl implements SportFacade {
         sport.setName(s.getName());
         sport.setEvent(eventService.findEventById(s.getEvent())); // add event reference
         s.setIdSport(sportService.addNewSport(sport));
+    }
+    
+    @Override
+    public void updateSportResults(SportDTO sportDTO) {
+        Sport sport = sportService.findSportById(sportDTO.getIdSport());
+        List<EntryDTO> entriesDTO = sportDTO.getEntries();
+        for (EntryDTO entryDTO : entriesDTO) {
+            Entry entry = sport.getEntries().stream().filter(e -> e.getIdEntry().equals(entryDTO.getIdEntry())).findFirst().get(); //entryService.findEntryById(entryDTO.getIdEntry());
+            entry.setTime(entryDTO.getTime());
+        }
+        sportService.updateSportResults(sport);
     }
 }

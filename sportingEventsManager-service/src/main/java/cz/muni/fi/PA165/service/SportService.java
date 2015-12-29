@@ -54,4 +54,11 @@ public interface SportService {
      * @return
      */
     Long addNewSport(Sport s);
+    
+    /**
+     * Updates sport results and positions.
+     * 
+     * @param s 
+     */
+    public void updateSportResults(Sport s);
 }
