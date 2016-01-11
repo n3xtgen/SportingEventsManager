@@ -8,7 +8,7 @@
 <my:pagetemplate title="Competition">
     <jsp:attribute name="body">
 
-        <form:form method="get" action="${pageContext.request.contextPath}/event/createSport" modelAttribute="sportForm">
+        <form:form method="post" action="${pageContext.request.contextPath}/event/createSport" modelAttribute="sportForm">
 
             <form:hidden path="event" />
 
@@ -23,6 +23,39 @@
                 </div>
             </s:bind>
 
+            <%-- attendants limitation --%>
+            <s:bind path="attendantsLimit">
+                <div class="form-group ${status.error ? 'has-error' : ''}">
+                    <label class="control-label col-sm-2">Max. attendants:</label>
+                    <div class="col-sm-10">
+                        <form:input path="attendantsLimit" id="attendantsLimit" type="text" class="form-control"
+                                placeholder="0" />
+                        <form:errors path="attendantsLimit" />
+                    </div>
+                </div>
+            </s:bind>
+
+            <%-- Start time --%>
+            <s:bind path="startTime">
+                <div class="form-group ${status.error ? 'has-error' : ''}">
+                    <label class="control-label col-sm-2">Starts:</label>
+                    <div class="col-sm-10">
+                        <form:input path="startTime" id="startTime" autocomplete="off" type="text" class="form-control" />
+                        <form:errors path="startTime" />
+                    </div>
+                </div>
+            </s:bind>
+
+            <%-- End time --%>
+            <s:bind path="endTime">
+                <div class="form-group ${status.error ? 'has-error' : ''}">
+                    <label class="control-label col-sm-2">Ends:</label>
+                    <div class="col-sm-10">
+                        <form:input path="endTime" id="endTime" autocomplete="off" type="text" class="form-control" />
+                        <form:errors path="endTime" />
+                    </div>
+                </div>
+            </s:bind>
 
             <button type="submit" class="btn btn-default">Add</button>
 

@@ -93,17 +93,29 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
        // add some sports
        Sport sport1 = new Sport();
        sport1.setName("Squash");
+       sport1.setStartTime(dStart1);
+       sport1.setEndTime(dEnd1);
        Sport sport2 = new Sport();
        sport2.setName("Basketball");
+       sport2.setStartTime(dStart2);
+       sport2.setEndTime(dEnd2);
 
        Sport sport3 = new Sport();
        sport3.setName("Football");
+       sport3.setStartTime(dStart1);
+       sport3.setEndTime(dEnd1);
        Sport sport4 = new Sport();
        sport4.setName("Hockey");
+       sport4.setStartTime(dStart1);
+       sport4.setEndTime(dEnd1);
        Sport sport5 = new Sport();
        sport5.setName("Sprint");
+       sport5.setStartTime(dStart2);
+       sport5.setEndTime(dEnd2);
        Sport sport6 = new Sport();
        sport6.setName("Long-distance run");
+       sport6.setStartTime(dStart2);
+       sport6.setEndTime(dEnd2);
 
 
        // CREATING ENTRIES

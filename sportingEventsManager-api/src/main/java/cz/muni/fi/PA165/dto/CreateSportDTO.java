@@ -3,6 +3,7 @@ package cz.muni.fi.PA165.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 /**
  * Created by Vladimir on 24.11.2015.
@@ -14,6 +15,13 @@ public class CreateSportDTO {
     @NotNull
     @Size(min = 3, max = 50)
     private String name;
+
+    //@Size(min = 0)
+    private int attendantsLimit;
+
+    private Date startTime;
+
+    private Date endTime;
 
     private long event;
 
@@ -31,6 +39,30 @@ public class CreateSportDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAttendantsLimit() {
+        return attendantsLimit;
+    }
+
+    public void setAttendantsLimit(int attendantsLimit) {
+        this.attendantsLimit = attendantsLimit;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public long getEvent() {
@@ -70,6 +102,9 @@ public class CreateSportDTO {
     public String toString() {
         return "CreateSportDTO{"
                 + "name=" + name
+                + ", attendantsLimit=" + attendantsLimit
+                + ", startTime=" + startTime
+                + ", endTime=" + endTime
                 + '}';
     }
 

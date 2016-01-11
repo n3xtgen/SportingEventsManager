@@ -3,6 +3,7 @@ package cz.muni.fi.PA165.dto;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Date;
 
 /**
  * Created by Vladimir on 24.11.2015.
@@ -11,6 +12,9 @@ public class SportDTO {
 
     private Long idSport;
     private String name;
+    private int attendantsLimit;
+    private Date startTime;
+    private Date endTime;
 
     private List<EntryDTO> entries = new ArrayList<>();
 
@@ -20,6 +24,30 @@ public class SportDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAttendantsLimit() {
+        return attendantsLimit;
+    }
+
+    public void setAttendantsLimit(int attendantsLimit) {
+        this.attendantsLimit = attendantsLimit;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public Long getIdSport() {
@@ -90,6 +118,9 @@ public class SportDTO {
         return "SportDTO{"
                 + "id=" + idSport
                 + ", name=" + name
+                + ", attendantsLimit=" + attendantsLimit
+                + ", startTime=" + startTime
+                + ", endTime=" + endTime
                 + '}';
     }
 

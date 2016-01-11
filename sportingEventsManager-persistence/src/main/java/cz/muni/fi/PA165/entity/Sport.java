@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.Date;
 
 /**
  * Konkretni Sport (zavod), ktery se kona v ramci jednoho Eventu.
@@ -22,6 +24,15 @@ public class Sport {
     @NotNull
     @Column(nullable = false, unique = true)
     private String name;
+
+    @Column
+    private int attendantsLimit;
+
+    @NotNull
+    private Date startTime;
+
+    @NotNull
+    private Date endTime;
 
     @NotNull
     @ManyToOne
@@ -58,6 +69,30 @@ public class Sport {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAttendantsLimit() {
+        return attendantsLimit;
+    }
+
+    public void setAttendantsLimit(int attendantsLimit) {
+        this.attendantsLimit = attendantsLimit;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public Event getEvent() {

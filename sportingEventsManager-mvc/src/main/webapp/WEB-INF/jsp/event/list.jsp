@@ -63,6 +63,8 @@
                                 <th width="40"></th>
                                 <th width="200">Name</th>
                                 <th></th>
+                                <th width="100">Start</th>
+                                <th width="100">End</th>
                                 <th width="100">Results</th>
                                 <c:if test="${signedUser.admin==true}">
                                     <th width="100"></th>
@@ -89,6 +91,10 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
+                                <%-- start time --%>
+                                <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${sport.startTime}"/></td>
+                                <%-- end time --%>
+                                <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${sport.startTime}"/></td>
                                 <div class="event_sport_control_butttons">
                                 <td>
                                     <form method="get" action="${pageContext.request.contextPath}/result/${sport.idSport}">

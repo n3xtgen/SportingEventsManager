@@ -4,7 +4,9 @@ import cz.muni.fi.PA165.dto.*;
 import cz.muni.fi.PA165.dto.facade.EntryFacade;
 import cz.muni.fi.PA165.dto.facade.EventFacade;
 import cz.muni.fi.PA165.dto.facade.SportFacade;
+import cz.muni.fi.PA165.mvc.propertyEditors.SportDTOPropertyEditor;
 import cz.muni.fi.PA165.mvc.validators.EventFormValidator;
+import cz.muni.fi.PA165.mvc.validators.SportFormValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,15 @@ public class EventController {
             binder.registerCustomEditor(Date.class, "endDate", new CustomDateEditor(dateFormat, false));
 
             binder.addValidators(new EventFormValidator());
+        }
+
+        if((binder.getTarget() instanceof CreateSportDTO) || (binder.getTarget() instanceof SportDTO)){
+            // we need to convert String to Date
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            binder.registerCustomEditor(Date.class, "startDate", new CustomDateEditor(dateFormat, false));
+            binder.registerCustomEditor(Date.class, "endDate", new CustomDateEditor(dateFormat, false));
+
+            binder.addValidators(new SportFormValidator());
         }
     }
 
@@ -178,6 +189,14 @@ public class EventController {
             return "redirect:/event/list";
         }
 
+        /*
+        SportDTO sport = sportFacade.findSportById(sportId);
+        if(sport != null && sport.getAttendantsLimit() > 0 && ){
+            redirectAttributes.addFlashAttribute("alert_danger", "This sport is full. You can´t sign up");
+            return "redirect:/event/list";
+        }
+        */
+
         // TODO: it might be good to include some limitations into Sport (for ex. max sportsman per sport)
         // create new registration
         CreateEntryDTO entry = new CreateEntryDTO();
@@ -243,18 +262,18 @@ public class EventController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/createSport", method = RequestMethod.GET)
+    @RequestMapping(value = "/createSport", method = RequestMethod.POST)
     public String createSport(@ModelAttribute("sportForm") @Valid CreateSportDTO formBean, BindingResult bResult,
                                HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
 
        if(bResult.hasErrors()) {
            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to create new sport");
-           return "result/resultForm";
+           return "event/sportForm";
         }
-
+        log.debug("createSport - " + (formBean.getStartTime() == null ? "null " : formBean.getStartTime().toString()));
         // add create new sport
         sportFacade.addNewSport(formBean);
-        redirectAttributes.addFlashAttribute("alert_success", "Result " + formBean.getName() +  " was created successfully");
+        redirectAttributes.addFlashAttribute("alert_success", "Sport " + formBean.getName() +  " was created successfully");
 
         log.debug("createSport()");
         return "redirect:/event/list";
