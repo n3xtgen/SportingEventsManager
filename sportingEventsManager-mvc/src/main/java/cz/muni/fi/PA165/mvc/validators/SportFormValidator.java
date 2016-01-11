@@ -6,6 +6,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.util.Date;
+
 /**
  * Created by Jamik on 5.1.2016.
  */
@@ -22,6 +24,8 @@ public class SportFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
+        Date timeNow = new Date();
+
         if(target instanceof CreateSportDTO){ // CreateSportDTO
             CreateSportDTO sport = (CreateSportDTO)target;
             System.out.println("SportFormValidator validation");
@@ -40,6 +44,12 @@ public class SportFormValidator implements Validator {
                     errors.rejectValue("startTime", "InputWrong.sportForm.sportTooShort");
                     errors.rejectValue("endTime", "InputWrong.sportForm.sportTooShort");
                 }
+
+                if(sport.getStartTime().compareTo(timeNow) > 0)
+                    errors.rejectValue("startTime", "InputWrong.sportForm.sportCantStartInPast");
+
+                if(sport.getEndTime().compareTo(timeNow) > 0)
+                    errors.rejectValue("endTime", "InputWrong.sportForm.sportCantEndInPast");
             }
             if(errors.hasErrors())
                 System.out.println("There are errors!!");
@@ -62,6 +72,12 @@ public class SportFormValidator implements Validator {
                     errors.rejectValue("startTime", "InputWrong.sportForm.sportTooShort");
                     errors.rejectValue("endTime", "InputWrong.sportForm.sportTooShort");
                 }
+
+                if(sport.getStartTime().compareTo(timeNow) > 0)
+                    errors.rejectValue("startTime", "InputWrong.sportForm.sportCantStartInPast");
+
+                if(sport.getEndTime().compareTo(timeNow) > 0)
+                    errors.rejectValue("endTime", "InputWrong.sportForm.sportCantEndInPast");
             }
         }
     }

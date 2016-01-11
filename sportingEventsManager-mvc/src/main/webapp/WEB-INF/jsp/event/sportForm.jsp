@@ -40,7 +40,8 @@
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <label class="control-label col-sm-2">Starts:</label>
                     <div class="col-sm-10">
-                        <form:input path="startTime" id="startTime" autocomplete="off" type="text" class="form-control" />
+                        <fmt:formatDate value="${sportForm.startTime}" type="both" var="startDateFormated" pattern="yyyy/MM/dd HH:mm" />
+                        <form:input path="startTime" value="${startDateFormated}" id="startTime" autocomplete="off" type="text" class="form-control" />
                         <form:errors path="startTime" />
                     </div>
                 </div>
@@ -51,7 +52,8 @@
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <label class="control-label col-sm-2">Ends:</label>
                     <div class="col-sm-10">
-                        <form:input path="endTime" id="endTime" autocomplete="off" type="text" class="form-control" />
+                        <fmt:formatDate value="${sportForm.endTime}" type="both" var="endDateFormated" pattern="yyyy/MM/dd HH:mm" />
+                        <form:input path="endTime" value="${endDateFormated}" id="endTime" autocomplete="off" type="text" class="form-control" />
                         <form:errors path="endTime" />
                     </div>
                 </div>

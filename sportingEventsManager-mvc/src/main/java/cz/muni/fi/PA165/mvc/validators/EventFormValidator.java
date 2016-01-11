@@ -5,6 +5,7 @@ import cz.muni.fi.PA165.dto.EventDTO;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import java.util.Date;
 
 /**
  * Created by Jamik on 13.12.2015.
@@ -22,7 +23,7 @@ public class EventFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-
+        Date timeNow = new Date();
         if(target instanceof CreateEventDTO) {
             CreateEventDTO evt = (CreateEventDTO) target;
 
@@ -41,10 +42,18 @@ public class EventFormValidator implements Validator {
 
                 // TODO: use MIN_EVENT_LENGTH in error message
                 // lets say we want only events that last at least MIN_EVENT_LENGTH
-                if (evt.getEndTime().getTime() - evt.getStartTime().getTime() < MIN_EVENT_LENGTH) {
+                else if (evt.getEndTime().getTime() - evt.getStartTime().getTime() < MIN_EVENT_LENGTH) {
                     errors.rejectValue("startTime", "InputWrong.eventForm.eventTooShort");
                     errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
                 }
+
+                // start in the past?
+                if(evt.getStartTime().compareTo(timeNow) > 0)
+                    errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
+
+                // end in the past?
+                if(evt.getEndTime().compareTo(timeNow) > 0)
+                    errors.rejectValue("endTime", "InputWrong.eventForm.eventCantEndInPast");
             }
         }
         else{
@@ -69,6 +78,12 @@ public class EventFormValidator implements Validator {
                     errors.rejectValue("startTime", "InputWrong.eventForm.eventTooShort");
                     errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
                 }
+
+                if(evt.getStartTime().compareTo(timeNow) > 0)
+                    errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
+
+                if(evt.getEndTime().compareTo(timeNow) > 0)
+                    errors.rejectValue("endTime", "InputWrong.eventForm.eventCantEndInPast");
             }
         }
     }
