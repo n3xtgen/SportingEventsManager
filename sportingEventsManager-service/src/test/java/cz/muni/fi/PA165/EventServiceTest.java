@@ -76,6 +76,9 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         eventService.createEvent(evt1);
         eventService.createEvent(evt2);
 
+        when(eventDao.findById(evt1.getIdEvent())).thenReturn(evt1);
+        when(eventDao.findById(evt2.getIdEvent())).thenReturn(evt2);
+
         Assert.assertEquals(eventService.findEventById(evt1.getIdEvent()), evt1);
         Assert.assertEquals(eventService.findEventById(evt2.getIdEvent()), evt2);
     }
