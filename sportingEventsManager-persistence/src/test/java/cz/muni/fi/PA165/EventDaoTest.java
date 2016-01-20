@@ -191,6 +191,11 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         Sport spt2 = new Sport();
         spt2.setName("football");
 
+        spt1.setEndTime(new Date(946771200));
+        spt1.setStartTime(new Date(946684800));
+        spt2.setEndTime(new Date(946771200));
+        spt2.setStartTime(new Date(946684800));
+
         spt1.setEvent(evt);
         spt2.setEvent(evt);
         evt.addSport(spt1);
