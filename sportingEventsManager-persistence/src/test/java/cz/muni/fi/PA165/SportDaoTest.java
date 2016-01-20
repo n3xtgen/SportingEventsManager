@@ -63,6 +63,12 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 		sp1.setEvent(event);
 		sp2.setEvent(event);
 
+		sp1.setEndTime(new Date(946771200));
+		sp1.setStartTime(new Date(946684800));
+
+		sp2.setEndTime(new Date(946771200));
+		sp2.setStartTime(new Date(946684800));
+
 		sportDao.create(sp1);
 		sportDao.create(sp2);
 		List<Sport> sports = sportDao.findAll();
@@ -79,6 +85,9 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 		sp.setName("tennis");
 		sp.setEvent(event);
 
+		sp.setEndTime(new Date(946771200));
+		sp.setStartTime(new Date(946684800));
+
 		sportDao.create(sp);
 
 		Assert.assertEquals(sportDao.findById(sp.getIdSport()), sp);
@@ -87,6 +96,10 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 	@Test(expectedExceptions = ConstraintViolationException.class)
 	public void importWithoutName() {
 		Sport sp = new Sport();
+
+		sp.setEndTime(new Date(946771200));
+		sp.setStartTime(new Date(946684800));
+
 		sportDao.create(sp);
 	}
 
@@ -101,6 +114,11 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 		sp1.setEvent(event);
 		sp2.setEvent(event);
 
+		sp2.setEndTime(new Date(946771200));
+		sp2.setStartTime(new Date(946684800));
+
+		sp1.setEndTime(new Date(946771200));
+		sp1.setStartTime(new Date(946684800));
 		sportDao.create(sp1);
 		sportDao.create(sp2);
 	}
@@ -110,7 +128,8 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 		Sport sp = new Sport();
 		sp.setName("tennis");
 		sp.setEvent(event);
-
+		sp.setEndTime(new Date(946771200));
+		sp.setStartTime(new Date(946684800));
 		sportDao.create(sp);
 
 		Assert.assertEquals(sportDao.findByName(sp.getName()), sp);
@@ -122,10 +141,13 @@ public class SportDaoTest extends AbstractTestNGSpringContextTests {
 		Sport sp1 = new Sport();
 		Sport sp2 = new Sport();
 		sp1.setName("tennis");
+		sp1.setEndTime(new Date(946771200));
+		sp1.setStartTime(new Date(946684800));
 		sp2.setName("hockey");
 		sp1.setEvent(event);
 		sp2.setEvent(event);
-
+		sp2.setEndTime(new Date(946771200));
+		sp2.setStartTime(new Date(946684800));
 		sportDao.create(sp1);
 		sportDao.create(sp2);
 
