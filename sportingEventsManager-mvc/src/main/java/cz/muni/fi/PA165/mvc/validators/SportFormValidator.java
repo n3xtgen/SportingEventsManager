@@ -73,10 +73,10 @@ public class SportFormValidator implements Validator {
                     errors.rejectValue("endTime", "InputWrong.sportForm.sportTooShort");
                 }
 
-                if(sport.getStartTime().compareTo(timeNow) > 0)
+                if(sport.getStartTime().compareTo(timeNow) < 0)
                     errors.rejectValue("startTime", "InputWrong.sportForm.sportCantStartInPast");
 
-                if(sport.getEndTime().compareTo(timeNow) > 0)
+                if(sport.getEndTime().compareTo(timeNow) < 0)
                     errors.rejectValue("endTime", "InputWrong.sportForm.sportCantEndInPast");
             }
         }
