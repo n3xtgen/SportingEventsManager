@@ -18,7 +18,6 @@ public class SportFormValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        System.out.println(" SportFormValidator support check" + (CreateSportDTO.class.isAssignableFrom(aClass) || SportDTO.class.isAssignableFrom(aClass) == true ? "true" : "false"));
         return (CreateSportDTO.class.isAssignableFrom(aClass) || SportDTO.class.isAssignableFrom(aClass));
     }
 
@@ -28,7 +27,7 @@ public class SportFormValidator implements Validator {
 
         if(target instanceof CreateSportDTO){ // CreateSportDTO
             CreateSportDTO sport = (CreateSportDTO)target;
-            System.out.println("SportFormValidator validation");
+
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "InputEmpty.sportForm.name");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "attendantsLimit", "InputEmpty.sportForm.attendantsEmpty");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startTime", "InputEmpty.sportForm.startTimeEmpty");
@@ -45,14 +44,12 @@ public class SportFormValidator implements Validator {
                     errors.rejectValue("endTime", "InputWrong.sportForm.sportTooShort");
                 }
 
-                if(sport.getStartTime().compareTo(timeNow) > 0)
+                if(sport.getStartTime().compareTo(timeNow) < 0)
                     errors.rejectValue("startTime", "InputWrong.sportForm.sportCantStartInPast");
 
-                if(sport.getEndTime().compareTo(timeNow) > 0)
+                if(sport.getEndTime().compareTo(timeNow) < 0)
                     errors.rejectValue("endTime", "InputWrong.sportForm.sportCantEndInPast");
             }
-            if(errors.hasErrors())
-                System.out.println("There are errors!!");
         }
         else if(target instanceof SportDTO){ // SportDTO
             SportDTO sport = (SportDTO)target;

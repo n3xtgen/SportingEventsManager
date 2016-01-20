@@ -90,8 +90,6 @@ public class UserControllerTest extends AbstractTestNGSpringContextTests {
 
         String json = this.convertObjectToJsonBytes(sp);
 
-        System.out.println(json);
-
         mockMvc.perform(
                 post("/users/create").contentType(MediaType.APPLICATION_JSON)
                 .content(json))

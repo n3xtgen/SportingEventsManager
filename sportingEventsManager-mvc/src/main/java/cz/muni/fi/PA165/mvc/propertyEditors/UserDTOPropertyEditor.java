@@ -41,8 +41,6 @@ public class UserDTOPropertyEditor extends PropertyEditorSupport {
             // get&set isAdmin
             user.setAdmin(attributes[ATTR_IS_ADMIN].substring(INDEX_IS_ADMIN_START, attributes[ATTR_IS_ADMIN].length() - 2).matches("true"));
 
-            System.out.println("UserConversion!: " + user.toString());
-
             setValue(user);
         }
         else{

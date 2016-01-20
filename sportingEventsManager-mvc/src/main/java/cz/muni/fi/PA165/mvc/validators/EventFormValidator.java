@@ -2,12 +2,10 @@ package cz.muni.fi.PA165.mvc.validators;
 
 import cz.muni.fi.PA165.dto.CreateEventDTO;;
 import cz.muni.fi.PA165.dto.EventDTO;
-import org.apache.commons.logging.Log;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import java.util.Date;
-import java.util.logging.Logger;
 
 /**
  * Created by Jamik on 13.12.2015.
@@ -49,8 +47,6 @@ public class EventFormValidator implements Validator {
                     errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
                 }
 
-
-
                 // start in the past?
                 if(evt.getStartTime().compareTo(timeNow) < 0)
                     errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
@@ -83,10 +79,10 @@ public class EventFormValidator implements Validator {
                     errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
                 }
 
-                if(evt.getStartTime().compareTo(timeNow) > 0)
+                if(evt.getStartTime().compareTo(timeNow) < 0)
                     errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
 
-                if(evt.getEndTime().compareTo(timeNow) > 0)
+                if(evt.getEndTime().compareTo(timeNow) < 0)
                     errors.rejectValue("endTime", "InputWrong.eventForm.eventCantEndInPast");
             }
         }

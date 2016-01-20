@@ -4,7 +4,6 @@ import cz.muni.fi.PA165.dto.*;
 import cz.muni.fi.PA165.dto.facade.EntryFacade;
 import cz.muni.fi.PA165.dto.facade.EventFacade;
 import cz.muni.fi.PA165.dto.facade.SportFacade;
-import cz.muni.fi.PA165.mvc.propertyEditors.SportDTOPropertyEditor;
 import cz.muni.fi.PA165.mvc.validators.EventFormValidator;
 import cz.muni.fi.PA165.mvc.validators.SportFormValidator;
 import org.slf4j.Logger;
@@ -179,7 +178,6 @@ public class EventController {
      */
     @RequestMapping(value="/signIn/{sportId}", method = RequestMethod.POST)
     public String signUp(@PathVariable("sportId") long sportId, HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
-        System.out.println("signUp()");
         log.debug("signUp()");
         UserDTO sportsman = (UserDTO)request.getSession().getAttribute("authenticatedUser");
         // something went wrong
@@ -204,7 +202,7 @@ public class EventController {
         entry.setSportsmanId(sportsman.getId());
         entryFacade.registerEntry(entry);
 
-        redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed up");
+        redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed up to a sport");
 
         return "redirect:/event/list";
     }
@@ -232,7 +230,7 @@ public class EventController {
         if(entry != null)
             entryFacade.deleteEntry(entry.getIdEntry());
 
-        redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed out");
+        redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed out from a sport");
 
         return "redirect:/event/list";
     }

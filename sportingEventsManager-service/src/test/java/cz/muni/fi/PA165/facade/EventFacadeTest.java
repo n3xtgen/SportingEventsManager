@@ -95,7 +95,6 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void shouldGetAll(){
-        System.out.println("all size: " + eventFacade.getAllEvents().size());
         Assert.assertEquals(eventFacade.getAllEvents().size(), 2);
     }
 
@@ -108,7 +107,6 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests {
           sport.setEvent(evt1.getIdEvent());
           sportFacade.addNewSport(sport);
 
-          System.out.println("shouldAddSport(): " + evt1.getIdEvent() + " , " + sport.getIdSport());
           eventFacade.addSport(evt1.getIdEvent(), sport.getIdSport());
 
           EventDTO event = eventFacade.findEventById(evt1.getIdEvent());

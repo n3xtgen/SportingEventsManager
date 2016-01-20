@@ -20,14 +20,12 @@ public class SportDTOPropertyEditor extends PropertyEditorSupport {
     private static final int INDEX_START_TIME_START = 11;
     private static final int INDEX_END_TIME_START = 9;
 
-
     // attributes order inside of the string
     private static final int ATTR_ID = 0;
     private static final int ATTR_NAME = 1;
     private static final int ATTR_ATTENDANTS = 2;
     private static final int ATTR_START_TIME = 3;
     private static final int ATTR_END_TIME = 4;
-
 
     /**
      * setAsText(String text)
@@ -37,8 +35,6 @@ public class SportDTOPropertyEditor extends PropertyEditorSupport {
      */
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
-
-        System.out.println("SportDTOPropertyEditor: "+ text );
 
         if(text != null && !text.isEmpty()) {
 
@@ -53,8 +49,6 @@ public class SportDTOPropertyEditor extends PropertyEditorSupport {
             int attendantsLimit = Integer.parseInt(attributes[ATTR_ATTENDANTS].substring(INDEX_ATTENDANTS_START));
             sport.setAttendantsLimit(attendantsLimit);
 
-            // TODO: convert string to Date
-            System.out.println("SportDTOPropertyEditor -> startTime: " + (attributes[ATTR_START_TIME].substring(INDEX_START_TIME_START)));
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.ENGLISH);
 
             try {
@@ -62,8 +56,6 @@ public class SportDTOPropertyEditor extends PropertyEditorSupport {
                 sport.setEndTime(dateFormat.parse(attributes[ATTR_END_TIME].substring(INDEX_END_TIME_START, attributes[ATTR_END_TIME].length()-1)));
             }catch (ParseException ex){}
 
-            //System.out.println("SportDTOPropertyEditor after processing: " + sport.getIdSport() + " , name: " + sport.getName()
-            //        + " , attendats: " + sport.getAttendantsLimit() + " startTime: " + sport.getStartTime() + " , endTime: " + sport.getEndTime());
             setValue(sport);
         }
         else // may not happen

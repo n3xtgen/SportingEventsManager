@@ -64,7 +64,6 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public void deleteEvent(Long eventId) {
-        System.out.println("public void deleteEvent(Long eventId)");
         eventService.deleteEvent(eventService.findEventById(eventId));
     }
 
@@ -85,7 +84,6 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public void removeSport(Long eventId, Long sportId) {
-        System.out.println(" removeSport(Long eventId, Long sportId) = " + eventId + " , " + sportId);
         eventService.removeSport(eventService.findEventById(eventId), sportService.findSportById(sportId));
     }
 }

@@ -2,7 +2,6 @@ package cz.muni.fi.PA165.dto.facade;
 
 import cz.muni.fi.PA165.dto.CreateEventDTO;
 import cz.muni.fi.PA165.dto.EventDTO;
-import cz.muni.fi.PA165.dto.SportDTO;
 
 import java.util.Collection;
 import java.util.Date;

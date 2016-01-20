@@ -4,7 +4,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
-import java.sql.Time;
 
 /**
  * @author n3xtgen

@@ -1,7 +1,5 @@
 package cz.muni.fi.PA165.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 import java.util.Set;
 
@@ -32,7 +30,6 @@ public class EventDTO {
     }
 
     public String getName() {
-        System.out.println("public String getName() " + name);
         return name;
     }
 
@@ -65,7 +62,6 @@ public class EventDTO {
     }
 
     public Set<SportDTO> getSports() {
-        System.out.println("public Set<SportDTO> getSports(): " + (sports == null ? 0 : sports.size()));
         return sports;
     }
 

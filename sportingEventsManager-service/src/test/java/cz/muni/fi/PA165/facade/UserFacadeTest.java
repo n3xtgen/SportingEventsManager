@@ -72,8 +72,6 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void shouldFindByEmail(){
-        System.out.println("user" + user.getEmail());
-
        when(userDao.findByEmail(user.getEmail())).thenReturn(user);
        Assert.assertEquals(userFacade.findUserByEmail(someUser.getEmail()).getEmail(), someUser.getEmail());
     }
