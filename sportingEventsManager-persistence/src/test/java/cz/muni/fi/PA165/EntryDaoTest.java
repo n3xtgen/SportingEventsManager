@@ -66,6 +66,8 @@ public class EntryDaoTest extends AbstractTestNGSpringContextTests {
         sport = new Sport();
         sport.setName("Sport 1");
         sport.setEvent(event);
+        sport.setEndTime(new Date(946771200));
+        sport.setStartTime(new Date(946684800));
         sportDao.create(sport);
 
         usr1 = new Usr();
