@@ -16,9 +16,6 @@ public class CreateSportDTO {
     @Size(min = 3, max = 50)
     private String name;
 
-    //@Size(min = 0)
-    private int attendantsLimit;
-
     private Date startTime;
 
     private Date endTime;
@@ -39,14 +36,6 @@ public class CreateSportDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getAttendantsLimit() {
-        return attendantsLimit;
-    }
-
-    public void setAttendantsLimit(int attendantsLimit) {
-        this.attendantsLimit = attendantsLimit;
     }
 
     public Date getStartTime() {
@@ -102,7 +91,6 @@ public class CreateSportDTO {
     public String toString() {
         return "CreateSportDTO{"
                 + "name=" + name
-                + ", attendantsLimit=" + attendantsLimit
                 + ", startTime=" + startTime
                 + ", endTime=" + endTime
                 + '}';

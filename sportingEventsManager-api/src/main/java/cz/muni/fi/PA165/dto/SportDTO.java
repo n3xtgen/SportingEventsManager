@@ -12,7 +12,7 @@ public class SportDTO {
 
     private Long idSport;
     private String name;
-    private int attendantsLimit;
+
     private Date startTime;
     private Date endTime;
 
@@ -24,14 +24,6 @@ public class SportDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getAttendantsLimit() {
-        return attendantsLimit;
-    }
-
-    public void setAttendantsLimit(int attendantsLimit) {
-        this.attendantsLimit = attendantsLimit;
     }
 
     public Date getStartTime() {
@@ -118,7 +110,6 @@ public class SportDTO {
         return "SportDTO{"
                 + "id=" + idSport
                 + ", name=" + name
-                + ", attendantsLimit=" + attendantsLimit
                 + ", startTime=" + startTime
                 + ", endTime=" + endTime
                 + '}';

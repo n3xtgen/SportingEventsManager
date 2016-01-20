@@ -16,16 +16,14 @@ public class SportDTOPropertyEditor extends PropertyEditorSupport {
     // positions of attribute starts in the string
     private static final int INDEX_ID_START = 12;
     private static final int INDEX_NAME_START = 6;
-    private static final int INDEX_ATTENDANTS_START = 17;
     private static final int INDEX_START_TIME_START = 11;
     private static final int INDEX_END_TIME_START = 9;
 
     // attributes order inside of the string
     private static final int ATTR_ID = 0;
     private static final int ATTR_NAME = 1;
-    private static final int ATTR_ATTENDANTS = 2;
-    private static final int ATTR_START_TIME = 3;
-    private static final int ATTR_END_TIME = 4;
+    private static final int ATTR_START_TIME = 2;
+    private static final int ATTR_END_TIME = 3;
 
     /**
      * setAsText(String text)
@@ -46,8 +44,6 @@ public class SportDTOPropertyEditor extends PropertyEditorSupport {
             sport.setIdSport(id);
             // set name
             sport.setName(attributes[ATTR_NAME].substring(INDEX_NAME_START, attributes[ATTR_NAME].length()-1));
-            int attendantsLimit = Integer.parseInt(attributes[ATTR_ATTENDANTS].substring(INDEX_ATTENDANTS_START));
-            sport.setAttendantsLimit(attendantsLimit);
 
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.ENGLISH);
 

@@ -29,7 +29,6 @@ public class SportFormValidator implements Validator {
             CreateSportDTO sport = (CreateSportDTO)target;
 
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "InputEmpty.sportForm.name");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "attendantsLimit", "InputEmpty.sportForm.attendantsEmpty");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startTime", "InputEmpty.sportForm.startTimeEmpty");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endTime", "InputEmpty.sportForm.endTimeEmpty");
 
@@ -49,13 +48,13 @@ public class SportFormValidator implements Validator {
 
                 if(sport.getEndTime().compareTo(timeNow) < 0)
                     errors.rejectValue("endTime", "InputWrong.sportForm.sportCantEndInPast");
+
             }
         }
         else if(target instanceof SportDTO){ // SportDTO
             SportDTO sport = (SportDTO)target;
 
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "InputEmpty.sportForm.name");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "attendantsLimit", "InputEmpty.sportForm.attendantsEmpty");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startTime", "InputEmpty.sportForm.startTimeEmpty");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endTime", "InputEmpty.sportForm.endTimeEmpty");
 
@@ -75,6 +74,7 @@ public class SportFormValidator implements Validator {
 
                 if(sport.getEndTime().compareTo(timeNow) < 0)
                     errors.rejectValue("endTime", "InputWrong.sportForm.sportCantEndInPast");
+
             }
         }
     }

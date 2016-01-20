@@ -59,7 +59,6 @@ public class SportFacadeImpl implements SportFacade {
     public void addNewSport(CreateSportDTO s) {
         Sport sport = new Sport();
         sport.setName(s.getName());
-        sport.setAttendantsLimit(s.getAttendantsLimit());
         sport.setStartTime(s.getStartTime());
         sport.setEndTime(s.getEndTime());
         sport.setEvent(eventService.findEventById(s.getEvent())); // add event reference

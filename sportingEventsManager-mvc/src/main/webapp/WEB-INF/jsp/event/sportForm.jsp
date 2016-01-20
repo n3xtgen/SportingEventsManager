@@ -23,18 +23,6 @@
                 </div>
             </s:bind>
 
-            <%-- attendants limitation --%>
-            <s:bind path="attendantsLimit">
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <label class="control-label col-sm-2">Max. attendants:</label>
-                    <div class="col-sm-10">
-                        <form:input path="attendantsLimit" id="attendantsLimit" type="text" class="form-control"
-                                placeholder="0" />
-                        <form:errors path="attendantsLimit" />
-                    </div>
-                </div>
-            </s:bind>
-
             <%-- Start time --%>
             <s:bind path="startTime">
                 <div class="form-group ${status.error ? 'has-error' : ''}">

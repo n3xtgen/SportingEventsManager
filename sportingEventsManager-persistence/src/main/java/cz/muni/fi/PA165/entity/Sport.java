@@ -24,9 +24,6 @@ public class Sport {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column
-    private int attendantsLimit;
-
     @NotNull
     private Date startTime;
 
@@ -68,14 +65,6 @@ public class Sport {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getAttendantsLimit() {
-        return attendantsLimit;
-    }
-
-    public void setAttendantsLimit(int attendantsLimit) {
-        this.attendantsLimit = attendantsLimit;
     }
 
     public Date getStartTime() {

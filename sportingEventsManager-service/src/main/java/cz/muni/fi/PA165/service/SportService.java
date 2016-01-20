@@ -1,7 +1,5 @@
 package cz.muni.fi.PA165.service;
 
-
-
 import cz.muni.fi.PA165.entity.Sport;
 
 import java.util.Collection;

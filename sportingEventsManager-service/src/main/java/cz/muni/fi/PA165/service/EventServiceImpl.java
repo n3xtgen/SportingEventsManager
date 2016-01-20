@@ -99,8 +99,6 @@ public class EventServiceImpl implements EventService{
         try {
             evt.removeSport(sport);
             sportDao.delete(sport);
-            //eventDao.update(evt);
-
         }catch(Exception ex){
         throw new DataAccessException(ex);
     }
