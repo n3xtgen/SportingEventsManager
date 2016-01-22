@@ -85,11 +85,11 @@ public class UserController {
         try {
             userFacade.updateUser(formBean);
         } catch (ConstraintViolationException e) {
-            model.addAttribute("alert_warning", "Account with this email is already registred");
+            model.addAttribute("alert_warning", "Account with this email is already registered.");
             return "user/update_page";
         }
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "User was updated");
+        redirectAttributes.addFlashAttribute("alert_success", "User has been updated.");
         return "redirect:" + uriBuilder.path("/user/detail/{id}").buildAndExpand(formBean.getId()).encode().toUriString();
     }
 
@@ -110,11 +110,11 @@ public class UserController {
         try {
            id = userFacade.registerUser(formBean);
         } catch (ConstraintViolationException e) {
-            model.addAttribute("alert_warning", "Account with this email is already registred");
+            model.addAttribute("alert_warning", "Account with this email is already registered.");
             return "user/new";
         }
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "User was created");
+        redirectAttributes.addFlashAttribute("alert_success", "User has been created.");
         request.getSession().setAttribute("authenticatedUser", userFacade.findUserById(id));
         return "redirect:" + uriBuilder.path("/user/detail/{id}").buildAndExpand(id).encode().toUriString();
     }
@@ -133,29 +133,29 @@ public class UserController {
             Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, HttpServletRequest request
     ) {
         log.debug("login(sportsmanLogin={})", formBean);
+        
         //in case of validation error forward back to the the form
         if (bindingResult.hasErrors()) {
-
             return "user/login_page";
         }
-        //create sportsman
-
+        
+        //
         if (!userFacade.authenticate(formBean)) {
-            model.addAttribute("alert_warning", "authentication fail");
+            model.addAttribute("alert_warning", "You couldn't be logged in - wrong email or password.");
             return "user/login_page";
         }
+        
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "loged in");
+        redirectAttributes.addFlashAttribute("alert_success", "You have been logged in as " + formBean.getEmail() + ".");
         request.getSession().setAttribute("authenticatedUser", userFacade.findUserByEmail(formBean.getEmail()));
         return "redirect:/";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(Model model, HttpServletRequest request
-    ) {
+    public String logout(Model model, HttpServletRequest request) {
         log.debug("logout");
         request.getSession().removeAttribute("authenticatedUser");
-        model.addAttribute("alert_success", "loged out");
+        model.addAttribute("alert_success", "You have been logged out.");
         return "/home";
     }
 }

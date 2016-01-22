@@ -81,7 +81,7 @@ public class ResultsController {
         
         sportFacade.updateSportResults(sport);
         
-        redirectAttributes.addFlashAttribute("alert_success", "Result was updated successfully");
+        redirectAttributes.addFlashAttribute("alert_success", "Result has been successfully updated.");
 
         return "redirect:/result/{sportId}";
     }
