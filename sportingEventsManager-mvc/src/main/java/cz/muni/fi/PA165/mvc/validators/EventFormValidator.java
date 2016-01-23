@@ -23,68 +23,46 @@ public class EventFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        Date timeNow = new Date();
+
         if(target instanceof CreateEventDTO) {
             CreateEventDTO evt = (CreateEventDTO) target;
 
-            // lets check empty & whitespaces
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "InputEmpty.eventForm.name");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "InputEmpty.eventForm.description");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startTime", "InputEmpty.eventForm.startDate");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endTime", "InputEmpty.eventForm.endDate");
-
-            if (evt.getStartTime() != null && evt.getEndTime() != null) {
-                // check if the start date is before end date
-                if (evt.getStartTime().getTime() >= evt.getEndTime().getTime()) {
-                    errors.rejectValue("startTime", "InputEmpty.eventForm.startDateAfterEnd");
-                    errors.rejectValue("endTime", "InputEmpty.eventForm.endDateBeforeStart");
-                }
-
-                // TODO: use MIN_EVENT_LENGTH in error message
-                // lets say we want only events that last at least MIN_EVENT_LENGTH
-                else if (evt.getEndTime().getTime() - evt.getStartTime().getTime() < MIN_EVENT_LENGTH) {
-                    errors.rejectValue("startTime", "InputWrong.eventForm.eventTooShort");
-                    errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
-                }
-
-                // start in the past?
-                if(evt.getStartTime().compareTo(timeNow) < 0)
-                    errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
-
-                // end in the past?
-                if(evt.getEndTime().compareTo(timeNow) < 0)
-                    errors.rejectValue("endTime", "InputWrong.eventForm.eventCantEndInPast");
-            }
+            validateForm(evt.getStartTime(), evt.getEndTime(), errors);
         }
         else{
             EventDTO evt = (EventDTO) target;
 
-            // lets check empty & whitespaces
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "InputEmpty.eventForm.name");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "InputEmpty.eventForm.description");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startTime", "InputEmpty.eventForm.startDate");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endTime", "InputEmpty.eventForm.endDate");
+            validateForm(evt.getStartTime(), evt.getEndTime(), errors);
+        }
+    }
 
-            if (evt.getStartTime() != null && evt.getEndTime() != null) {
-                // check if the start date is before end date
-                if (evt.getStartTime().getTime() >= evt.getEndTime().getTime()) {
-                    errors.rejectValue("startTime", "InputEmpty.eventForm.startDateAfterEnd");
-                    errors.rejectValue("endTime", "InputEmpty.eventForm.endDateBeforeStart");
-                }
+    private void validateForm(Date sTime, Date eTime, Errors errors){
+        Date timeNow = new Date();
+        // lets check empty & whitespaces
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "InputEmpty.eventForm.name");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "InputEmpty.eventForm.description");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startTime", "InputEmpty.eventForm.startDate");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endTime", "InputEmpty.eventForm.endDate");
 
-                // TODO: use MIN_EVENT_LENGTH in error message
-                // lets say we want only events that last at least MIN_EVENT_LENGTH
-                if (evt.getEndTime().getTime() - evt.getStartTime().getTime() < MIN_EVENT_LENGTH) {
-                    errors.rejectValue("startTime", "InputWrong.eventForm.eventTooShort");
-                    errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
-                }
-
-                if(evt.getStartTime().compareTo(timeNow) < 0)
-                    errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
-
-                if(evt.getEndTime().compareTo(timeNow) < 0)
-                    errors.rejectValue("endTime", "InputWrong.eventForm.eventCantEndInPast");
+        if (sTime != null && eTime != null) {
+            // check if the start date is before end date
+            if (sTime.getTime() >= eTime.getTime()) {
+                errors.rejectValue("startTime", "InputEmpty.eventForm.startDateAfterEnd");
+                errors.rejectValue("endTime", "InputEmpty.eventForm.endDateBeforeStart");
             }
+
+            // TODO: use MIN_EVENT_LENGTH in error message
+            // lets say we want only events that last at least MIN_EVENT_LENGTH
+            if (eTime.getTime() - sTime.getTime() < MIN_EVENT_LENGTH) {
+                errors.rejectValue("startTime", "InputWrong.eventForm.eventTooShort");
+                errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
+            }
+
+            if(sTime.compareTo(timeNow) < 0)
+                errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
+
+            if(eTime.compareTo(timeNow) < 0)
+                errors.rejectValue("endTime", "InputWrong.eventForm.eventCantEndInPast");
         }
     }
 }

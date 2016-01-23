@@ -61,7 +61,7 @@ public class SportFacadeImpl implements SportFacade {
         sport.setName(s.getName());
         sport.setStartTime(s.getStartTime());
         sport.setEndTime(s.getEndTime());
-        sport.setEvent(eventService.findEventById(s.getEvent())); // add event reference
+        sport.setEvent(eventService.findEventById(s.getEvent().getIdEvent())); // add event reference
         s.setIdSport(sportService.addNewSport(sport));
     }
     

@@ -16,6 +16,8 @@ public class SportDTO {
     private Date startTime;
     private Date endTime;
 
+    private EventDTO event;
+
     private List<EntryDTO> entries = new ArrayList<>();
 
     public String getName() {
@@ -48,6 +50,14 @@ public class SportDTO {
 
     public void setIdSport(Long idSport) {
         this.idSport = idSport;
+    }
+
+    public EventDTO getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventDTO event) {
+        this.event = event;
     }
 
     public List<EntryDTO> getEntries() {
