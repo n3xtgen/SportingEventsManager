@@ -92,7 +92,7 @@ public class EventController {
                               UriComponentsBuilder uriComponentsBuilder){
         EventDTO event = eventFacade.findEventById(deleteId);
         eventFacade.deleteEvent(deleteId);
-        redirectAttributes.addFlashAttribute("alert_success", "Event \"" + event.getName() + "\" was removed");
+        redirectAttributes.addFlashAttribute("alert_success", "Event \"" + event.getName() + "\" has been removed.");
         log.debug("deleteEvent()");
         return "redirect:/event/list";
     }
@@ -141,7 +141,7 @@ public class EventController {
         // save the new event
         eventFacade.addEvent(formBean);
         // show success alert
-        redirectAttributes.addFlashAttribute("alert_success", "Event \"" + formBean.getName() + "\" was created successfully");
+        redirectAttributes.addFlashAttribute("alert_success", "Event \"" + formBean.getName() + "\" has been created.");
 
         // go back to list of events
         return "redirect:/event/list";
@@ -165,7 +165,7 @@ public class EventController {
         // update event
         eventFacade.updateEvent(formBean);
         // show success alert
-        redirectAttributes.addFlashAttribute("alert_success", "Event " + formBean.getName() + " was updated successfully");
+        redirectAttributes.addFlashAttribute("alert_success", "Event \"" + formBean.getName() + "\" has been updated.");
 
         // go back to list of events
         return "redirect:/event/list";
@@ -205,7 +205,7 @@ public class EventController {
         entry.setSportsmanId(sportsman.getId());
         entryFacade.registerEntry(entry);
 
-        redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed up to a sport");
+        redirectAttributes.addFlashAttribute("alert_success", "You have signed up to a sport.");
 
         return "redirect:/event/list";
     }
@@ -233,7 +233,7 @@ public class EventController {
         if(entry != null)
             entryFacade.deleteEntry(entry.getIdEntry());
 
-        redirectAttributes.addFlashAttribute("alert_success", "You have successfully signed out from a sport");
+        redirectAttributes.addFlashAttribute("alert_success", "You have signed out from a sport.");
 
         return "redirect:/event/list";
     }
@@ -274,7 +274,7 @@ public class EventController {
         log.debug("createSport - " + (formBean.getStartTime() == null ? "null " : formBean.getStartTime().toString()));
         // add create new sport
         sportFacade.addNewSport(formBean);
-        redirectAttributes.addFlashAttribute("alert_success", "Sport " + formBean.getName() +  " was created successfully");
+        redirectAttributes.addFlashAttribute("alert_success", "Sport \"" + formBean.getName() + "\" has been created.");
 
         log.debug("createSport()");
         return "redirect:/event/list";
@@ -297,8 +297,7 @@ public class EventController {
         // remove the sport from event
         eventFacade.removeSport(eventId, sportId);
 
-        redirectAttributes.addFlashAttribute("alert_success", delSport.getName() + " was successfully removed from " +
-                                             event.getName());
+        redirectAttributes.addFlashAttribute("alert_success", "Sport \"" + delSport.getName() + "\" has been removed from event \"" + event.getName() + "\".");
         log.debug("deleteSport()");
         return "redirect:/event/list";
     }

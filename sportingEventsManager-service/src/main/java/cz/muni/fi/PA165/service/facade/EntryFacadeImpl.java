@@ -23,18 +23,22 @@ import java.util.Collection;
 @Transactional
 public class EntryFacadeImpl implements EntryFacade {
 
-    @Autowired
     private SportService sportService;
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private EntryService entryService;
 
-    @Autowired
     private BeanMappingService beanMappingService;
 
+    @Autowired
+    public EntryFacadeImpl(SportService sportService, UserService userService, EntryService entryService, BeanMappingService beanMappingService) {
+        this.sportService = sportService;
+        this.userService = userService;
+        this.entryService = entryService;
+        this.beanMappingService = beanMappingService;
+    }
+    
     /**
      * Vytvori novou registraci mezi zavodem a sportovcem.
      *
@@ -50,7 +54,6 @@ public class EntryFacadeImpl implements EntryFacade {
         entry.setUsr(user);
         entry.setEntryState(Entry.EntryState.REGISTERED);
         createEntryDto.setEntryId(entryService.createEntry(entry));
-
     }
 
     /**
