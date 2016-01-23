@@ -5,10 +5,10 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="All users">
+<my:pagetemplate title="All users" backgroundimg="${pageContext.request.contextPath}/resources/images/events.jpg">
 <jsp:attribute name="body">
 
-  <div class="animated fadeIn">
+  <div class="event_container animated fadeIn">
     <table class="table">
         <thead>
         <tr>

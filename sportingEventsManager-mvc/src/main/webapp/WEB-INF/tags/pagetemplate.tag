@@ -55,11 +55,13 @@
             <!-- page title -->
             <c:if test="${not empty title and title != 'Sporting Events Manager'}">
                 <div class="page-header">
-                    <c:if test="${title != 'Events' and title != 'Competition results'}">
-                        <h1><c:out value="${title}"/></h1>
+                    <c:if test="${title != 'Events' and title != 'Competition results' and title != 'Competition'
+                        and title != 'All users'}">
+                            <h1><c:out value="${title}"/></h1>
                     </c:if>
-                    <c:if test="${title == 'Events' or title == 'Competition results'}">
-                        <h1 style=" color: white;"><c:out value="${title}"/></h1>
+                    <c:if test="${title == 'Events' or title == 'Competition results' or title == 'Competition'
+                        or title == 'All users'}">
+                            <h1 style=" color: white;"><c:out value="${title}"/></h1>
                     </c:if>
                 </div>
             </c:if>

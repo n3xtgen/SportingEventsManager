@@ -87,3 +87,13 @@ td {
 .event_sport_control_butttonsn{
     float : right;
 }
+
+
+.form-group {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#sports_container{
+    padding-top: 20px;
+}
