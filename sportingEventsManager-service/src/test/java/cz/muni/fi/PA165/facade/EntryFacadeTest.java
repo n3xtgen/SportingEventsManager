@@ -76,17 +76,17 @@ public class EntryFacadeTest extends AbstractTestNGSpringContextTests  {
         sport1.setIdSport(11L);
         sport1.setName("Sport1");
         
-        sport1 = new Sport();
-        sport1.setIdSport(12L);
-        sport1.setName("Sport2");
+        sport2 = new Sport();
+        sport2.setIdSport(12L);
+        sport2.setName("Sport2");
         
         sportsman1 = new Usr();
         sportsman1.setId(21L);
         sportsman1.setEmail("user1@mail.com");
         
-        sportsman1 = new Usr();
-        sportsman1.setId(22L);
-        sportsman1.setEmail("user2@mail.com");
+        sportsman2 = new Usr();
+        sportsman2.setId(22L);
+        sportsman2.setEmail("user2@mail.com");
         
         createEntry1DTO = new CreateEntryDTO();
         createEntry1DTO.setSportId(sport1.getIdSport());

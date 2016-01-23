@@ -77,9 +77,12 @@
                 <div class="alert alert-info" role="alert"><c:out value="${alert_info}"/></div>
             </c:if>
             <c:if test="${not empty alert_success}">
-                <div class="alert alert-success fadeOut animated" style="animation-delay: 3s;" role="alert">
+                <div class="alert alert-success fadeOut animated" id="alest-success" style="animation-delay: 3s; animation-duration: 1s;" role="alert">
                     <c:out value="${alert_success}"/>
                 </div>
+                <script type="text/javascript">
+                    setTimeout(function() { document.getElementById("alest-success").style.display = "none" }, 4000);
+                </script>
             </c:if>
             <c:if test="${not empty alert_warning}">
                 <div class="alert alert-warning" role="alert"><c:out value="${alert_warning}"/></div>

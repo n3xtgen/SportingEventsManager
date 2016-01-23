@@ -15,11 +15,6 @@ public class CreateEntryDTO {
     @NotNull
     private Long sportId;
 
-    @DateTimeFormat(pattern = "HH:mm:SS")
-    private Date time;
-
-    private int position;
-
     @NotNull
     private Long sportsmanId;
 
@@ -52,23 +47,6 @@ public class CreateEntryDTO {
         this.sportsmanId = sportsmanId;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-
     /***************************
      *** METHODS & FUNCTIONS ***
      ***************************/
@@ -79,18 +57,14 @@ public class CreateEntryDTO {
         if (this == obj) return true;
 
         final CreateEntryDTO entry = (CreateEntryDTO) obj;
-
-        if ( !getSportId().equals(entry.getSportId()) ) return false;
-        if ( !getSportsmanId().equals(entry.getSportsmanId()) ) return false;
-
-        return true;
+        return (getSportId() == null ? entry.getSportId() == null : getSportId().equals(entry.getSportId()) &&
+                getSportsmanId() == null ? entry.getSportsmanId() == null : getSportsmanId().equals(entry.getSportsmanId()));
     }
 
     @Override
     public int hashCode(){
-        int hash;
-        hash = 13 * getSportId().hashCode();
-        hash = hash + 17 * getSportsmanId().hashCode();
+        int hash = 13 * getSportId().hashCode();
+        hash += 17 * getSportsmanId().hashCode();
         return hash;
     }
 
@@ -101,8 +75,6 @@ public class CreateEntryDTO {
         return "EventDTO{"
                 + "sportId= " + sportId
                 + ", sportsmanId= " + sportsmanId
-                + ", time= " + time
-                + ", position= " + position
                 + '}';
     }
 }
