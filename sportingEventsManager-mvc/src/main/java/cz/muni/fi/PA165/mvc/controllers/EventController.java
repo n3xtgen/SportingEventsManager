@@ -4,6 +4,7 @@ import cz.muni.fi.PA165.dto.*;
 import cz.muni.fi.PA165.dto.facade.EntryFacade;
 import cz.muni.fi.PA165.dto.facade.EventFacade;
 import cz.muni.fi.PA165.dto.facade.SportFacade;
+import cz.muni.fi.PA165.mvc.propertyEditors.EventDTOPropertyEditor;
 import cz.muni.fi.PA165.mvc.validators.EventFormValidator;
 import cz.muni.fi.PA165.mvc.validators.SportFormValidator;
 import org.slf4j.Logger;
@@ -58,9 +59,11 @@ public class EventController {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             binder.registerCustomEditor(Date.class, "startDate", new CustomDateEditor(dateFormat, false));
             binder.registerCustomEditor(Date.class, "endDate", new CustomDateEditor(dateFormat, false));
-
+            binder.registerCustomEditor(EventDTO.class, new EventDTOPropertyEditor());
             binder.addValidators(new SportFormValidator());
         }
+
+
     }
 
     /**
@@ -245,7 +248,7 @@ public class EventController {
     public String addSport(Model model, @PathVariable("eventId") long eventId){
 
         CreateSportDTO sport = new CreateSportDTO();
-        sport.setEvent(eventId); // pass event to sport form
+        sport.setEvent(eventFacade.findEventById(eventId)); // pass event to sport form
         model.addAttribute("sportForm", sport);
 
         return "event/sportForm";

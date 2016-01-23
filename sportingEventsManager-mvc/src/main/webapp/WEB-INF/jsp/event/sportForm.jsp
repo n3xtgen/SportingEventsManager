@@ -11,6 +11,15 @@
         <form:form method="post" action="${pageContext.request.contextPath}/event/createSport" modelAttribute="sportForm">
 
             <form:hidden path="event" />
+            <form:hidden path="event.idEvent" />
+            <form:hidden path="event.name" />
+            <form:hidden path="event.description" />
+            <fmt:formatDate value="${sportForm.event.startTime}" type="both" var="evtStartDateFormated" pattern="yyyy/MM/dd HH:mm" />
+            <form:hidden path="event.startTime" value="${evtStartDateFormated}" />
+            <fmt:formatDate value="${sportForm.event.endTime}" type="both" var="evtEndDateFormated" pattern="yyyy/MM/dd HH:mm" />
+            <form:hidden path="event.endTime" value="${evtEndDateFormated}"/>
+            <h4>Event starts: ${evtStartDateFormated}</h4>
+            <h4>Event ends: ${evtEndDateFormated}</h4>
 
             <s:bind path="name">
                 <div class="form-group ${status.error ? 'has-error' : ''}">

@@ -94,7 +94,7 @@
                                 <%-- start time --%>
                                 <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${sport.startTime}"/></td>
                                 <%-- end time --%>
-                                <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${sport.startTime}"/></td>
+                                <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${sport.endTime}"/></td>
                                 <div class="event_sport_control_butttons">
                                 <td>
                                     <form method="get" action="${pageContext.request.contextPath}/result/${sport.idSport}">

@@ -20,7 +20,7 @@ public class CreateSportDTO {
 
     private Date endTime;
 
-    private long event;
+    private EventDTO event;
 
     public Long getIdSport() {
         return idSport;
@@ -54,11 +54,11 @@ public class CreateSportDTO {
         this.endTime = endTime;
     }
 
-    public long getEvent() {
+    public EventDTO getEvent() {
         return event;
     }
 
-    public void setEvent(long event) {
+    public void setEvent(EventDTO event) {
         this.event = event;
     }
 
@@ -93,6 +93,7 @@ public class CreateSportDTO {
                 + "name=" + name
                 + ", startTime=" + startTime
                 + ", endTime=" + endTime
+                + ", event=" + event.toString()
                 + '}';
     }
 
