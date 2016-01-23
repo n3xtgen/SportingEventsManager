@@ -70,12 +70,22 @@ public class ResultsController {
         return "result/sport";
     }
     
+    /**
+     * Aktualizuje vysledky sportu.
+     * 
+     * @param sportId
+     * @param sport
+     * @param bResult
+     * @param redirectAttributes
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = "/{sportId}/update", method = RequestMethod.POST)
     public String updateResults(@PathVariable("sportId") long sportId, @ModelAttribute("sportResultsForm") @Valid SportDTO sport,
                                 BindingResult bResult, RedirectAttributes redirectAttributes, Model model) {
 
         if(bResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("alert_danger", "You entered wrong time format");
+            redirectAttributes.addFlashAttribute("alert_danger", "You have entered wrong time format");
             return "redirect:/result/{sportId}";
         }
         
