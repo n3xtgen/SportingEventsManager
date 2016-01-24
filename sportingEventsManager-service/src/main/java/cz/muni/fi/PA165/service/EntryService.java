@@ -26,8 +26,9 @@ public interface EntryService {
     /**
      * Delete entry
      * @param entry
+     * @return success/failure
      */
-    void deleteEntry(Entry entry);
+    boolean deleteEntry(Entry entry);
 
     /**
      * Get all entries

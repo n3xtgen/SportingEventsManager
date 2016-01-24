@@ -96,7 +96,7 @@ public class EventController {
         if(eventFacade.deleteEvent(deleteId))
             redirectAttributes.addFlashAttribute("alert_success", "Event \"" + event.getName() + "\" has been removed.");
         else
-            redirectAttributes.addFlashAttribute("alert_danger", "You cant remove event \"" + event.getName() + "\" because it´s currently in progress");
+            redirectAttributes.addFlashAttribute("alert_danger", "You cant remove event \"" + event.getName() + "\" because it´s currently in progress.");
 
         log.debug("deleteEvent()");
         return "redirect:/event/list";
@@ -191,27 +191,19 @@ public class EventController {
         // something went wrong
         if(sportsman == null){
             log.debug("signUp() -> failure");
-            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to register you");
+            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to register you.");
             return "redirect:/event/list";
         }
 
-        /*
-        SportDTO sport = sportFacade.findSportById(sportId);
-        if(sport != null && sport.getAttendantsLimit() > 0 && ){
-            redirectAttributes.addFlashAttribute("alert_danger", "This sport is full. You can´t sign up");
-            return "redirect:/event/list";
-        }
-        */
-
-        // TODO: it might be good to include some limitations into Sport (for ex. max sportsman per sport)
         // create new registration
         CreateEntryDTO entry = new CreateEntryDTO();
         entry.setSportId(sportId);
         entry.setSportsmanId(sportsman.getId());
-        entryFacade.registerEntry(entry);
-
-        redirectAttributes.addFlashAttribute("alert_success", "You have signed up to a sport.");
-
+        // man can only sign up to a sport before it starts
+        if(entryFacade.registerEntry(entry))
+            redirectAttributes.addFlashAttribute("alert_success", "You have signed up to a sport.");
+        else
+            redirectAttributes.addFlashAttribute("alert_danger", "You can´t register to this sport any more.");
         return "redirect:/event/list";
     }
 
@@ -229,16 +221,18 @@ public class EventController {
         // something went wrong
         if(sportsman == null){
             log.debug("signOut() -> failure");
-            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to unregister you");
+            redirectAttributes.addFlashAttribute("alert_danger", "System was not able to unregister you.");
             return "redirect:/event/list";
         }
 
         // find the registration and delete it
         EntryDTO entry = entryFacade.findEntryBySportsmanAndSportId(sportId, sportsman.getId());
-        if(entry != null)
-            entryFacade.deleteEntry(entry.getIdEntry());
-
-        redirectAttributes.addFlashAttribute("alert_success", "You have signed out from a sport.");
+        if(entry != null){
+            if(entryFacade.deleteEntry(entry.getIdEntry()))
+                redirectAttributes.addFlashAttribute("alert_success", "You have signed out from a sport.");
+            else
+                redirectAttributes.addFlashAttribute("alert_danger", "You can´t sign out from a sport after the start.");
+        }
 
         return "redirect:/event/list";
     }
@@ -273,7 +267,7 @@ public class EventController {
                                HttpServletRequest request, RedirectAttributes redirectAttributes, Model model){
 
        if(bResult.hasErrors()) {
-           redirectAttributes.addFlashAttribute("alert_danger", "System was not able to create new sport");
+           redirectAttributes.addFlashAttribute("alert_danger", "System was not able to create new sport.");
            return "event/sportForm";
         }
         log.debug("createSport - " + (formBean.getStartTime() == null ? "null " : formBean.getStartTime().toString()));
@@ -303,7 +297,7 @@ public class EventController {
         if(eventFacade.removeSport(eventId, sportId))
             redirectAttributes.addFlashAttribute("alert_success", "Sport \"" + delSport.getName() + "\" has been removed from event \"" + event.getName() + "\".");
         else
-            redirectAttributes.addFlashAttribute("alert_danger", "You can´t remove \"" + delSport.getName() + "\" because it´s currently in progress");
+            redirectAttributes.addFlashAttribute("alert_danger", "You can´t remove \"" + delSport.getName() + "\" because it´s currently in progress.");
         log.debug("deleteSport()");
         return "redirect:/event/list";
     }

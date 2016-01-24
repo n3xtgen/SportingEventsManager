@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * @author n3xtgen
@@ -45,15 +46,21 @@ public class EntryFacadeImpl implements EntryFacade {
      * @param createEntryDto
      */
     @Override
-    public void registerEntry(CreateEntryDTO createEntryDto) {
+    public boolean registerEntry(CreateEntryDTO createEntryDto) {
         Sport sport = sportService.findSportById(createEntryDto.getSportId());
         Usr user = userService.findById(createEntryDto.getSportsmanId());
+
+        // a man can only sign up for a sport before it starts
+        if((new Date()).compareTo(sport.getStartTime()) >= 0)
+            return false;
 
         Entry entry = new Entry();
         entry.setSport(sport);
         entry.setUsr(user);
         entry.setEntryState(Entry.EntryState.REGISTERED);
         createEntryDto.setEntryId(entryService.createEntry(entry));
+
+        return true;
     }
 
     /**
@@ -72,8 +79,8 @@ public class EntryFacadeImpl implements EntryFacade {
      * @param id
      */
     @Override
-    public void deleteEntry(Long id) {
-        entryService.deleteEntry(entryService.findEntryById(id));
+    public boolean deleteEntry(Long id) {
+        return entryService.deleteEntry(entryService.findEntryById(id));
     }
 
     /**

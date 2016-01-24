@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * @author n3xtgen
@@ -48,12 +49,17 @@ public class EntryServiceImpl implements EntryService {
     }
 
     @Override
-    public void deleteEntry(Entry entry) {
+    public boolean deleteEntry(Entry entry) {
+        // dont allow anybody to quit from a sport after the start
+        if((new Date()).compareTo(entry.getSport().getStartTime()) >= 0)
+            return false;
+
         try {
             entryDao.delete(entry);
         } catch(Exception ex) {
             throw new DataAccessException(ex);
         }
+        return true;
     }
 
     @Override

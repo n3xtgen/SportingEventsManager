@@ -14,8 +14,9 @@ public interface EntryFacade {
      * Vytvori novou registraci mezi zavodem a sportovcem.
      *
      * @param entryDto
+     * @return success/failure
      */
-    void registerEntry(CreateEntryDTO entryDto);
+    boolean registerEntry(CreateEntryDTO entryDto);
 
     /**
      * Upravi registraci podle pozadavku.
@@ -28,8 +29,9 @@ public interface EntryFacade {
      * Smaze registraci podle Id.
      *
      * @param id
+     * @return success/failure
      */
-    void deleteEntry(Long id);
+    boolean deleteEntry(Long id);
 
 
     /**
