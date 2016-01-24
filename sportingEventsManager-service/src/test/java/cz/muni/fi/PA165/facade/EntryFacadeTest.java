@@ -2,9 +2,6 @@ package cz.muni.fi.PA165.facade;
 
 import cz.muni.fi.PA165.dto.*;
 import cz.muni.fi.PA165.dto.facade.EntryFacade;
-import cz.muni.fi.PA165.dto.facade.EventFacade;
-import cz.muni.fi.PA165.dto.facade.SportFacade;
-import cz.muni.fi.PA165.dto.facade.UserFacade;
 import cz.muni.fi.PA165.entity.Entry;
 import cz.muni.fi.PA165.entity.Sport;
 import cz.muni.fi.PA165.entity.Usr;
@@ -15,17 +12,14 @@ import cz.muni.fi.PA165.service.UserService;
 import cz.muni.fi.PA165.service.config.ServiceConfiguration;
 import cz.muni.fi.PA165.service.facade.EntryFacadeImpl;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Calendar;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import static org.mockito.Mockito.verify;
@@ -74,10 +68,16 @@ public class EntryFacadeTest extends AbstractTestNGSpringContextTests  {
         
         sport1 = new Sport();
         sport1.setIdSport(11L);
+        Calendar cal = Calendar.getInstance();
+        cal.set(2050, 2, 2);
+        sport1.setStartTime(cal.getTime());
         sport1.setName("Sport1");
         
         sport2 = new Sport();
         sport2.setIdSport(12L);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(2050, 2, 3);
+        sport2.setStartTime(cal2.getTime());
         sport2.setName("Sport2");
         
         sportsman1 = new Usr();

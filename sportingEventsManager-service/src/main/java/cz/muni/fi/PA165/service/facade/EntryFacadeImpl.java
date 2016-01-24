@@ -24,13 +24,13 @@ import java.util.Date;
 @Transactional
 public class EntryFacadeImpl implements EntryFacade {
 
-    private SportService sportService;
+    private final SportService sportService;
 
-    private UserService userService;
+    private final UserService userService;
 
-    private EntryService entryService;
+    private final EntryService entryService;
 
-    private BeanMappingService beanMappingService;
+    private final BeanMappingService beanMappingService;
 
     @Autowired
     public EntryFacadeImpl(SportService sportService, UserService userService, EntryService entryService, BeanMappingService beanMappingService) {

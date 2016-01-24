@@ -32,7 +32,7 @@ public class ResultsController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder){
-        if((binder.getTarget() instanceof CreateEntryDTO) || (binder.getTarget() instanceof EntryDTO)) {
+        if((binder.getTarget() instanceof EntryDTO)) {
             // we need to convert String to Date
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
             binder.registerCustomEditor(Date.class, "time", new CustomDateEditor(dateFormat, false));

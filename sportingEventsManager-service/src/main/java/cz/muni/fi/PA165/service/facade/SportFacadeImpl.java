@@ -19,40 +19,20 @@ import java.util.List;
 @Transactional
 public class SportFacadeImpl implements SportFacade {
 
-    @Autowired
-    private SportService sportService;
+    private final SportService sportService;
 
-    @Autowired
-    private EventService eventService;
+    private final EventService eventService;
     
-    @Autowired
-    private EntryService entryService;
+    private final EntryService entryService;
+
+    private final BeanMappingService beanMappingService;
 
     @Autowired
-    private BeanMappingService beanMappingService;
-
-    @Override
-    public SportDTO findSportById(Long id) {
-        Sport sport = sportService.findSportById(id);
-        return (sport == null) ? null : beanMappingService.mapTo(sport, SportDTO.class);
-    }
-
-    @Override
-    public SportDTO findSportByName(String name) {
-        Sport sport = sportService.findSportByName(name);
-        return (sport == null) ? null : beanMappingService.mapTo(sport, SportDTO.class);
-    }
-
-    @Override
-    public void updateSport(SportDTO s) {
-        Sport sport = sportService.findSportById(s.getIdSport());
-        sport.setName(s.getName());
-        sportService.updateSport(sport);
-    }
-
-    @Override
-    public Collection<SportDTO> getAllSports() {
-        return beanMappingService.mapTo(sportService.getAllSports(), SportDTO.class);
+    public SportFacadeImpl(SportService sportService, EventService eventService, EntryService entryService, BeanMappingService beanMappingService) {
+        this.sportService = sportService;
+        this.eventService = eventService;
+        this.entryService = entryService;
+        this.beanMappingService = beanMappingService;
     }
 
     @Override
@@ -66,11 +46,35 @@ public class SportFacadeImpl implements SportFacade {
     }
     
     @Override
+    public void updateSport(SportDTO s) {
+        Sport sport = sportService.findSportById(s.getIdSport());
+        sport.setName(s.getName());
+        sportService.updateSport(sport);
+    }
+    
+    @Override
+    public SportDTO findSportById(Long id) {
+        Sport sport = sportService.findSportById(id);
+        return (sport == null) ? null : beanMappingService.mapTo(sport, SportDTO.class);
+    }
+
+    @Override
+    public SportDTO findSportByName(String name) {
+        Sport sport = sportService.findSportByName(name);
+        return (sport == null) ? null : beanMappingService.mapTo(sport, SportDTO.class);
+    }
+    
+    @Override
+    public Collection<SportDTO> getAllSports() {
+        return beanMappingService.mapTo(sportService.getAllSports(), SportDTO.class);
+    }
+    
+    @Override
     public void updateSportResults(SportDTO sportDTO) {
         Sport sport = sportService.findSportById(sportDTO.getIdSport());
         List<EntryDTO> entriesDTO = sportDTO.getEntries();
         for (EntryDTO entryDTO : entriesDTO) {
-            Entry entry = sport.getEntries().stream().filter(e -> e.getIdEntry().equals(entryDTO.getIdEntry())).findFirst().get(); //entryService.findEntryById(entryDTO.getIdEntry());
+            Entry entry = sport.getEntries().stream().filter(e -> e.getIdEntry().equals(entryDTO.getIdEntry())).findFirst().get();
             entry.setTime(entryDTO.getTime());
         }
         sportService.updateSportResults(sport);
