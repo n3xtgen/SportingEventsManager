@@ -14,6 +14,7 @@ public interface EntryService {
     /**
      * Create new entry
      * @param entry
+     * @return ID/error id (negative values)
      */
     Long createEntry(Entry entry);
 

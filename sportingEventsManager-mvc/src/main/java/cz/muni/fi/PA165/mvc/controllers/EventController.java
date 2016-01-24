@@ -7,6 +7,7 @@ import cz.muni.fi.PA165.dto.facade.SportFacade;
 import cz.muni.fi.PA165.mvc.propertyEditors.EventDTOPropertyEditor;
 import cz.muni.fi.PA165.mvc.validators.EventFormValidator;
 import cz.muni.fi.PA165.mvc.validators.SportFormValidator;
+import cz.muni.fi.PA165.service.constant.SLayerConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -200,10 +201,14 @@ public class EventController {
         entry.setSportId(sportId);
         entry.setSportsmanId(sportsman.getId());
         // man can only sign up to a sport before it starts
-        if(entryFacade.registerEntry(entry))
+        Long retVal = entryFacade.registerEntry(entry);
+        if(retVal >= SLayerConstants.NO_ERROR)
             redirectAttributes.addFlashAttribute("alert_success", "You have signed up to a sport.");
-        else
+        else if(retVal == SLayerConstants.ERROR_SPORT_ALREADY_STARTED)
             redirectAttributes.addFlashAttribute("alert_danger", "You can´t register to this sport any more.");
+        else if(retVal == SLayerConstants.ERROR_TIME_CONFLICT)
+            redirectAttributes.addFlashAttribute("alert_danger", "You can´t register to this sport because it would collide with one of your sports.");
+
         return "redirect:/event/list";
     }
 

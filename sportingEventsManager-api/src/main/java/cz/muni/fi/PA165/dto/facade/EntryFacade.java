@@ -14,9 +14,9 @@ public interface EntryFacade {
      * Vytvori novou registraci mezi zavodem a sportovcem.
      *
      * @param entryDto
-     * @return success/failure
+     * @return exit code
      */
-    boolean registerEntry(CreateEntryDTO entryDto);
+    Long registerEntry(CreateEntryDTO entryDto);
 
     /**
      * Upravi registraci podle pozadavku.
