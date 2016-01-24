@@ -70,12 +70,19 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void deleteEvent(Event evt) {
+    public boolean deleteEvent(Event evt) {
+        // do not allow admin to delete events that are currently in progress (and actually have some sport assigned)
+        Date timeNow = new Date();
+        if(timeNow.compareTo(evt.getStartTime()) >= 0 && timeNow.compareTo(evt.getEndTime()) <= 0 &&
+                evt.getSports().size() > 0)
+            return false;
+
         try{
             eventDao.delete(evt);
         }catch(Exception ex){
             throw new DataAccessException(ex);
         }
+        return true;
     }
 
     @Override
@@ -95,12 +102,18 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void removeSport(Event evt, Sport sport) {
+    public boolean removeSport(Event evt, Sport sport) {
+        Date timeNow = new Date();
+        // Don´t allow the admin to delete sport that are currently in progress
+        if(timeNow.compareTo(sport.getStartTime()) >= 0 && timeNow.compareTo(sport.getEndTime()) <= 0)
+            return false;
+
         try {
             evt.removeSport(sport);
             sportDao.delete(sport);
         }catch(Exception ex){
-        throw new DataAccessException(ex);
-    }
+            throw new DataAccessException(ex);
+        }
+        return true;
     }
 }

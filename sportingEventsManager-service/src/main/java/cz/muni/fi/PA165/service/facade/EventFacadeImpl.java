@@ -63,8 +63,8 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
-    public void deleteEvent(Long eventId) {
-        eventService.deleteEvent(eventService.findEventById(eventId));
+    public boolean deleteEvent(Long eventId) {
+        return eventService.deleteEvent(eventService.findEventById(eventId));
     }
 
     @Override
@@ -83,7 +83,7 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
-    public void removeSport(Long eventId, Long sportId) {
-        eventService.removeSport(eventService.findEventById(eventId), sportService.findSportById(sportId));
+    public boolean removeSport(Long eventId, Long sportId) {
+        return eventService.removeSport(eventService.findEventById(eventId), sportService.findSportById(sportId));
     }
 }

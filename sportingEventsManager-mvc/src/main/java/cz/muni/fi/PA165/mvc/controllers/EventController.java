@@ -90,9 +90,14 @@ public class EventController {
     @RequestMapping(value = "/delete/{deleteId}", method = RequestMethod.POST)
     public String deleteEvent(@PathVariable("deleteId") long deleteId, RedirectAttributes redirectAttributes,
                               UriComponentsBuilder uriComponentsBuilder){
+
         EventDTO event = eventFacade.findEventById(deleteId);
-        eventFacade.deleteEvent(deleteId);
-        redirectAttributes.addFlashAttribute("alert_success", "Event \"" + event.getName() + "\" has been removed.");
+        // events that are in progress cant be removed
+        if(eventFacade.deleteEvent(deleteId))
+            redirectAttributes.addFlashAttribute("alert_success", "Event \"" + event.getName() + "\" has been removed.");
+        else
+            redirectAttributes.addFlashAttribute("alert_danger", "You cant remove event \"" + event.getName() + "\" because it´s currently in progress");
+
         log.debug("deleteEvent()");
         return "redirect:/event/list";
     }
@@ -294,10 +299,11 @@ public class EventController {
 
         SportDTO delSport = sportFacade.findSportById(sportId);
         EventDTO event = eventFacade.findEventById(eventId);
-        // remove the sport from event
-        eventFacade.removeSport(eventId, sportId);
-
-        redirectAttributes.addFlashAttribute("alert_success", "Sport \"" + delSport.getName() + "\" has been removed from event \"" + event.getName() + "\".");
+        // remove the sport from event, but only if it´s not currently in progress
+        if(eventFacade.removeSport(eventId, sportId))
+            redirectAttributes.addFlashAttribute("alert_success", "Sport \"" + delSport.getName() + "\" has been removed from event \"" + event.getName() + "\".");
+        else
+            redirectAttributes.addFlashAttribute("alert_danger", "You can´t remove \"" + delSport.getName() + "\" because it´s currently in progress");
         log.debug("deleteSport()");
         return "redirect:/event/list";
     }

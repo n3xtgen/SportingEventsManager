@@ -42,8 +42,9 @@ public interface EventService {
     /**
      * delete an event
      * @param evt
+     * @return success/failure
      */
-    void deleteEvent(Event evt);
+    boolean deleteEvent(Event evt);
 
     /**
      * update an event
@@ -70,6 +71,7 @@ public interface EventService {
      * Remove sport from an event
      * @param evt
      * @param sport
+     * @return success/failure
      */
-    void removeSport(Event evt, Sport sport);
+    boolean removeSport(Event evt, Sport sport);
 }

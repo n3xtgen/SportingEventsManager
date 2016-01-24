@@ -60,7 +60,9 @@
                     <table class="table event_sports_table">
                         <thead>
                             <tr>
+                                <c:if test="${signedUser.admin==true}">
                                 <th width="40"></th>
+                                </c:if>
                                 <th width="200">Name</th>
                                 <th></th>
                                 <th width="100">Start</th>
@@ -74,7 +76,9 @@
                         <tbody>
                         <c:forEach var="sport" items="${event.sports}">
                             <tr>
+                                <c:if test="${signedUser.admin==true}">
                                 <td>${sport.idSport}</td>
+                                </c:if>
                                 <td>${sport.name}</td>
                                 <td>
                                     <c:choose>

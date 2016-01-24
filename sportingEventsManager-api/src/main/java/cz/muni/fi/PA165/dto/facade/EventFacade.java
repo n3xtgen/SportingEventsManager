@@ -48,8 +48,9 @@ public interface EventFacade {
     /**
      * Remove an event
      * @param eventId
+     * @return success/failure
      */
-    void deleteEvent(Long eventId);
+    boolean deleteEvent(Long eventId);
 
     /**
      * Update existing event
@@ -68,6 +69,7 @@ public interface EventFacade {
      * Remove sport from an event
      * @param eventId
      * @param sportId
+     * @return success/failure
      */
-    void removeSport(Long eventId, Long sportId);
+    boolean removeSport(Long eventId, Long sportId);
 }
