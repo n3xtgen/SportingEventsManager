@@ -50,7 +50,7 @@ public class Entry {
     /**
      * Vysledny cas sportovce.
      */
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date time;
 
     /********************
