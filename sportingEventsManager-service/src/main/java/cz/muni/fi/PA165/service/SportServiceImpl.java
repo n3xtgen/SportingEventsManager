@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -82,14 +83,21 @@ public class SportServiceImpl implements SportService{
             s.getEntries().stream().sorted(new Comparator<Entry> () {
                 @Override
                 public int compare(Entry o1, Entry o2) {
-                    if ((o1.getTime() == null) && (o2.getTime() == null)) {
-                        return 0;
-                    } else if ((o1.getTime() == null) && (o2.getTime() != null)) {
+                    Entry.EntryState entryState1 = o1.getEntryState();
+                    Entry.EntryState entryState2 = o2.getEntryState();
+                    
+                    if (entryState1.ordinal() > entryState2.ordinal()) { // napr. pokud je jeden Finished a druhy Registered (zatim nedobehl), tak prvni bude pred nim
                         return -1;
-                    } else if ((o1.getTime() != null) && (o2.getTime() == null)) {
+                    } else if (entryState1.ordinal() < entryState2.ordinal()) {
                         return 1;
-                    } else {
-                        return o1.getTime().compareTo(o2.getTime());
+                    } else { // pokud maji stejnej stav
+                        if (entryState1 == Entry.EntryState.FINISHED) { // pokud dokoncili radim podle casu
+                            return o1.getTime().compareTo(o2.getTime()); // v tom pripade musi byt cas vyplnenej a nemusim se bat ze ze getTime() je null
+                        } else if ((entryState1 == Entry.EntryState.REGISTERED) || (entryState1 == Entry.EntryState.DISQUALIFIED)) { // pokud zatim nedokoncili | diskvalifikovani
+                            return o1.getUsr().getSurname().compareTo(o2.getUsr().getSurname()); // seradim podle prijmeni
+                        } else {
+                            throw new IllegalStateException("Comparing entries with unknown state.");
+                        }
                     }
                 }
             }).forEach(e -> e.setPosition(index.incrementAndGet()));

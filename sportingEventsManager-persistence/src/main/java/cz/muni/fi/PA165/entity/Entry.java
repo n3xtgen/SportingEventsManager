@@ -40,7 +40,7 @@ public class Entry {
      */
     @Enumerated
     private EntryState entryState;
-    public enum EntryState { REGISTERED, FINISHED, DISQUALIFIED}
+    public enum EntryState {DISQUALIFIED, REGISTERED, FINISHED} // Hodnoty sou serazeny v poradi vyhodnosti od nejmensi po nejvetsi, pro serazeni vysledku..
 
     /**
      * Poradi (vysledne misto) sportovce.

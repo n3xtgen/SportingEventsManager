@@ -11,9 +11,9 @@ public class EntryDTO {
 
     private Long idEntry;
     private EntryState entryState;
-    public enum EntryState { REGISTERED, FINISHED, DISQUALIFIED}
+    public enum EntryState {DISQUALIFIED, REGISTERED, FINISHED} // Hodnoty sou serazeny v poradi vyhodnosti od nejmensi po nejvetsi, pro serazeni vysledku..
     private int position;
-    @DateTimeFormat(pattern="HH:mm:ss")
+    @DateTimeFormat(pattern="HH:mm:ss.SSS")
     private Date time;
 
     private SportDTO sport;
@@ -71,6 +71,7 @@ public class EntryDTO {
         this.usr = usr;
     }
 
+    
 
     /***************************
      *** METHODS & FUNCTIONS ***

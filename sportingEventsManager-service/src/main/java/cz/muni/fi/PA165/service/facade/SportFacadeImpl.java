@@ -76,6 +76,7 @@ public class SportFacadeImpl implements SportFacade {
         for (EntryDTO entryDTO : entriesDTO) {
             Entry entry = sport.getEntries().stream().filter(e -> e.getIdEntry().equals(entryDTO.getIdEntry())).findFirst().get();
             entry.setTime(entryDTO.getTime());
+            entry.setEntryState(Entry.EntryState.values()[entryDTO.getEntryState().ordinal()]);
         }
         sportService.updateSportResults(sport);
     }

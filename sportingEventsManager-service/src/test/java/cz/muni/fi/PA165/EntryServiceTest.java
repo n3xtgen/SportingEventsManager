@@ -6,6 +6,7 @@ import cz.muni.fi.PA165.entity.Sport;
 import cz.muni.fi.PA165.entity.Usr;
 import cz.muni.fi.PA165.service.EntryService;
 import cz.muni.fi.PA165.service.config.ServiceConfiguration;
+import java.util.Date;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -49,6 +50,7 @@ public class EntryServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void prepareTestData() {
         sport = new Sport();
+        sport.setStartTime(new Date(2025, 1, 1));
         sport.setName("Sport 1");
 
         user1 = new Usr();

@@ -22,7 +22,7 @@
                                 <th width="100">Pos.</th>
                                 <th width="200">Name</th>
                                 <th width="200">Surname</th>
-                                <th>Time</th>
+                                <th style="text-align: right">Result</th>
                             </tr>
                         </thead>
 
@@ -33,8 +33,18 @@
                                 <td>${entry.usr.name}</td>
                                 <td>${entry.usr.surname}</td>
 
-                                <fmt:formatDate value="${entry.time}" var="timeString" pattern="HH:mm:ss"/>
-                                <td><form:hidden path="entries[${loop.index}].idEntry" /><form:input type="text" path="entries[${loop.index}].time" /></td>
+                                <td>
+                                    <form:hidden path="entries[${loop.index}].idEntry" />
+                                    <form:radiobutton path="entries[${loop.index}].entryState" value="REGISTERED"/>
+                                    Not finished
+                                    /
+                                    <form:radiobutton path="entries[${loop.index}].entryState" value="FINISHED"/>
+                                    Finished
+                                    <form:input type="text" path="entries[${loop.index}].time" />
+                                    /
+                                    <form:radiobutton path="entries[${loop.index}].entryState" value="DISQUALIFIED"/>
+                                    Disqualified
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

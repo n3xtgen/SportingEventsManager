@@ -18,24 +18,21 @@ public class ResultFormValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        if(target instanceof CreateEntryDTO) {
+        if (target instanceof CreateEntryDTO) {
             CreateEntryDTO entry = (CreateEntryDTO) target;
-        }
-        else { // EntryDTO
-            EntryDTO entry = (EntryDTO)target;
-            // lets check empty & whitespaces
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "position", "InputEmpty.resultForm.position");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "time", "InputEmpty.resultForm.time");
-
-            if (entry.getTime() != null){
-                if (entry.getTime().getTime() == 0){
-                    errors.rejectValue("Result time", "Result time has to be at least 00:00:01 hour.");
-                }
-            }
-            else{
-                errors.rejectValue("Result time", "You have to specify the result time.");
+        } else if (target instanceof EntryDTO) {
+            EntryDTO entry = (EntryDTO) target;
+            
+            EntryDTO.EntryState entryState = entry.getEntryState();
+            switch (entryState) {
+                case REGISTERED:
+                    break;
+                case FINISHED:
+                    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "time", "Time cannot be empty when finished.");
+                    break;
+                case DISQUALIFIED:
+                    break;
             }
         }
-
     }
 }

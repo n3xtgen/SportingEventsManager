@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="emailInput">Email:</label>
                 <div class="col-sm-10">
-                    <form:input type="email" class="form-control" path="email" id="emailInput" value="email@mail.com" placeholder="Enter email" />
+                    <form:input type="email" class="form-control" path="email" id="emailInput" value="admin@email.com" placeholder="Enter email" />
                      <form:errors path="email" cssClass="help-block"/>
                 </div>
             </div>
