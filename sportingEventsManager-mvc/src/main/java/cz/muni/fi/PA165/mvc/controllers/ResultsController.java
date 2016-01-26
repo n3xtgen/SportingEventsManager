@@ -30,12 +30,8 @@ public class ResultsController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder){
-        if((binder.getTarget() instanceof EntryDTO)) {
-            // convert String to SportDTO
-            binder.registerCustomEditor(SportDTO.class, new SportDTOPropertyEditor());
-            // convert String to UsrDTO
-            binder.registerCustomEditor(UserDTO.class, new UserDTOPropertyEditor());
-
+        Object target = binder.getTarget();
+        if(target instanceof SportDTO) {
             binder.addValidators(new ResultFormValidator());
         }
     }
@@ -59,22 +55,26 @@ public class ResultsController {
     @RequestMapping(value="/{sportId}", method = RequestMethod.GET)
     public String showResults(@PathVariable("sportId") long sportId, Model model, HttpServletRequest request)
     {
-        // Pred zobrazenim vysledky seradim podle position a nebo jmeno pokud position je 0, coz znaci ze s timto Entry jeste vysledek nebyl ukladan a je novy
+        // Pred zobrazenim vysledky seradim podle position ty co dokoncili, pote ty co nedokoncili podle jmeno a pak DNF podle jmena
         SportDTO sportDTO = sportFacade.findSportById(sportId);
         sportDTO.setEntries(sportDTO.getEntries().stream().sorted(new Comparator<EntryDTO> () {
                 @Override
                 public int compare(EntryDTO o1, EntryDTO o2) {
-                    int entryPosition1 = o1.getPosition();
-                    int entryPosition2 = o2.getPosition();
+                    EntryDTO.EntryState entryState1 = o1.getEntryState();
+                    EntryDTO.EntryState entryState2 = o2.getEntryState();
                     
-                    if ((entryPosition1 == 0) && (entryPosition2 == 0)) { // oba jeste nemaji vysledek, porovnavam podle prijmeni
-                        return o1.getUsr().getSurname().compareTo(o2.getUsr().getSurname());
-                    } else if ((entryPosition1 > 0) && (entryPosition2 <= 0)) { // prvni uz ma zapsan nejakou pozici, druhy je novy
-                        return 1;
-                    } else if ((entryPosition1 <= 0) && (entryPosition2 > 0)) { // prvni je novy, druhy uz ma zapsan nejakou pozici
+                    if (entryState1.ordinal() > entryState2.ordinal()) { // napr. pokud je jeden Finished a druhy Registered (zatim nedobehl), tak prvni bude pred nim
                         return -1;
-                    } else { // oba maji zapsanou pozici - porovnavam podle ni..
-                        return (entryPosition1 - entryPosition2);
+                    } else if (entryState1.ordinal() < entryState2.ordinal()) {
+                        return 1;
+                    } else { // pokud maji stejnej stav
+                        if (entryState1 == EntryDTO.EntryState.FINISHED) {
+                            return o1.getPosition() - o2.getPosition(); // porovnam podle poradi
+                        } else if ((entryState1 == EntryDTO.EntryState.REGISTERED) || (entryState1 == EntryDTO.EntryState.DISQUALIFIED)) {
+                            return o1.getUsr().getSurname().compareTo(o2.getUsr().getSurname()); // seradim podle prijmeni
+                        } else {
+                            throw new IllegalStateException("Comparing entries with unknown state.");
+                        }
                     }
                 }
             }).collect(Collectors.toList()));
