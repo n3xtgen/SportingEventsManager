@@ -1,4 +1,4 @@
-package cz.muni.fi.PA165;
+package cz.muni.fi.PA165.service;
 
 import cz.muni.fi.PA165.Exceptions.DataAccessException;
 import cz.muni.fi.PA165.dao.EventDao;

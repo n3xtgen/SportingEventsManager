@@ -27,16 +27,16 @@ public class EventFormValidator implements Validator {
         if(target instanceof CreateEventDTO) {
             CreateEventDTO evt = (CreateEventDTO) target;
 
-            validateForm(evt.getStartTime(), evt.getEndTime(), errors);
+            validateForm(evt.getStartTime(), evt.getEndTime(), errors, false);
         }
         else{
             EventDTO evt = (EventDTO) target;
 
-            validateForm(evt.getStartTime(), evt.getEndTime(), errors);
+            validateForm(evt.getStartTime(), evt.getEndTime(), errors, true);
         }
     }
 
-    private void validateForm(Date sTime, Date eTime, Errors errors){
+    private void validateForm(Date sTime, Date eTime, Errors errors, boolean isUpdate){
         Date timeNow = new Date();
         // lets check empty & whitespaces
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "InputEmpty.eventForm.name");
@@ -58,11 +58,13 @@ public class EventFormValidator implements Validator {
                 errors.rejectValue("endTime", "InputWrong.eventForm.eventTooShort");
             }
 
-            if(sTime.compareTo(timeNow) < 0)
-                errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
+            if(!isUpdate) {
+                if (sTime.compareTo(timeNow) < 0)
+                    errors.rejectValue("startTime", "InputWrong.eventForm.eventCantStartInPast");
 
-            if(eTime.compareTo(timeNow) < 0)
-                errors.rejectValue("endTime", "InputWrong.eventForm.eventCantEndInPast");
+                if (eTime.compareTo(timeNow) < 0)
+                    errors.rejectValue("endTime", "InputWrong.eventForm.eventCantEndInPast");
+            }
         }
     }
 }
