@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -77,31 +78,25 @@ public class SportServiceImpl implements SportService{
     }
     
     @Override
-    public void updateSportResults(Sport s) {
+    public void updateSportResults(Sport sport) {
         try {
+            Set<Entry> entries = sport.getEntries();
+            
+            // nastavit vsem nedokoncenym pozici 0 a cas null
+            entries.stream().filter(e -> e.getEntryState() != Entry.EntryState.FINISHED).forEach( e -> {
+                e.setPosition(0);
+                e.setTime(null);
+            });
+            
+            // nastavit vsem dokoncenym pozici podle casu
             AtomicInteger index = new AtomicInteger();
-            s.getEntries().stream().sorted(new Comparator<Entry> () {
+            entries.stream().filter(e -> e.getEntryState() == Entry.EntryState.FINISHED).sorted(new Comparator<Entry> () {
                 @Override
                 public int compare(Entry o1, Entry o2) {
-                    Entry.EntryState entryState1 = o1.getEntryState();
-                    Entry.EntryState entryState2 = o2.getEntryState();
-                    
-                    if (entryState1.ordinal() > entryState2.ordinal()) { // napr. pokud je jeden Finished a druhy Registered (zatim nedobehl), tak prvni bude pred nim
-                        return -1;
-                    } else if (entryState1.ordinal() < entryState2.ordinal()) {
-                        return 1;
-                    } else { // pokud maji stejnej stav
-                        if (entryState1 == Entry.EntryState.FINISHED) { // pokud dokoncili radim podle casu
-                            return o1.getTime().compareTo(o2.getTime()); // v tom pripade musi byt cas vyplnenej a nemusim se bat ze ze getTime() je null
-                        } else if ((entryState1 == Entry.EntryState.REGISTERED) || (entryState1 == Entry.EntryState.DISQUALIFIED)) { // pokud zatim nedokoncili | diskvalifikovani
-                            return o1.getUsr().getSurname().compareTo(o2.getUsr().getSurname()); // seradim podle prijmeni
-                        } else {
-                            throw new IllegalStateException("Comparing entries with unknown state.");
-                        }
-                    }
+                    return o1.getTime().compareTo(o2.getTime());
                 }
             }).forEach(e -> e.setPosition(index.incrementAndGet()));
-            sportDao.update(s);
+            sportDao.update(sport);
         } catch (Exception e) {
             throw new DataAccessException(e);
         }

@@ -29,20 +29,20 @@
                         <tbody>
                         <c:forEach items="${sport.entries}" var="entry" varStatus="loop">
                             <tr>
-                                <td>${entry.position}</td>
+                                <td><c:if test="${entry.position != 0}">${entry.position}</c:if></td>
                                 <td>${entry.usr.name}</td>
                                 <td>${entry.usr.surname}</td>
 
-                                <td>
+                                <td style="text-align: right">
                                     <form:hidden path="entries[${loop.index}].idEntry" />
-                                    <form:radiobutton path="entries[${loop.index}].entryState" value="REGISTERED"/>
-                                    Not finished
-                                    /
-                                    <form:radiobutton path="entries[${loop.index}].entryState" value="FINISHED"/>
-                                    Finished
-                                    <form:input type="text" path="entries[${loop.index}].time" />
-                                    /
-                                    <form:radiobutton path="entries[${loop.index}].entryState" value="DISQUALIFIED"/>
+                                    <form:radiobutton class="result_radio" path="entries[${loop.index}].entryState" value="REGISTERED" onchange="disableTime(this)"/>
+                                    No result
+                                    &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;
+                                    <form:radiobutton class="result_radio radio_finished" path="entries[${loop.index}].entryState" value="FINISHED" onchange="enableTime(this)"/>
+                                    Finished:
+                                    <form:input style="text-align: right; padding-right: 8px;" size="14" class="result_time" type="text" path="entries[${loop.index}].time" />
+                                    &nbsp;&nbsp;/&nbsp;&nbsp;
+                                    <form:radiobutton class="result_radio" path="entries[${loop.index}].entryState" value="DISQUALIFIED" onchange="disableTime(this)"/>
                                     Disqualified
                                 </td>
                             </tr>
@@ -62,24 +62,54 @@
                             <th width="100">Pos.</th>
                             <th width="200">Name</th>
                             <th width="200">Surname</th>
-                            <th>Time</th>
+                            <th style="text-align: right">Result</th>
                         </tr>
                     </thead>
 
                     <tbody>
                     <c:forEach items="${sport.entries}" var="entry" varStatus="loop">
                         <tr>
-                            <td>${entry.position}</td>
+                            <td><c:if test="${entry.position != 0}">${entry.position}</c:if></td>
                             <td>${entry.usr.name}</td>
                             <td>${entry.usr.surname}</td>
-                            <fmt:formatDate value="${entry.time}" var="timeString" pattern="HH:mm:ss"/>
-                            <td>${timeString}</td>
+                            <c:choose>
+                                <c:when test="${entry.entryState eq 'REGISTERED'}">
+                                    <td style="text-align: right; color: grey">No result yet</td>
+                                </c:when>
+                                <c:when test="${entry.entryState eq 'FINISHED'}">
+                                    <fmt:formatDate value="${entry.time}" var="timeString" pattern="HH:mm:ss.SSS"/>
+                                    <td style="text-align: right; font-size: 110%">${timeString}</td>
+                                </c:when>
+                                <c:when test="${entry.entryState eq 'DISQUALIFIED'}">
+                                    <td style="text-align: right; color: red;">Disqualified</td>
+                                </c:when>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </c:if>
         </div>
+            
+        <script type="text/javascript">
+            function disableTime(obj) {
+                var timeEntry = obj.parentNode.getElementsByClassName("result_time")[0];
+                timeEntry.value="";
+                timeEntry.disabled = true;
+            }
+            function enableTime(obj) {
+                var timeEntry = obj.parentNode.getElementsByClassName("result_time")[0];
+                timeEntry.value="00:00:00.000";
+                timeEntry.disabled = false;
+            }
+
+            var finishedRadios = document.getElementsByClassName("radio_finished");
+            for (var i = 0, len = finishedRadios.length; i < len; i++) {
+                if (!finishedRadios[i].checked) {
+                    disableTime(finishedRadios[i]);
+                }
+            }
+        </script>
             
     </jsp:attribute>
 </my:pagetemplate>

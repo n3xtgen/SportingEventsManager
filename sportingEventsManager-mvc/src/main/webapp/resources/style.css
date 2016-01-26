@@ -97,3 +97,13 @@ td {
 #sports_container{
     padding-top: 20px;
 }
+
+
+// +++ STRANKA S VYSLEDKY
+
+.result_radio {
+    position: relative;
+    top: 1px;
+}
+
+// --- STRANKA S VYSLEDKY
