@@ -106,10 +106,10 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{"
                 + "id=" + id
-                + ", email='" + getEmail() + '\''
-                + ", givenName='" + name + '\''
-                + ", surname='" + surname + '\''
-                + ", isAdmin='" + (isAdmin() ? "true" : "false") + '\''
+                + "; email='" + getEmail() + '\''
+                + "; givenName='" + name + '\''
+                + "; surname='" + surname + '\''
+                + "; isAdmin='" + (isAdmin() ? "true" : "false") + '\''
                 + '}';
     }
 }

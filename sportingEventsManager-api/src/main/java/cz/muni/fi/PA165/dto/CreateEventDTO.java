@@ -136,9 +136,9 @@ public class CreateEventDTO {
     {
         return "EventDTO{"
                 + "name= " + name
-                + ", description= " + description
-                + ", start= " + (startTime != null ? startTime.toString() : "null")
-                + ", end= " + (endTime != null ? endTime.toString() : "null")
+                + "; description= " + description
+                + "; start= " + (startTime != null ? startTime.toString() : "null")
+                + "; end= " + (endTime != null ? endTime.toString() : "null")
                 + '}';
     }
 }

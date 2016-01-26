@@ -91,9 +91,9 @@ public class CreateSportDTO {
     public String toString() {
         return "CreateSportDTO{"
                 + "name=" + name
-                + ", startTime=" + startTime
-                + ", endTime=" + endTime
-                + ", event=" + event.toString()
+                + "; startTime=" + startTime
+                + "; endTime=" + endTime
+                + "; event=" + event.toString()
                 + '}';
     }
 

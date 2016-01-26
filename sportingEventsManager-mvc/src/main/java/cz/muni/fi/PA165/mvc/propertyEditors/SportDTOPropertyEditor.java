@@ -38,7 +38,7 @@ public class SportDTOPropertyEditor extends PropertyEditorSupport {
 
             SportDTO sport = new SportDTO();
 
-            String[] attributes = text.split(",");
+            String[] attributes = text.split(";");
             // get&set sportId from the string
             long id = Long.parseLong(attributes[ATTR_ID].substring(INDEX_ID_START));
             sport.setIdSport(id);

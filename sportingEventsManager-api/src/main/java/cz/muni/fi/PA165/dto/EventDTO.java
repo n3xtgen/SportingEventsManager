@@ -124,10 +124,10 @@ public class EventDTO {
     {
         return "EventDTO{"
                 + "id= " + idEvent
-                + ", name= " + name
-                + ", description= " + description
-                + ", start= " + (startTime != null ? startTime.toString() : "null")
-                + ", end= " + (endTime != null ? endTime.toString() : "null")
+                + "; name= " + name
+                + "; description= " + description
+                + "; start= " + (startTime != null ? startTime.toString() : "null")
+                + "; end= " + (endTime != null ? endTime.toString() : "null")
                 + '}';
     }
 }

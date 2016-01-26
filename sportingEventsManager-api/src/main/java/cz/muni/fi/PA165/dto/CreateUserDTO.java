@@ -100,9 +100,9 @@ public class CreateUserDTO {
     public String toString() {
         return "UserDTO{"
                 + "id=" + id
-                + ", email='" + getEmail() + '\''
-                + ", givenName='" + name + '\''
-                + ", surname='" + surname + '\''
+                + "; email='" + getEmail() + '\''
+                + "; givenName='" + name + '\''
+                + "; surname='" + surname + '\''
                 + '}';
     }
 }
