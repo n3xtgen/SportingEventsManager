@@ -29,7 +29,7 @@ public class UserDTOPropertyEditor extends PropertyEditorSupport {
         if(text != null && !text.isEmpty()){
             UserDTO user = new UserDTO();
 
-            String[] attributes = text.split(",");
+            String[] attributes = text.split(";");
             // get&set id
             user.setId(Long.parseLong(attributes[ATTR_ID].substring(INDEX_ID_START)));
             // get&set email

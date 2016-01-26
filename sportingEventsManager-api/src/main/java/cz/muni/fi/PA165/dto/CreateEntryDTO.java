@@ -1,9 +1,6 @@
 package cz.muni.fi.PA165.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 
 /**
  * @author n3xtgen
@@ -74,7 +71,7 @@ public class CreateEntryDTO {
     {
         return "EventDTO{"
                 + "sportId= " + sportId
-                + ", sportsmanId= " + sportsmanId
+                + "; sportsmanId= " + sportsmanId
                 + '}';
     }
 }

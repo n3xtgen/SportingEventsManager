@@ -131,8 +131,8 @@ public class EntryServiceImpl implements EntryService {
         if(entries != null && !entries.isEmpty()){
             for(Entry itr : entries){
                 Sport toCompare = itr.getSport();
-                if((toCompare.getStartTime().before(sport.getStartTime()) && toCompare.getEndTime().after(sport.getStartTime())) ||
-                        toCompare.getStartTime().after(sport.getStartTime()) && toCompare.getStartTime().before(sport.getEndTime()))
+                if(((toCompare.getStartTime().compareTo(sport.getStartTime()) <= 0) && (toCompare.getEndTime().compareTo(sport.getStartTime()) >= 0)) ||
+                        ((toCompare.getStartTime().compareTo(sport.getStartTime()) >= 0) && (toCompare.getStartTime().compareTo(sport.getEndTime()) <= 0)))
                     return false;
             }
         }

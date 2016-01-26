@@ -99,9 +99,9 @@ public class EntryDTO {
     {
         return "EntryDTO{"
                 + "id= " + idEntry
-                + ", entryState= " + (entryState != null ? entryState.toString() : "null")
-                + ", position= " + position
-                + ", time= " + (time != null ? time.toString() : "null")
+                + "; entryState= " + (entryState != null ? entryState.toString() : "null")
+                + "; position= " + position
+                + "; time= " + (time != null ? time.toString() : "null")
                 + '}';
     }
 }

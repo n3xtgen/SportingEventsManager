@@ -39,7 +39,7 @@ public class EventDTOPropertyEditor extends PropertyEditorSupport {
 
         if(text != null && !text.isEmpty()){
             EventDTO event = new EventDTO();
-            String[] attributes = text.split(",");
+            String[] attributes = text.split(";");
 
             // set idEvent
             event.setIdEvent(Long.parseLong(attributes[ATTR_ID].substring(INDEX_ID_START)));

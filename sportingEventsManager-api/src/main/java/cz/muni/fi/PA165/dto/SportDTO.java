@@ -119,9 +119,9 @@ public class SportDTO {
     public String toString() {
         return "SportDTO{"
                 + "id=" + idSport
-                + ", name=" + name
-                + ", startTime=" + startTime
-                + ", endTime=" + endTime
+                + "; name=" + name
+                + "; startTime=" + startTime
+                + "; endTime=" + endTime
                 + '}';
     }
 

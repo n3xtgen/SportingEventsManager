@@ -15,8 +15,7 @@ import java.util.Date;
  */
 public class SportFormValidator implements Validator {
 
-    private static final int HOUR_IN_MS = 3600000; // 1 hour in milliseconds
-    private static final int MIN_SPORT_LENGTH = HOUR_IN_MS; // set min length to 1 hour
+    private static final int MIN_SPORT_LENGTH = 600000; // set minimal length of a sport to 10 minutes
 
     @Override
     public boolean supports(Class<?> aClass) {
