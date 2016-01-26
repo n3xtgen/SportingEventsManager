@@ -22,6 +22,8 @@
                                 <th width="100">Pos.</th>
                                 <th width="200">Name</th>
                                 <th width="200">Surname</th>
+                                
+                                <th></th>
                                 <th style="text-align: right">Result</th>
                             </tr>
                         </thead>
@@ -33,6 +35,7 @@
                                 <td>${entry.usr.name}</td>
                                 <td>${entry.usr.surname}</td>
 
+                                <td><form:errors path="entries[${loop.index}].entryState" /><form:errors path="entries[${loop.index}].time" /></td>
                                 <td style="text-align: right">
                                     <form:hidden path="entries[${loop.index}].idEntry" />
                                     <form:radiobutton class="result_radio" path="entries[${loop.index}].entryState" value="REGISTERED" onchange="disableTime(this)"/>

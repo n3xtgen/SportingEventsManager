@@ -4,6 +4,7 @@ package cz.muni.fi.PA165.mvc.validators;
 import cz.muni.fi.PA165.dto.CreateEntryDTO;
 import cz.muni.fi.PA165.dto.EntryDTO;
 import cz.muni.fi.PA165.dto.SportDTO;
+import java.util.Date;
 import java.util.List;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -24,21 +25,25 @@ public class ResultFormValidator implements Validator {
             SportDTO sportDTO = (SportDTO) target;
             
             List<EntryDTO> entries = sportDTO.getEntries();
-            /*
-            for (EntryDTO entry : entries) {
-                ValidationUtils.rejectIfEmptyOrWhitespace(errors, "idEntry", "Time cannot be empty when finished.");
+            
+            for (int i = 0; i < entries.size(); i++) {
+                EntryDTO entry = entries.get(i);
                 
-                EntryDTO.EntryState entryState = entry.getEntryState();
-                switch (entryState) {
-                    case REGISTERED:
-                        break;
-                    case FINISHED:
-                        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "time", "Time cannot be empty when finished.");
-                        break;
-                    case DISQUALIFIED:
-                        break;
+                if (entry.getEntryState() == null) {
+                    errors.rejectValue("entries[" + i + "].entryState", "InputEmpty.resultForm.entryState");
                 }
-            }*/
+                if (entry.getEntryState().equals(EntryDTO.EntryState.FINISHED)) {
+                    Date time = entry.getTime();
+                    if(time == null) {
+                        errors.rejectValue("entries[" + i + "].time", "InputWrong.resultForm.time");
+                    }
+                } else {
+                    Date time = entry.getTime();
+                    if(time != null) {
+                        errors.rejectValue("entries[" + i + "].time", "InputWrong.resultForm.timeSet");
+                    }
+                }
+            }
             
             return;
         }

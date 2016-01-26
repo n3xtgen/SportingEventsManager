@@ -35,9 +35,6 @@ public class ResultsController {
             binder.addValidators(new ResultFormValidator());
         }
     }
-
-    @Autowired
-    private EntryFacade entryFacade;
     
     @Autowired
     private SportFacade sportFacade;
